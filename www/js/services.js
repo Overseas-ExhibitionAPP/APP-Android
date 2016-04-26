@@ -202,6 +202,24 @@ angular.module('starter.services', [])
                     }
                 ]
             }
+        ])
+        .factory('FavoriteList_Func', function (FavoriteList, $filter) {
+            var self = this;
+            self.add = function(sName) {
+                var tmp = null;
+                //利用posName來找出陣列中符合的gps資訊
+                var found = $filter('filter')(FavoriteList, {"schoolName": sName}, true);
+                if (found.length) {
+                    tmp = angular.fromJson(found[0]);
+                } else {
+                    var item = { "schoolName": sName};
+                    FavoriteList.push(item);
+                }
+                return FavoriteList;
+            }
+            return self
+        })
+        .value('FavoriteList',[
         ]);
 
          /*

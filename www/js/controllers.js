@@ -29,14 +29,24 @@ angular.module('starter.controllers', ['starter.services','ui.bootstrap','ngAnim
 
     }
 })
-.controller('SchoolInfoCtrl', function($scope, DepartInfoSet, SchoolFunc) {
+.controller('SchoolInfoCtrl', function($scope, DepartInfoSet, SchoolFunc, FavoriteList_Func) {
     $scope.groups = DepartInfoSet;
     $scope.getInfoSet = function(gName) {
         $scope.departs = SchoolFunc.getDepartSet(gName);
+    }
+    $scope.addItem = function() {
+        var result = FavoriteList_Func.add("國立暨南國際大學")
+        console.log(result);
     }
     $scope.oneAtATime = true;
     $scope.status = {
         isFirstOpen: true,
         isFirstDisabled: false
     }
-});
+})
+.controller('LikeListCrtl', function($scope,FavoriteList) {
+    $scope.items = FavoriteList;
+
+})
+
+;

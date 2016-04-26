@@ -1,12 +1,17 @@
 <ion-view view-title="School" >
     <ion-nav-bar class="bar bar-header bar-calm">
-        <ion-nav-back-button><!-- 這是返回鍵，直接插入即可 -->
+        <ion-nav-back-button>
         </ion-nav-back-button>
+        <ion-nav-buttons side=" right">
+            <button class="button button-clear button-positive icon ion-heart header-favorite-icon" ng-click="addItem()"></button>
+            <a href="#/index">
+            <button class="button button-clear button-positive icon ion-ionic header-favorite-icon"></button></a>
+    </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content>
         <div class = "row">
             <div class = "col">
-                <h2>國立暨南國際大學 <h2>
+                <h2>國立暨南國際大學<h2>
             </div>
         </div>
         <div class = "row">

@@ -4,6 +4,10 @@
         </ion-nav-back-button>
     </ion-nav-bar>
     <ion-content>
-        <div class = "col">我的最愛</div>
+        <ion-list>
+            <ion-item ng-repeat="item in items">
+                {{item.schoolName}}
+            </ion-item>
+        </ion-list>
     </ion-content>
 </ion-view>
