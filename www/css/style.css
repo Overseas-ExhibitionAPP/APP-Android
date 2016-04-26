@@ -15,16 +15,33 @@
 }
 /*Lobby layout Setting(index.html)*/
 .lobby-row {
-    margin-top:20px; 
-    margin-bottom:50px; 
+    margin-top:0px; 
+    margin-bottom:20px;
 }
 .lobby-col {
     text-align: Center;
 }
-.lobby-item {
+.lobby-item-img  {
+    padding-left:0px;
+    margin-bottom: 0px;
+    /*border-style:solid;*/
+}
+.lobby-item-text {
+    padding-left:0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    /*border-style:solid;*/
+
+}
+.item-href {
     color: #000050;
-    text-decoration:none
+    text-decoration:none;
 }
 .icon {
-    font-size: 18px;
+    font-size: 50px;
+}
+
+.item-description {
+    padding-left:0px; 
+    font-size: 10px;
 }
