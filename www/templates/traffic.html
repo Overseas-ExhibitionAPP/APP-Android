@@ -1,20 +1,17 @@
 <ion-view view-title="交通資訊">
-	<ion-nav-bar class="bar bar-header bar-calm">
-		<ion-nav-back-button class="button-clear"> 
-		<!--這是返回鍵，直接插入即可 -->
-		</ion-nav-back-button>
-	</ion-nav-bar>
-	<ion-content>
-		交通資訊
-        <dir>
-            <div class="item item-avatar">
-                <ion-item collection-repeat="pos in Pos_Set" align="center" item-width="20%" ng-click="setPos(pos.name)">{{pos.name}}</ion-item>
+    <ion-nav-bar class="bar bar-header bar-calm">
+        <ion-nav-back-button> 
+        <!--這是返回鍵，直接插入即可 -->
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content>
+        <div class="card">
+            <div class="item item-divider">
+                <button ng-repeat="pos in Pos_Set" class="button button-balanced area-item" ng-click="setPos(pos.name)">{{pos.name}}</button>
             </div>
             <div class="item item-body">
-                <div class="row"> 
-                    <div class="col col-center map-body">
-                        <div class="map-content" id="map" data-tap-disabled="true"></div>
-                    </div>
+                <div class="col col-center map-body">
+                    <div class="map-content" id="map" data-tap-disabled="true"></div>
                 </div>
             </div>
         </dir>
