@@ -1,4 +1,5 @@
 /* Empty. Add your own CSS if you like */
+/* Map CSS Setting(Traffic.html)*/
 .scroll {
     height: 100%;
 }
@@ -11,4 +12,19 @@
 .map-body .map-content{
     width: 100%;
     height: 100%;
+}
+/*Lobby layout Setting(index.html)*/
+.lobby-row {
+    margin-top:20px; 
+    margin-bottom:50px; 
+}
+.lobby-col {
+    text-align: Center;
+}
+.lobby-item {
+    color: #000050;
+    text-decoration:none
+}
+.icon {
+    font-size: 18px;
 }
