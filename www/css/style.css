@@ -1,5 +1,5 @@
 /* Empty. Add your own CSS if you like */
-/* Map CSS Setting(Traffic.html)*/
+/* 交通資訊 CSS Setting(Traffic.html)*/
 .scroll {
     height: 100%;
 }
@@ -51,4 +51,16 @@
 .item-description {
     padding-left:0px; 
     font-size: 10%;
+}
+/*參展學校 CSS Setting(search_result.html)*/
+.school-logo {
+    width:100%;
+    height:auto;
+}
+.depart-info {
+    border-width:5px; 
+    border-style:dashed
+}
+.school-description {
+    padding-left: 0px;
 }

@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['starter.services'])
+angular.module('starter.controllers', ['starter.services','ui.bootstrap','ngAnimate'])
 
 .controller('PlaylistsCtrl', function($scope) {
   $scope.playlists = [
@@ -21,10 +21,22 @@ angular.module('starter.controllers', ['starter.services'])
     MAP.setLocation(map, marker);
     //偵測到地區按鈕被點擊，即reload該地區圖資
     $scope.setPos=function(posName) {
+        console.log(posName);
         var pos = MAP.searchPos(posName);
         var map = MAP.initialize('map', pos);
         var marker = pos;
         MAP.setLocation(map, marker);
 
+    }
+})
+.controller('SchoolInfoCtrl', function($scope, DepartInfoSet, SchoolFunc) {
+    $scope.groups = DepartInfoSet;
+    $scope.getInfoSet = function(gName) {
+        $scope.departs = SchoolFunc.getDepartSet(gName);
+    }
+    $scope.oneAtATime = true;
+    $scope.status = {
+        isFirstOpen: true,
+        isFirstDisabled: false
     }
 });

@@ -1,0 +1,62 @@
+<ion-view view-title="School" >
+    <ion-nav-bar class="bar bar-header bar-calm">
+        <ion-nav-back-button><!-- 這是返回鍵，直接插入即可 -->
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content>
+        <div class = "row">
+            <div class = "col">
+                <h2>國立暨南國際大學 <h2>
+            </div>
+        </div>
+        <div class = "row">
+            <div class = "col col-25 ">
+                <img class = "col col-95 school-logo" ng-src="/img/NCNU_LOGO.PNG" />
+            </div>
+            <div class = "col col-75 item-text-wrap school-description">
+                <h3>學校簡介</h3>
+                <p >國立暨南國際大學位於台灣地理中心南投縣埔里鎮，
+                校地面積150公頃，校園廣闊景致宜人。國道六號開通後，
+                台灣好行觀光巴士直達校園，交通更加便捷。
+                暨大目前設人文、教育、管理、科技等四個學院，優
+                質的專業師資與學習環境，是莘莘學子的最佳選擇。</p>
+            </div>
+        </div>
+        <div>
+            <uib-accordion close-others="oneAtATime">
+                <uib-accordion-group is-open="status.open">
+                    <uib-accordion-heading>
+                        僑生福利
+                        <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                    </uib-accordion-heading>
+                    <p class="">
+                        成績優秀學生獎學金</br>
+                        僑生獎學金</br>
+                        教育部、僑委會提供的各種僑生獎學金</br>
+                        國立暨南國際大學僑生獎助學金</br>
+                        1.僑生獎學金</br>
+                        2.僑生助學金</br>
+                        僑委會受理華僑捐贈支各類獎助學金</br>
+                        校內多元工讀機會</br>
+                        研究生另有教育部提供多項獎學金。</br>
+                    </p>
+                </uib-accordion-group>
+            </uib-accordion>
+        </div>
+        <h3>學系資訊</h3>
+        <div class="depart-info">
+            <uib-accordion close-others="oneAtATime">
+                <uib-accordion-group ng-repeat="group in groups"  ng-click="getInfoSet(group.groupName)" class="group-item">
+                    <uib-accordion-heading>
+                        {{group.groupName}} <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                    </uib-accordion-heading>
+                    <p>
+                        <li  ng-repeat="depart in departs">
+                            {{depart.departName}}(<a href="{{depart.url}}">{{depart.url}}</a>)
+                        </li>
+                    </p>
+                </uib-accordion-group>
+            </uib-accordion>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,20 +1,19 @@
-<ion-view view-title="Questionnaire" >
-<ion-nav-bar>
-
-</ion-nav-bar>
-  <ion-content>
-   <div class = "col">
-		<div class = "col">
-		<h2>請問您是哪一個僑居地的學生?<h2>
-		</div>
-		<ion-list>
-		  <ion-radio ng-model="choice" ng-value="'MY'">馬來西亞</ion-radio>
-		  <ion-radio ng-model="choice" ng-value="'HK'">香港</ion-radio>
-		  <ion-radio ng-model="choice" ng-value="'MO'">澳門</ion-radio>
-		  <ion-radio ng-model="choice" ng-value="'others'">其他國家</ion-radio>
-		</ion-list>
-    <ion-item href="#/Q-end">
-		下一題
-	</ion-item>
-  </ion-content>
+<ion-view view-title="行動問卷" >
+    <ion-nav-bar class="bar bar-header bar-calm">
+    </ion-nav-bar>
+    <ion-content>
+    <div class = "col">
+        <div class = "col">
+            <h2>請問您是哪一個僑居地的學生?<h2>
+        </div>
+        <ion-list>
+            <ion-radio ng-model="choice" ng-value="'MY'">馬來西亞</ion-radio>
+            <ion-radio ng-model="choice" ng-value="'HK'">香港</ion-radio>
+            <ion-radio ng-model="choice" ng-value="'MO'">澳門</ion-radio>
+            <ion-radio ng-model="choice" ng-value="'others'">其他國家</ion-radio>
+        </ion-list>
+        <ion-item href="#/Q-end">
+            下一題
+        </ion-item>
+    </ion-content>
 </ion-view>

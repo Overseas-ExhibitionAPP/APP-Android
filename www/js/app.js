@@ -106,6 +106,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           templateUrl: 'templates/Questionnaire/Q-end.html',
           controller: 'PlaylistsCtrl'
         })
+        .state('search_area', {
+          url: '/search_area',
+          templateUrl: 'templates/school/search_area.html',
+          controller: 'PlaylistsCtrl'
+        })
+        .state('search_result', {
+          url: '/search_result',
+          templateUrl: 'templates/school/search_result.html',
+          controller: 'SchoolInfoCtrl'
+        })
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/index'); //這是頁面起始點
 });
