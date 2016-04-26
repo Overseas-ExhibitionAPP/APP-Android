@@ -7,85 +7,105 @@
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
 .run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      cordova.plugins.Keyboard.disableScroll(true);
+    $ionicPlatform.ready(function() {
+        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+        // for form inputs)
+        if (window.cordova && window.cordova.plugins.Keyboard) {
+          cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+          cordova.plugins.Keyboard.disableScroll(true);
 
-    }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
+        }
+        if (window.StatusBar) {
+          // org.apache.cordova.statusbar required
+          StatusBar.styleDefault();
+        }
+    });
 })
-.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
-  /*
-    .state('app', {
-    url: '/app',
-    abstract: true,
-    templateUrl: 'templates/menu.html',
-    controller: 'AppCtrl'
-  })*/
+.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
+    //設定全域返回鍵，去除標示的text，並統一套用icon
+    $ionicConfigProvider.backButton.previousTitleText(false);
+    $ionicConfigProvider.backButton.icon('ion-chevron-left');
+    $ionicConfigProvider.backButton.text('')
+    $stateProvider
+        .state('index', {
+          url: '/index',
+          templateUrl: 'templates/index.html',
+          controller: 'PlaylistsCtrl'
+        })
+        .state('Stalls', {
+          url: '/Stall',
+          templateUrl: 'templates/Stalls.html',
+          controller: 'PlaylistsCtrl'
+        })
+        .state('school', {
+          url: '/school',
+          templateUrl: 'templates/school.html',
+          controller: 'PlaylistsCtrl'
+        })
+        .state('Theme_events', {
+          url: '/Theme_events',
+          templateUrl: 'templates/Theme_events.html',
+          controller: 'PlaylistsCtrl'
+        })
+        
+        .state('traffic', {
+          url: '/traffic',
+          templateUrl: 'templates/traffic.html',
+          controller: 'TrafficCtrl'
+        })
+        .state('news', {
+          url: '/news',
+          templateUrl: 'templates/news.html',
+          controller: 'PlaylistsCtrl'
+        })
+        
+        .state('Questionnaire', {
+          url: '/Questionnaire',
+          templateUrl: 'templates/Questionnaire.html',
+          controller: 'PlaylistsCtrl'
 
-	.state('index', {
-      url: '/index',
-      templateUrl: 'templates/index.html',
-      controller: 'PlaylistsCtrl'
-    })
-    .state('Stalls', {
-      url: '/Stall',
-      templateUrl: 'templates/Stalls.html',
-      controller: 'PlaylistsCtrl'
-    })
-	.state('school', {
-      url: '/school',
-      templateUrl: 'templates/school.html',
-      controller: 'PlaylistsCtrl'
-    })
-	.state('Theme_events', {
-      url: '/Theme_events',
-      templateUrl: 'templates/Theme_events.html',
-      controller: 'PlaylistsCtrl'
-    })
-    
-	.state('traffic', {
-      url: '/traffic',
-      templateUrl: 'templates/traffic.html',
-      controller: 'TrafficCtrl'
-    })
-	.state('news', {
-      url: '/news',
-      templateUrl: 'templates/news.html',
-      controller: 'PlaylistsCtrl'
-    })
-	
-	.state('Questionnaire', {
-      url: '/Questionnaire',
-      templateUrl: 'templates/Questionnaire.html',
-      controller: 'PlaylistsCtrl'
-
-    })
-	
-	.state('photos', {
-      url: '/photos',
-      templateUrl: 'templates/photos.html',
-      controller: 'PlaylistsCtrl'
-    })
-	.state('like_list', {
-      url: '/like_list',
-      templateUrl: 'templates/like_list.html',
-      controller: 'PlaylistsCtrl'
-    })
-	.state('others', {
-      url: '/others',
-      templateUrl: 'templates/others.html',
-      controller: 'PlaylistsCtrl'
-    })
-	
+        })
+        
+        .state('photos', {
+          url: '/photos',
+          templateUrl: 'templates/photos.html',
+          controller: 'PlaylistsCtrl'
+        })
+        .state('like_list', {
+          url: '/like_list',
+          templateUrl: 'templates/like_list.html',
+          controller: 'PlaylistsCtrl'
+        })
+        .state('others', {
+          url: '/others',
+          templateUrl: 'templates/others.html',
+          controller: 'PlaylistsCtrl'
+        })
+        .state('Q1-1', {
+          url: '/Q1-1',
+          templateUrl: 'templates/Questionnaire/Q1-1.html',
+          controller: 'PlaylistsCtrl'
+        })
+        .state('Q2-1', {
+          url: '/Q2-1',
+          templateUrl: 'templates/Questionnaire/Q2-1.html',
+          controller: 'PlaylistsCtrl'
+        })
+        .state('Q3-1', {
+          url: '/Q3-1',
+          templateUrl: 'templates/Questionnaire/Q3-1.html',
+          controller: 'PlaylistsCtrl'
+        })
+        .state('Q4-1', {
+          url: '/Q4-1',
+          templateUrl: 'templates/Questionnaire/Q4-1.html',
+          controller: 'PlaylistsCtrl'
+        })
+        .state('Q-end', {
+          url: '/Q-end',
+          templateUrl: 'templates/Questionnaire/Q-end.html',
+          controller: 'PlaylistsCtrl'
+        })
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/index'); //這是頁面起始點
 });

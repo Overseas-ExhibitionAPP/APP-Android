@@ -37,10 +37,9 @@
     color: #000050;
     text-decoration:none;
 }
-.icon {
+.item-icon {
     font-size: 50px;
 }
-
 .item-description {
     padding-left:0px; 
     font-size: 10px;
