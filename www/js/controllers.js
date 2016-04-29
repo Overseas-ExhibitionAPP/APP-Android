@@ -12,7 +12,6 @@ angular.module('starter.controllers', ['starter.services','ui.bootstrap','ngAnim
   
 })
 .controller('TrafficCtrl', function($scope, MAP, $stateParams,POIs,$filter) {
-    $scope.Test = "hahaha";
     $scope.Pos_Set = POIs;
     //預設地圖為參展資料之第一筆地區資料
     var posT = MAP.searchPos(POIs[0].name);
@@ -39,10 +38,6 @@ angular.module('starter.controllers', ['starter.services','ui.bootstrap','ngAnim
         console.log(result);
     }
     $scope.oneAtATime = true;
-    $scope.status = {
-        isFirstOpen: true,
-        isFirstDisabled: false
-    }
 })
 .controller('LikeListCrtl', function($scope,FavoriteList) {
     $scope.items = FavoriteList;
