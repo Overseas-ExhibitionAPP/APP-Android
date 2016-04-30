@@ -220,6 +220,11 @@ angular.module('starter.services', [])
             return self
         })
         .value('FavoriteList',[
+            {
+                "schoolName" : "國立暨南國際大學",
+                "layout_Number": "72",
+                "Speech": "true"
+            }
         ]);
 
          /*

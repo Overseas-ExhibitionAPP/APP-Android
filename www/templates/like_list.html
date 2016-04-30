@@ -6,7 +6,14 @@
     <ion-content>
         <ion-list>
             <ion-item ng-repeat="item in items">
-                {{item.schoolName}}
+                <div class="row">
+                    <div class="col col-75">
+                        {{item.schoolName}}
+                    </div>
+                    <div class="col col-25 ">
+                        <i class="col col-10 ion-speakerphone"> {{item.layout_Number}}</i>
+                    </div>
+                </div>
             </ion-item>
         </ion-list>
     </ion-content>

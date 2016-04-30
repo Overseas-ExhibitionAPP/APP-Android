@@ -1,9 +1,30 @@
-<ion-view view-title="主題活動">
+<ion-view view-title="OVERSEAS">
     <ion-nav-bar class="bar bar-header bar-calm">
         <ion-nav-back-button><!-- 這是返回鍵，直接插入即可 -->
         </ion-nav-back-button>
     </ion-nav-bar>
     <ion-content>
-        主題活動
-    </ion-content>
+        <h2>集章簿</h2>
+        <div class="stickerbook">
+            <div class="row theme-row" ng-repeat="letter in alphabet track by $index" ng-if="$index % 5 == 0">
+                <div class="col"
+                    ng-repeat="i in [$index, $index + 1, $index + 2, $index + 3, $index + 4]" 
+                    ng-if="alphabet[i] != null">
+                        <ion-item class="sticker-item"><img class="full-image" src="/img/{{alphabet[i]}}"></img></ion-item>
+                </div>
+            </div>
+        </div>
+        <div  class="row button-area">
+            <div class="col col-50 button-item">
+                <button class="button button-balanced">
+                    集章
+                </button>
+            </div>
+            <div class=" col col-50 button-item">
+                <button class="button button-balanced">
+                    兌換
+                </button>
+            </div>
+        </div>
+  </ion-content>
 </ion-view>

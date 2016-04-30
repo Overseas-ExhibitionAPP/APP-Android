@@ -43,5 +43,9 @@ angular.module('starter.controllers', ['starter.services','ui.bootstrap','ngAnim
     $scope.items = FavoriteList;
 
 })
+.controller('ThemeEventsCtrl', function($scope) {
+    $scope.alphabet = ['NCNU_LOGO.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png'];
+
+})
 
 ;

@@ -45,7 +45,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         .state('Theme_events', {
           url: '/Theme_events',
           templateUrl: 'templates/Theme_events.html',
-          controller: 'PlaylistsCtrl'
+          controller: 'ThemeEventsCtrl'
         })
         
         .state('traffic', {
