@@ -37,15 +37,9 @@ angular.module('starter.services', [])
         })
         .value('POIs', [
             {
-                "name": "吉隆坡",
-                "lat": 24.26467,
-                "lng": 121.740875
-            },
-            {
-                "name": "麻坡",
-                "lat": 2.047277, 
-                "lng": 102.611882
-
+                "name": "啟德碼頭",
+                "lat": 22.3061703,
+                "lng": 114.2128582
             }
         ])
         .factory('SchoolFunc', function (DepartInfoSet, $filter) {

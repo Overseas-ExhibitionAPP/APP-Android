@@ -4,17 +4,16 @@
         </ion-nav-back-button>
     </ion-nav-bar>
     <ion-content>
-        <h1>參展學校</h1>
         <div class="list list-inset">
             <label class="item item-input item-stacked-label">
-                <input type="text" placeholder="請輸入關鍵字">
+                <input type="text" placeholder="請輸入校名">
             </label>
-            <ion-item href="#/search_area">
-                Seach school
+            <ion-item href="#/search_area" >
+               <button class="button button-balanced">搜尋</button>
             </ion-item>
-            <span class="input-label">搜尋條件</span>
-        </div>
-		<div class="depart-info">
+            <span class="input-label">搜尋條件：</span>
+        
+		<div class="school-conditionSearch">
 		<uib-accordion close-others="oneAtATime">
 			<uib-accordion-group  is-open="status.open">
 				<uib-accordion-heading>
@@ -62,6 +61,7 @@
 				</ion-list>
 			</uib-accordion-group>
 		</uib-accordion>
+                </div>
                 </div>
     </ion-content>
 </ion-view>

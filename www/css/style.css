@@ -109,3 +109,8 @@
     text-align: Center;
 
 }
+/*school.html*/
+.school-conditionSearch {
+    border-width:2px; 
+    border-style:dashed
+}
