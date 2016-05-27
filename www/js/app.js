@@ -62,7 +62,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         .state('Questionnaire', {
           url: '/Questionnaire',
           templateUrl: 'templates/Questionnaire.html',
-          controller: 'PlaylistsCtrl'
+          controller: 'QuestionnaireSelect'
 
         })
         

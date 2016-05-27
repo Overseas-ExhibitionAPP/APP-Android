@@ -108,4 +108,51 @@ angular.module('starter.controllers', ['starter.services','ui.bootstrap','ngAnim
     return array;
   }
 })
+.controller('QuestionnaireSelect', function($scope, $window, $http, Questionnaire_serve, $ionicModal, $ionicPopup, $timeout, $state, $ionicHistory, $stateParams, localStorage )
+{	
+	var qSet;
+	var count = 0;
+	//var show_flag = this;
+	Questionnaire_serve.getQuestionnaire('hk','2016')
+		.success(function (response) {      //$scope.XXX  XXX=>實體名稱
+			qSet = response.questionset;    //將問題陣列輸出至變數
+      })
+      .error(function (response) {
+
+      });
+	$scope.state = "開始答題";
+	$scope.nextQ = function() {    //下一題的功能區塊
+		if (count == qSet.length+1){
+			$window.location.href = '#Q-end';
+			
+		}
+		if (count == qSet.length){
+			$scope.state = "問卷結束";
+			$scope.Questionnaire_List_question1 = "";
+			$scope.Questionnaire_List_option1 = "";
+			count = count + 1;
+		}
+		else
+		{
+			$scope.state = "下一題";
+			//問題題數增加
+			$scope.Questionnaire_List_question1 = qSet[count].description;
+			$scope.Questionnaire_List_option1 = qSet[count].options;
+			$scope.Questionnaire_List_count = count;
+			count = count + 1;
+		}
+	}
+	//show_flag.show = false;
+	//show_flag.showQuestion = function() {
+	//	show_flag.show = !show_flag.show;
+	//}
+	
+	/* $scope.start = function() {    //下一題的功能區塊
+		$scope.Questionnaire_List_question1 = qSet[count].description;
+		$scope.Questionnaire_List_option1 = qSet[count].options;
+		$scope.Questionnaire_List_count = count;
+		//$scope.show = !$scope.show;
+	} */
+
+})
 ;

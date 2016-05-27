@@ -8,9 +8,17 @@
             問卷提示內容
             一旦開始填寫問卷
             就必須填完唷
-        </div>
-		<button class="button button-block button-positive" ui-sref="Q1-1">
+			<button class="button button-block button-positive" ui-sref="Q1-1">
 		  開始填寫
 		</button>
+		</div>
+		<div class = "col">
+		<button class="button button-block button-positive" ng-click="nextQ()" display= "none">{{state}}</button>
+			{{Questionnaire_List_question1}}<br>
+			{{Questionnaire_List_option1}}<br>
+		</div>
+				
+				
+		
     </ion-content>
 </ion-view>
