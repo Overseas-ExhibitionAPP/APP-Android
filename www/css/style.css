@@ -95,7 +95,9 @@
 }
 .sticker-item {
     padding: 0;
-    border-width: 1px; 
+	width: 53px;
+	height: 53px;
+	border-width: 1px; 
     border-style:dashed;
 }
 .button-area{
