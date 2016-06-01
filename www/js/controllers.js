@@ -112,14 +112,50 @@ angular.module('starter.controllers', ['starter.services','ui.bootstrap','ngAnim
 {	
 	var qSet;
 	var count = 0;
+<<<<<<< HEAD
 	//var show_flag = this;
 	Questionnaire_serve.getQuestionnaire('hk','2016')
 		.success(function (response) {      //$scope.XXX  XXX=>實體名稱
 			qSet = response.questionset;    //將問題陣列輸出至變數
+=======
+	//var q_option_type;
+	//var show_flag = this;
+	Questionnaire_serve.getQuestionnaire('hk','2016')
+		.success(function (response) {      
+			qSet = response.questionset;    
+			$scope.Questionnaire_List_question1 = qSet[0].description;
+			if (qSet[0].type == "MultiSelect"){
+				$scope.Questionnaire_List_option_M = "";
+				$scope.Questionnaire_List_option_S = "";
+				$scope.q_option_type_Test = qSet[count].type;
+				$scope.Questionnaire_List_option_M = qSet[count].options;
+			}
+			if (qSet[0].type == "SingleSelect"){
+				$scope.Questionnaire_List_option_M = "";
+				$scope.Questionnaire_List_option_S = "";
+				$scope.q_option_type_Test = qSet[count].type;
+				$scope.Questionnaire_List_option_S = qSet[count].options;
+			}
+			$scope.q_option_type_Test = qSet[0].type;
+			$scope.info = response.info;
+			//q_option_type = qSet.type;
+			
+			if (count == qSet.length)
+			{
+				$scope.state = "問卷結束";
+				$scope.Questionnaire_List_question1 = "";
+				$scope.Questionnaire_List_option1 = "";
+			}
+			else
+			{
+				count = count + 1;
+			}
+>>>>>>> origin/jeff.dev
       })
       .error(function (response) {
 
       });
+<<<<<<< HEAD
 	$scope.state = "開始答題";
 	$scope.nextQ = function() {    //下一題的功能區塊
 		if (count == qSet.length+1){
@@ -131,10 +167,20 @@ angular.module('starter.controllers', ['starter.services','ui.bootstrap','ngAnim
 			$scope.Questionnaire_List_question1 = "";
 			$scope.Questionnaire_List_option1 = "";
 			count = count + 1;
+=======
+	$scope.state = "下一題";
+	$scope.space = "      ";
+	
+	$scope.nextQ = function() {    //下一題的功能區塊
+		if (count == qSet.length){
+			$window.location.href = '#Q-end';
+			count = 0;
+>>>>>>> origin/jeff.dev
 		}
 		else
 		{
 			$scope.state = "下一題";
+<<<<<<< HEAD
 			//問題題數增加
 			$scope.Questionnaire_List_question1 = qSet[count].description;
 			$scope.Questionnaire_List_option1 = qSet[count].options;
@@ -154,5 +200,33 @@ angular.module('starter.controllers', ['starter.services','ui.bootstrap','ngAnim
 		//$scope.show = !$scope.show;
 	} */
 
+=======
+			$scope.Questionnaire_List_question1 = qSet[count].description;
+			//$scope.Questionnaire_List_option1 = qSet[count].options;
+			$scope.Questionnaire_List_count = count;
+			$scope.q_option_type_Test = qSet[count].type;
+			
+			if (qSet[count].type == "MultiSelect"){
+				$scope.Questionnaire_List_option_M = "";
+				$scope.Questionnaire_List_option_S = "";
+				$scope.q_option_type_Test = qSet[count].type;
+				$scope.Questionnaire_List_option_M = qSet[count].options;
+			}
+			if (qSet[count].type == "SingleSelect"){
+				$scope.Questionnaire_List_option_M = "";
+				$scope.Questionnaire_List_option_S = "";
+				$scope.q_option_type_Test = qSet[count].type;
+				$scope.Questionnaire_List_option_S = qSet[count].options;
+			}
+			count = count + 1;
+		}
+	}
+	$scope.endQ = function() {
+		$window.location.href = '#index';
+		$window.location.reload();
+		count = 0;
+		//$scope.Questionnaire_List_count = count;
+	}
+>>>>>>> origin/jeff.dev
 })
 ;

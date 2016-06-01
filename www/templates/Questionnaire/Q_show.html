@@ -1,0 +1,26 @@
+<ion-view view-title="行動問卷" >
+    <ion-nav-bar class="bar bar-header bar-calm">
+    </ion-nav-bar>
+    <ion-content>
+        <div class="Quest-body">
+            {{Questionnaire_List_question1}}<br>
+			<ion-checkbox ng-repeat="name in Questionnaire_List_option_M" 
+						  ng-value="name.value"
+						  ng-model="data.serverSide"
+						  name="server-side"
+						  ng-change="serverSideChange(name)">
+				{{name}}
+			</ion-checkbox>
+			<ion-radio ng-repeat="item in Questionnaire_List_option_S"
+                   ng-value="item.value"
+                   ng-model="data.serverSide"
+                   ng-change="serverSideChange(item)"
+                   name="server-side">
+				{{ item }}
+			</ion-radio>
+			<button class="button button-block button-positive" ng-click="nextQ()" display="none">
+				{{state}}
+			</button>
+        </div>
+    </ion-content>
+</ion-view>
