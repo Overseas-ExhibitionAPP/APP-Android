@@ -112,12 +112,6 @@ angular.module('starter.controllers', ['starter.services','ui.bootstrap','ngAnim
 {	
 	var qSet;
 	var count = 0;
-<<<<<<< HEAD
-	//var show_flag = this;
-	Questionnaire_serve.getQuestionnaire('hk','2016')
-		.success(function (response) {      //$scope.XXX  XXX=>實體名稱
-			qSet = response.questionset;    //將問題陣列輸出至變數
-=======
 	//var q_option_type;
 	//var show_flag = this;
 	Questionnaire_serve.getQuestionnaire('hk','2016')
@@ -150,24 +144,10 @@ angular.module('starter.controllers', ['starter.services','ui.bootstrap','ngAnim
 			{
 				count = count + 1;
 			}
->>>>>>> origin/jeff.dev
       })
       .error(function (response) {
 
       });
-<<<<<<< HEAD
-	$scope.state = "開始答題";
-	$scope.nextQ = function() {    //下一題的功能區塊
-		if (count == qSet.length+1){
-			$window.location.href = '#Q-end';
-			
-		}
-		if (count == qSet.length){
-			$scope.state = "問卷結束";
-			$scope.Questionnaire_List_question1 = "";
-			$scope.Questionnaire_List_option1 = "";
-			count = count + 1;
-=======
 	$scope.state = "下一題";
 	$scope.space = "      ";
 	
@@ -175,32 +155,10 @@ angular.module('starter.controllers', ['starter.services','ui.bootstrap','ngAnim
 		if (count == qSet.length){
 			$window.location.href = '#Q-end';
 			count = 0;
->>>>>>> origin/jeff.dev
 		}
 		else
 		{
 			$scope.state = "下一題";
-<<<<<<< HEAD
-			//問題題數增加
-			$scope.Questionnaire_List_question1 = qSet[count].description;
-			$scope.Questionnaire_List_option1 = qSet[count].options;
-			$scope.Questionnaire_List_count = count;
-			count = count + 1;
-		}
-	}
-	//show_flag.show = false;
-	//show_flag.showQuestion = function() {
-	//	show_flag.show = !show_flag.show;
-	//}
-	
-	/* $scope.start = function() {    //下一題的功能區塊
-		$scope.Questionnaire_List_question1 = qSet[count].description;
-		$scope.Questionnaire_List_option1 = qSet[count].options;
-		$scope.Questionnaire_List_count = count;
-		//$scope.show = !$scope.show;
-	} */
-
-=======
 			$scope.Questionnaire_List_question1 = qSet[count].description;
 			//$scope.Questionnaire_List_option1 = qSet[count].options;
 			$scope.Questionnaire_List_count = count;
@@ -227,6 +185,5 @@ angular.module('starter.controllers', ['starter.services','ui.bootstrap','ngAnim
 		count = 0;
 		//$scope.Questionnaire_List_count = count;
 	}
->>>>>>> origin/jeff.dev
 })
 ;

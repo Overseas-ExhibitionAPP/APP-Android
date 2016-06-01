@@ -63,10 +63,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           url: '/Questionnaire',
           templateUrl: 'templates/Questionnaire.html',
           controller: 'QuestionnaireSelect'
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/jeff.dev
         })
         
         .state('photos', {
