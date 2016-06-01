@@ -2,57 +2,30 @@
     <ion-nav-bar class="bar bar-header bar-calm">
     </ion-nav-bar>
     <ion-content>
-        <div class = "col wrap" >
-            <div class = "col">
-                <h2>請問您是透過什麼管道認識到臺灣的大學？<h2>
-            </div>
-            <ul class="list">
-                <li class="item item-checkbox">
-                    駐外館處/海華服務基金/華僑文教中心/留臺同學會
-                    <label class="checkbox">
-                        <input type="checkbox">
-                    </label>
-                </li>
-                <li class="item item-checkbox">
-                    海外聯招會
-                    <label class="checkbox">
-                        <input type="checkbox">
-                    </label>
-                </li>
-                <li class="item item-checkbox">
-                    臺灣各大學網站
-                    <label class="checkbox">
-                        <input type="checkbox">
-                    </label>
-                </li>
-                <li class="item item-checkbox">
-                    學校老師
-                    <label class="checkbox">
-                        <input type="checkbox">
-                    </label>
-                </li>
-                <li class="item item-checkbox">
-                    家人或同學
-                    <label class="checkbox">
-                        <input type="checkbox">
-                    </label>
-                </li>
-                <li class="item item-checkbox">
-                    媒體文宣
-                    <label class="checkbox">
-                        <input type="checkbox">
-                    </label>
-                </li>
-                <li class="item item-checkbox">
-                    社群網站（Google+、Facebook、twitter…etc.）
-                    <label class="checkbox">
-                        <input type="checkbox">
-                    </label>
-                </li>
-            </ul>
-        </div>
-		<button class="button button-block button-positive" ui-sref="Q2-1">
-		  下一題
-		</button>
+	<div>
+		{{Questionnaire_List_question1}}<br>
+		{{q_option_type_Test}}<br>
+		<li class="item item-checkbox" ng-repeat="name in Questionnaire_List_option_M"> 
+			<label class="checkbox">
+				<input type="checkbox"
+				ng-click="select(name.index)"
+				ng-checked="name.selected"
+				ng-disabled="checked==1">
+			</label>
+			{{name}}
+		</li>
+		<li class="item item-radio" ng-repeat="name in Questionnaire_List_option_S"> 
+			<label class="radio">
+				<input type="radio"
+				ng-click="select(name.index)"
+				ng-checked="name.selected"
+				ng-disabled="checked==1">
+			</label>
+			{{name}}
+		</li>
+	
+		{{Questionnaire_List_count}}<br>
+		<button class="button button-block button-positive" ng-click="nextQ()" display= "none">{{state}}</button>
+	</div>
     </ion-content>
 </ion-view>

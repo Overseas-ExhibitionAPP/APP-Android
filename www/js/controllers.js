@@ -108,4 +108,82 @@ angular.module('starter.controllers', ['starter.services','ui.bootstrap','ngAnim
     return array;
   }
 })
+.controller('QuestionnaireSelect', function($scope, $window, $http, Questionnaire_serve, $ionicModal, $ionicPopup, $timeout, $state, $ionicHistory, $stateParams, localStorage )
+{	
+	var qSet;
+	var count = 0;
+	//var q_option_type;
+	//var show_flag = this;
+	Questionnaire_serve.getQuestionnaire('hk','2016')
+		.success(function (response) {      
+			qSet = response.questionset;    
+			$scope.Questionnaire_List_question1 = qSet[0].description;
+			if (qSet[0].type == "MultiSelect"){
+				$scope.Questionnaire_List_option_M = "";
+				$scope.Questionnaire_List_option_S = "";
+				$scope.q_option_type_Test = qSet[count].type;
+				$scope.Questionnaire_List_option_M = qSet[count].options;
+			}
+			if (qSet[0].type == "SingleSelect"){
+				$scope.Questionnaire_List_option_M = "";
+				$scope.Questionnaire_List_option_S = "";
+				$scope.q_option_type_Test = qSet[count].type;
+				$scope.Questionnaire_List_option_S = qSet[count].options;
+			}
+			$scope.q_option_type_Test = qSet[0].type;
+			$scope.info = response.info;
+			//q_option_type = qSet.type;
+			
+			if (count == qSet.length)
+			{
+				$scope.state = "問卷結束";
+				$scope.Questionnaire_List_question1 = "";
+				$scope.Questionnaire_List_option1 = "";
+			}
+			else
+			{
+				count = count + 1;
+			}
+      })
+      .error(function (response) {
+
+      });
+	$scope.state = "下一題";
+	$scope.space = "      ";
+	
+	$scope.nextQ = function() {    //下一題的功能區塊
+		if (count == qSet.length){
+			$window.location.href = '#Q-end';
+			count = 0;
+		}
+		else
+		{
+			$scope.state = "下一題";
+			$scope.Questionnaire_List_question1 = qSet[count].description;
+			//$scope.Questionnaire_List_option1 = qSet[count].options;
+			$scope.Questionnaire_List_count = count;
+			$scope.q_option_type_Test = qSet[count].type;
+			
+			if (qSet[count].type == "MultiSelect"){
+				$scope.Questionnaire_List_option_M = "";
+				$scope.Questionnaire_List_option_S = "";
+				$scope.q_option_type_Test = qSet[count].type;
+				$scope.Questionnaire_List_option_M = qSet[count].options;
+			}
+			if (qSet[count].type == "SingleSelect"){
+				$scope.Questionnaire_List_option_M = "";
+				$scope.Questionnaire_List_option_S = "";
+				$scope.q_option_type_Test = qSet[count].type;
+				$scope.Questionnaire_List_option_S = qSet[count].options;
+			}
+			count = count + 1;
+		}
+	}
+	$scope.endQ = function() {
+		$window.location.href = '#index';
+		$window.location.reload();
+		count = 0;
+		//$scope.Questionnaire_List_count = count;
+	}
+})
 ;

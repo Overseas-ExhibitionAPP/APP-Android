@@ -62,8 +62,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         .state('Questionnaire', {
           url: '/Questionnaire',
           templateUrl: 'templates/Questionnaire.html',
-          controller: 'PlaylistsCtrl'
-
+          controller: 'QuestionnaireSelect'
         })
         
         .state('photos', {
@@ -84,27 +83,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         .state('Q1-1', {
           url: '/Q1-1',
           templateUrl: 'templates/Questionnaire/Q1-1.html',
-          controller: 'PlaylistsCtrl'
+          controller: 'QuestionnaireSelect'
         })
-        .state('Q2-1', {
-          url: '/Q2-1',
-          templateUrl: 'templates/Questionnaire/Q2-1.html',
-          controller: 'PlaylistsCtrl'
-        })
-        .state('Q3-1', {
-          url: '/Q3-1',
-          templateUrl: 'templates/Questionnaire/Q3-1.html',
-          controller: 'PlaylistsCtrl'
-        })
-        .state('Q4-1', {
-          url: '/Q4-1',
-          templateUrl: 'templates/Questionnaire/Q4-1.html',
-          controller: 'PlaylistsCtrl'
+		.state('Q_show', {
+          url: '/Q_show',
+          templateUrl: 'templates/Questionnaire/Q_show.html',
+          controller: 'QuestionnaireSelect'
         })
         .state('Q-end', {
           url: '/Q-end',
           templateUrl: 'templates/Questionnaire/Q-end.html',
-          controller: 'PlaylistsCtrl'
+          controller: 'QuestionnaireSelect'
         })
         .state('search_area', {
           url: '/search_area',
