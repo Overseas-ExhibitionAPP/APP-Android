@@ -5,10 +5,15 @@
         </ion-nav-back-button>
     </ion-nav-bar>
     <ion-content>
-        <div class="card">
+        <div class = "card">
             <div class="item item-divider">
-                <button ng-repeat="pos in Pos_Set" class="button button-balanced area-item" ng-click="setPos(pos.name)">{{pos.name}}</button>
+                <button ng-repeat="pos in Pos_Set" class="button button-balanced area-item item-text-wrap" ng-click="setPos(pos.name)">{{pos.btn_name}}</button>
             </div>
+			<div class = "item item-body">
+				{{name}}</br>
+				{{address}}</br>
+				{{time}}
+			</div>
             <div class="item item-body">
                 <div class="col col-center map-body">
                     <div class="map-content" id="map" data-tap-disabled="true"></div>

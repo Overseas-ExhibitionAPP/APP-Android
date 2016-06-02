@@ -35,7 +35,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         .state('Stalls', {
           url: '/Stall',
           templateUrl: 'templates/Stalls.html',
-          controller: 'PlaylistsCtrl'
+          controller: 'StallsCtrl'
         })
         .state('school', {
           url: '/school',

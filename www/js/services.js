@@ -25,7 +25,7 @@ angular.module('starter.services', [])
         Questionnaire_List = $http.get(link);
         return Questionnaire_List;
     }
-	})
+	})/*
 	.service('Stalls_serve', function($http){
 		var Stalls_List;
 		this.getStalls = function(country,year){
@@ -34,14 +34,20 @@ angular.module('starter.services', [])
         Stalls_List = $http.get(link);
         return Stalls_List;
     }
-	})
-	.factory('MAP', function (POIs, $filter) {
+	})*/
+	.factory('MAP', function (POIs, $filter, $http) {
         var self = this;
         
-        self.searchPos = function(posName) {
+		self.getPosList = function(){
+			var Pos_List;
+			var link = 'http://163.22.17.174:8080/V1/exhibitions/2016/traffic/my';
+			Pos_List = $http.get(link);
+			return Pos_List;
+		}
+        self.searchPos = function(posName, temList) {
             var pos_tmp = null;
             //利用posName來找出陣列中符合的gps資訊
-            var found = $filter('filter')(POIs, {"name": posName}, true);
+            var found = $filter('filter')(temList, {"name": posName}, true);
             if (found.length) {
                 pos_tmp = angular.fromJson(found[0]);
             }
@@ -49,7 +55,7 @@ angular.module('starter.services', [])
         }
         self.initialize = function (id, pos) {
             console.log(pos);
-            var LatLng = new google.maps.LatLng(pos.lat,pos.lng); // 目前位置
+            var LatLng = new google.maps.LatLng(pos.position.x_pos, pos.position.y_pos); // 目前位置
 
             var mapOptions = {
                 center: LatLng,
@@ -62,7 +68,7 @@ angular.module('starter.services', [])
 
         self.setLocation = function (map, pos) {
             var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(pos.lat, pos.lng),
+                position: new google.maps.LatLng(pos.position.x_pos, pos.position.y_pos),
                 map: map,
                 title: pos.name
             });
@@ -73,11 +79,43 @@ angular.module('starter.services', [])
     })
     .value('POIs', [
         {
-            "name": "啟德碼頭",
+            "area": "hongkong",
+			"address": "九龍城啟德發展區承豐道33號",
+			"name": "啟德郵輪碼頭2樓Hall B",
+			"starttime": "2016/10/15",
+			"endtime": "2016/10/16",
             "lat": 22.3061703,
+            "lng": 114.2128582
+        },
+		{
+            "area": "hongkong",
+			"address": "九龍城啟德發展區承豐道33號-2",
+			"name": "啟德郵輪碼頭2樓Hall B-2",
+			"starttime": "2016/10/15-2",
+			"endtime": "2016/10/16-2",
+            "lat": 30.3061703,
             "lng": 114.2128582
         }
     ])
+	.factory('STALLS',function ($filter, $http) {
+		var self = this;
+		self.searchStalls = function(stallName , tmpList) {
+			var stalls_tmp = null;
+			
+			var found = $filter('filter')(tmpList,{"name": stallName}, true)
+			if (found.length) {
+				stalls_tmp = angular.fromJson(found[0]);
+			}
+			return stalls_tmp;
+		}
+		self.getStallList = function() {
+			var Stalls_List;
+			var link = 'http://163.22.17.174:8080/V1/exhibitions/2016/layout/my';
+			Stalls_List = $http.get(link);
+			return Stalls_List;
+		}
+		return self;
+	})
     .factory('SchoolFunc', function (DepartInfoSet, $filter) {
         var self = this;
         
