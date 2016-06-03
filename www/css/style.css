@@ -1,4 +1,10 @@
 /* Empty. Add your own CSS if you like */
+.page-back {
+    background: url('../img/background.png') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+}
 /* 交通資訊 CSS Setting(Traffic.html)*/
 .scroll {
     height: 100%;
@@ -28,10 +34,6 @@
 	text-align:right;
 }
 /*Lobby layout Setting(index.html)*/
-.lobby-row {
-    margin-top:0px; 
-    margin-bottom:20px;
-}
 .lobby-col {
     text-align: Center;
 }
@@ -40,9 +42,7 @@
 }
 .lobby-item-text {
     height: 100% auto;
-    margin-top: -15px;
-    margin-bottom: 10px;
-
+    margin-top: -5px;
 }
 .item-href {
     color: #000050;
@@ -52,7 +52,6 @@
     font-size: 420%;
 }
 .item-description {
-    padding-left:0px; 
     font-size: 50%;
 }
 /*參展學校 CSS Setting(search_result.html)*/

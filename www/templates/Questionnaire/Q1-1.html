@@ -1,31 +1,31 @@
 <ion-view view-title="行動問卷" >
-    <ion-nav-bar class="bar bar-header bar-calm">
+    <ion-nav-bar class="bar bar-header bar-balanced">
     </ion-nav-bar>
-    <ion-content>
-	<div>
-		{{Questionnaire_List_question1}}<br>
-		{{q_option_type_Test}}<br>
-		<li class="item item-checkbox" ng-repeat="name in Questionnaire_List_option_M"> 
-			<label class="checkbox">
-				<input type="checkbox"
-				ng-click="select(name.index)"
-				ng-checked="name.selected"
-				ng-disabled="checked==1">
-			</label>
-			{{name}}
-		</li>
-		<li class="item item-radio" ng-repeat="name in Questionnaire_List_option_S"> 
-			<label class="radio">
-				<input type="radio"
-				ng-click="select(name.index)"
-				ng-checked="name.selected"
-				ng-disabled="checked==1">
-			</label>
-			{{name}}
-		</li>
-	
-		{{Questionnaire_List_count}}<br>
-		<button class="button button-block button-positive" ng-click="nextQ()" display= "none">{{state}}</button>
-	</div>
+    <ion-content class="page-back">
+		<div>
+			{{Questionnaire_List_question1}}<br>
+			{{q_option_type_Test}}<br>
+			<li class="item item-checkbox" ng-repeat="name in Questionnaire_List_option_M"> 
+				<label class="checkbox">
+					<input type="checkbox"
+					ng-click="select(name.index)"
+					ng-checked="name.selected"
+					ng-disabled="checked==1">
+				</label>
+				{{name}}
+			</li>
+			<li class="item item-radio" ng-repeat="name in Questionnaire_List_option_S"> 
+				<label class="radio">
+					<input type="radio"
+					ng-click="select(name.index)"
+					ng-checked="name.selected"
+					ng-disabled="checked==1">
+				</label>
+				{{name}}
+			</li>
+		
+			{{Questionnaire_List_count}}<br>
+			<button class="button button-block button-positive" ng-click="nextQ()" display= "none">{{state}}</button>
+		</div>
     </ion-content>
 </ion-view>

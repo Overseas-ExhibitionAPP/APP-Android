@@ -75,6 +75,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           templateUrl: 'templates/like_list.html',
           controller: 'LikeListCrtl'
         })
+		.state('lecturetime', {
+          url: '/lecturetime',
+          templateUrl: 'templates/lectures.html',
+          controller: 'PlaylistsCtrl'
+        })
         .state('others', {
           url: '/others',
           templateUrl: 'templates/others.html',
