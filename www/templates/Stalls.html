@@ -10,8 +10,7 @@
 				<button ng-repeat="Stall in Stall_Set" class="button button-balanced area-item" ng-click="setPic(Stall.name)">{{Stall.btn_name}}</button>
 			</div>
             <div class="item item-body">
-			{{test}}
-                <img class="full-image" ng-src="{{pic_model}}"/>
+                <img class="full-image" data-ng-src="{{pic_model}}"/>
             </div>
 			
         </div>

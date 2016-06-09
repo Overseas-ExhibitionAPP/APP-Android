@@ -6,11 +6,11 @@
     <ion-content class="page-back">
         <h2>集章簿</h2>
         <div class="stickerbook">
-            <div class="row theme-row" ng-repeat="letter in alphabet track by $index" ng-if="$index % 5 == 0">
+            <div class="row" ng-repeat="letter in alphabet track by $index" ng-if="$index % 5 == 0">
                 <div class="col"
                     ng-repeat="i in [$index, $index + 1, $index + 2, $index + 3, $index + 4]" 
                     ng-if="alphabet[i] != null">
-                        <ion-item class="sticker-item"><img class="full-image" src="/img/{{alphabet[i]}}"></img></ion-item>
+                        <ion-item class="sticker-item"><img class="full-image" data-ng-src="{{alphabet[i]}}"></img></ion-item>
                 </div>
             </div>
         </div>
@@ -25,6 +25,8 @@
                     兌換
                 </button>
             </div>
+			<br>
+			{{test}}
         </div>
   </ion-content>
 </ion-view>

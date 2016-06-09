@@ -1,70 +1,8 @@
-angular.module('starter.controllers', ['starter.services','ui.bootstrap','ngAnimate'])
-
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
-  
-})
-.controller('TrafficCtrl', function($scope, MAP, $stateParams, POIs, $filter) {
-    var temList;
-	MAP.getPosList()
-		.success(function(res){
-			$scope.Pos_Set = res.traffic_list;
-			temList = res.traffic_list;
-			$scope.name = "地點；" + temList[0].name;
-			$scope.address = "地址：" + temList[0].address;
-			$scope.time = "時間：" + temList[0].starttime + "~" + temList[0].endtime;
-			//預設地圖為參展資料之第一筆地區資料
-			var posT = MAP.searchPos(temList[0].name, temList);
-			var map = MAP.initialize('map', posT);  // 載入地圖 'map'是顯示地圖區塊的id
-			var marker = posT;
-			MAP.setLocation(map, marker);
-		})
-		.error(function(res){
-			
-		})
-	
-	
-    
-    //偵測到地區按鈕被點擊，即reload該地區圖資
-    $scope.setPos=function(posName) {
-        console.log(posName);
-        var pos = MAP.searchPos(posName, temList);
-        var map = MAP.initialize('map', pos);
-        var marker = pos;
-        MAP.setLocation(map, marker);
-		$scope.name = "地點；" + pos.name;
-		$scope.address = "地址：" + pos.address;
-		$scope.time = "時間：" + pos.starttime + "~" + pos.endtime;
-
-    }
-})
-.controller('SchoolInfoCtrl', function($scope, DepartInfoSet, SchoolFunc, FavoriteList_Func) {
-    $scope.groups = DepartInfoSet;
-    $scope.getInfoSet = function(gName) {
-        $scope.departs = SchoolFunc.getDepartSet(gName);
-    }
-    $scope.addItem = function() {
-        var result = FavoriteList_Func.add("國立暨南國際大學")
-        console.log(result);
-    }
-    $scope.oneAtATime = true;
-})
-.controller('LikeListCrtl', function($scope,FavoriteList) {
-    $scope.items = FavoriteList;
+angular.module('starter.controllers', ['starter.services'])
+.controller('LobbyCtrl', function($scope,$state, $stateParams) {
 
 })
-.controller('ThemeEventsCtrl', function($scope) {
-    $scope.alphabet = ['NCNU_LOGO.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png'];
-
-})
-.controller('StallsCtrl', function($scope, STALLS) {
+.controller('StallsCtrl', function($scope,$state, $stateParams,$http,STALLS) {
 	var tmpList;
 	STALLS.getStallList()
 		.success(function(res) {
@@ -79,90 +17,70 @@ angular.module('starter.controllers', ['starter.services','ui.bootstrap','ngAnim
 		var tmp = STALLS.searchStalls(picName , tmpList);
 		$scope.pic_model = tmp.layout;
 	}
+})
+.controller('SchoolSearchCtrl', function($scope,$state, $stateParams) {
 
 })
-.controller('CarouselDemoCtrl', function ($scope) {
-  $scope.myInterval = 2000;
-  $scope.noWrapSlides = false;
-  $scope.active = 0;
-  var slides = $scope.slides = [];
-  var currIndex = 0;
-
-  $scope.addSlide = function() {
-    var newWidth = 500 + slides.length + 1;
-    slides.push({
-      image: '/img/photos/1.jpg',
-      text: ['Nice image','Awesome photograph','That is so cool'][slides.length % 3],
-      id: currIndex++
-    });
-  };
-
-  $scope.randomize = function() {
-    var indexes = generateIndexesArray();
-    assignNewIndexesToSlides(indexes);
-  };
-
-  for (var i = 0; i < 4; i++) {
-    $scope.addSlide();
-  }
-
-  // Randomize logic below
-
-  function assignNewIndexesToSlides(indexes) {
-    for (var i = 0, l = slides.length; i < l; i++) {
-      slides[i].id = indexes.pop();
-    }
-  }
-
-  function generateIndexesArray() {
-    var indexes = [];
-    for (var i = 0; i < currIndex; ++i) {
-      indexes[i] = i;
-    }
-    return shuffle(indexes);
-  }
-
-  // http://stackoverflow.com/questions/962802#962890
-  function shuffle(array) {
-    var tmp, current, top = array.length;
-
-    if (top) {
-      while (--top) {
-        current = Math.floor(Math.random() * (top + 1));
-        tmp = array[current];
-        array[current] = array[top];
-        array[top] = tmp;
-      }
-    }
-
-    return array;
-  }
+.controller('ThemeEventsCtrl', function($scope,$state, $stateParams/* , ThemeEvents_serve, $http, $window */) {
+	var alphabet_list;
+	$scope.alphabet = ['Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png'];
+/* 	ThemeEvents_serve.getalphabet('my','test003')
+		.success(function(response){
+			alphabet_list = response.alphabet_list.collectionbox;
+			$scope.test = alphabet_list[0].picture;
+		})
+		.error(function (response) {
+			$scope.test = "你可以去死了!!!";
+		});  */
 })
-.controller('QuestionnaireSelect', function($scope, $window, $http, Questionnaire_serve, $ionicModal, $ionicPopup, $timeout, $state, $ionicHistory, $stateParams, localStorage )
-{	
+.controller('TrafficCtrl', function($scope,$state, $stateParams, $http) {
+
+})
+.controller('NewsCtrl', function($scope,$state, $stateParams) {
+
+})
+.controller('QuestionnaireSelect', function($scope, $window, $http, Questionnaire_serve,  $state, $ionicHistory, localStorage) {
 	var qSet;
 	var count = 0;
-	//var q_option_type;
-	//var show_flag = this;
+	var change = "";
+    var ansSunmary={};
+	var UserId = "test005";
+	
 	Questionnaire_serve.getQuestionnaire('hk','2016')
 		.success(function (response) {      
-			qSet = response.questionset;    
+			qSet = response.questionset; 
+			$scope.selected = [];
+			$scope.isChecked = false;	
+			$scope.q_Ans = [];
+			var user = {	
+			};
+ 			ansSunmary= {
+				"userid" : UserId,
+				"userAnsList" : $scope.q_Ans
+			};  
 			$scope.Questionnaire_List_question1 = qSet[0].description;
 			if (qSet[0].type == "MultiSelect"){
-				$scope.Questionnaire_List_option_M = "";
-				$scope.Questionnaire_List_option_S = "";
 				$scope.q_option_type_Test = qSet[count].type;
 				$scope.Questionnaire_List_option_M = qSet[count].options;
+				$scope.checkedOrNot = function (asset, isChecked, index) {
+					if (isChecked) {
+						$scope.selected.push(asset);
+					} else {
+						var _index = $scope.selected.indexOf(asset);
+						$scope.selected.splice(_index, 1);
+					}
+				};
 			}
 			if (qSet[0].type == "SingleSelect"){
-				$scope.Questionnaire_List_option_M = "";
-				$scope.Questionnaire_List_option_S = "";
 				$scope.q_option_type_Test = qSet[count].type;
 				$scope.Questionnaire_List_option_S = qSet[count].options;
+				$scope.selectedOrNot=function(item){
+					$scope.selected = [];
+					$scope.selected.push(item);
+				}
 			}
 			$scope.q_option_type_Test = qSet[0].type;
 			$scope.info = response.info;
-			//q_option_type = qSet.type;
 			
 			if (count == qSet.length)
 			{
@@ -179,41 +97,93 @@ angular.module('starter.controllers', ['starter.services','ui.bootstrap','ngAnim
 
       });
 	$scope.state = "下一題";
-	$scope.space = "      ";
-	
 	$scope.nextQ = function() {    //下一題的功能區塊
-		if (count == qSet.length){
-			$window.location.href = '#Q-end';
+    var tmp = {
+		"options" : $scope.selected
+	};
+		if (count == qSet.length+1){
+			$window.location.href = '#index';
+			$window.location.reload();
 			count = 0;
 		}
 		else
 		{
-			$scope.state = "下一題";
-			$scope.Questionnaire_List_question1 = qSet[count].description;
-			//$scope.Questionnaire_List_option1 = qSet[count].options;
-			$scope.Questionnaire_List_count = count;
-			$scope.q_option_type_Test = qSet[count].type;
-			
-			if (qSet[count].type == "MultiSelect"){
+			if (count == qSet.length){
+				
+				$scope.q_Ans.push(tmp);
+				$scope.selected = [];
+				change = null;
+				$scope.state = "回首頁";
+				$scope.Questionnaire_List_question1 = "";
 				$scope.Questionnaire_List_option_M = "";
 				$scope.Questionnaire_List_option_S = "";
+				$scope.q_option_type_Test = "";
+				$scope.Questionnaire_List_count = count;
+				count = count + 1;
+				$scope.ansSunmary_test = ansSunmary;
+				Questionnaire_serve.postQuestionnaire(ansSunmary,'2016','hk')
+					.success(function (response){
+						$scope.end_content = "感謝頗冗填寫此活動問卷";
+						console.log(response.status);
+						console.log("YES");
+					})
+					.error(function (response) {
+						$scope.end_content = "感謝頗冗填寫此活動問卷";
+						console.log(response);
+						console.log("NO");
+					});
+				
+			}else{
+				$scope.state = "下一題";
+				$scope.Questionnaire_List_question1 = qSet[count].description;
+				$scope.Questionnaire_List_count = count;
 				$scope.q_option_type_Test = qSet[count].type;
-				$scope.Questionnaire_List_option_M = qSet[count].options;
+				
+				if (qSet[count].type == "MultiSelect"){
+					$scope.Questionnaire_List_option_M = "";
+					$scope.Questionnaire_List_option_S = "";
+					$scope.q_option_type_Test = qSet[count].type;
+					$scope.Questionnaire_List_option_M = qSet[count].options;
+					$scope.checkedOrNot = function (asset, isChecked, index) {
+						if (isChecked) {
+							$scope.selected.push(asset);
+						} else {
+							var _index = $scope.selected.indexOf(asset);
+							$scope.selected.splice(_index, 1);
+						}
+					}; 
+				}
+				if (qSet[count].type == "SingleSelect"){
+					$scope.Questionnaire_List_option_M = "";
+					$scope.Questionnaire_List_option_S = "";
+					$scope.q_option_type_Test = qSet[count].type;
+					$scope.Questionnaire_List_option_S = qSet[count].options;
+					$scope.selectedOrNot=function(item){
+						$scope.selected = [];
+						$scope.selected.push(item);
+					} 
+				}
+				tmp = {
+				"options" : $scope.selected
+					};
+					$scope.q_Ans.push(tmp);
+					count = count + 1;
+					$scope.selected = [];
+					change = null;
 			}
-			if (qSet[count].type == "SingleSelect"){
-				$scope.Questionnaire_List_option_M = "";
-				$scope.Questionnaire_List_option_S = "";
-				$scope.q_option_type_Test = qSet[count].type;
-				$scope.Questionnaire_List_option_S = qSet[count].options;
-			}
-			count = count + 1;
 		}
 	}
-	$scope.endQ = function() {
-		$window.location.href = '#index';
-		$window.location.reload();
-		count = 0;
-		//$scope.Questionnaire_List_count = count;
-	}
+})
+.controller('PhotosCtrl', function($scope,$state, $stateParams) {
+
+})
+.controller('LikeListCrtl', function($scope,$state, $stateParams) {
+
+})
+.controller('LecturetimeCrtl', function($scope,$state, $stateParams) {
+
+})
+.controller('OtherCtrl', function($scope,$state, $stateParams) {
+
 })
 ;

@@ -3,21 +3,19 @@
     </ion-nav-bar>
     <ion-content class="page-back">
         <div class="Quest-body">
-            {{Questionnaire_List_question1}}<br>
+			{{end_content}}
+            <!-- {{selected}} -->
+			{{Questionnaire_List_question1}}<br>
 			<ion-checkbox ng-repeat="name in Questionnaire_List_option_M" 
-						  ng-value="name.value"
-						  ng-model="data.serverSide"
-						  name="server-side"
-						  ng-change="serverSideChange(name)">
+						  ng-model="isChecked"
+						  ng-change="checkedOrNot(name, isChecked, $index)">
 				{{name}}
 			</ion-checkbox>
 			<ion-radio ng-repeat="item in Questionnaire_List_option_S"
-                   ng-value="item.value"
-                   ng-model="data.serverSide"
-                   ng-change="serverSideChange(item)"
-                   name="server-side">
-				{{ item }}
+					   ng-click="selectedOrNot(item)">
+				{{item}}
 			</ion-radio>
+			{{Questionnaire_List_count}}|{{ansSunmary_test}}
 			<button class="button button-block button-positive" ng-click="nextQ()" display="none">
 				{{state}}
 			</button>

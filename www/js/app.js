@@ -3,36 +3,34 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-// 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
 .run(function($ionicPlatform) {
-    $ionicPlatform.ready(function() {
-        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-        // for form inputs)
+	$ionicPlatform.ready(function() {
+		// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+		// for form inputs)
         if (window.cordova && window.cordova.plugins.Keyboard) {
-          cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-          cordova.plugins.Keyboard.disableScroll(true);
-
-        }
-        if (window.StatusBar) {
-          // org.apache.cordova.statusbar required
-          StatusBar.styleDefault();
-        }
-    });
+			cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+		}
+		if (window.StatusBar) {
+		  // org.apache.cordova.statusbar required
+		  StatusBar.styleDefault();
+		}
+	});
 })
 .config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
-    //Ë®≠ÂÆöÂÖ®ÂüüËøîÂõûÈçµÔºåÂéªÈô§Ê®ôÁ§∫ÁöÑtextÔºå‰∏¶Áµ±‰∏ÄÂ•óÁî®icon
+    //≥]©w•˛∞Ï™¶^¡‰°A•h∞£º–•‹™∫text°A®√≤Œ§@ÆM•Œicon
+	$ionicConfigProvider.navBar.alignTitle('center');
     $ionicConfigProvider.backButton.previousTitleText(false);
     $ionicConfigProvider.backButton.icon('ion-chevron-left');
     $ionicConfigProvider.backButton.text('')
     $stateProvider
-        .state('index', {
-          url: '/index',
-          templateUrl: 'templates/index.html',
-          controller: 'PlaylistsCtrl'
+        .state('lobby', {
+          url: '/lobby',
+          templateUrl: 'templates/lobby.html',
+          controller: 'LobbyCtrl'
         })
-        .state('Stalls', {
+		.state('Stalls', {
           url: '/Stall',
           templateUrl: 'templates/Stalls.html',
           controller: 'StallsCtrl'
@@ -40,7 +38,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         .state('school', {
           url: '/school',
           templateUrl: 'templates/school.html',
-          controller: 'PlaylistsCtrl'
+          controller: 'SchoolSearchCtrl'
         })
         .state('Theme_events', {
           url: '/Theme_events',
@@ -56,7 +54,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         .state('news', {
           url: '/news',
           templateUrl: 'templates/news.html',
-          controller: 'PlaylistsCtrl'
+          controller: 'NewsCtrl'
         })
         
         .state('Questionnaire', {
@@ -65,10 +63,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           controller: 'QuestionnaireSelect'
         })
         
+		.state('Q_show', {
+          url: '/Q_show',
+          templateUrl: 'templates/Questionnaire/Q_show.html',
+          controller: 'QuestionnaireSelect'
+        })
+		
+        .state('Q-end', {
+          url: '/Q-end',
+          templateUrl: 'templates/Questionnaire/Q-end.html',
+          controller: 'QuestionnaireSelect'
+        })
+        
         .state('photos', {
           url: '/photos',
           templateUrl: 'templates/photos.html',
-          controller: 'PlaylistsCtrl'
+          controller: 'PhotosCtrl'
         })
         .state('like_list', {
           url: '/like_list',
@@ -78,38 +88,24 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 		.state('lecturetime', {
           url: '/lecturetime',
           templateUrl: 'templates/lectures.html',
-          controller: 'PlaylistsCtrl'
+          controller: 'LecturetimeCrtl'
         })
         .state('others', {
           url: '/others',
           templateUrl: 'templates/others.html',
-          controller: 'PlaylistsCtrl'
+          controller: 'OtherCtrl'
         })
-        .state('Q1-1', {
-          url: '/Q1-1',
-          templateUrl: 'templates/Questionnaire/Q1-1.html',
-          controller: 'QuestionnaireSelect'
-        })
-		.state('Q_show', {
-          url: '/Q_show',
-          templateUrl: 'templates/Questionnaire/Q_show.html',
-          controller: 'QuestionnaireSelect'
-        })
-        .state('Q-end', {
-          url: '/Q-end',
-          templateUrl: 'templates/Questionnaire/Q-end.html',
-          controller: 'QuestionnaireSelect'
-        })
-        .state('search_area', {
+		.state('search_area', {
           url: '/search_area',
           templateUrl: 'templates/school/search_area.html',
-          controller: 'PlaylistsCtrl'
+          /*controller: 'PlaylistsCtrl'*/
         })
         .state('search_result', {
           url: '/search_result',
           templateUrl: 'templates/school/search_result.html',
-          controller: 'SchoolInfoCtrl'
+          /*controller: 'SchoolInfoCtrl'*/
         })
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/index'); //ÈÄôÊòØÈ†ÅÈù¢Ëµ∑ÂßãÈªû
-});
+  $urlRouterProvider.otherwise('/lobby'); //≥o¨O≠∂≠±∞_©l¬I
+})
+;
