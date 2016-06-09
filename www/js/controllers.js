@@ -22,7 +22,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 .controller('ThemeEventsCtrl', function($scope,$state, $stateParams, ThemeEvents_serve,$http) {
-/*
+
 	var alphabet_list;
 	var i;
 	var j;
@@ -59,7 +59,7 @@ angular.module('starter.controllers', ['starter.services'])
 		})
 		.error(function (response) {
 			//$scope.test = "你可以去死了!!!";
-		});  */
+		});  
 })
 .controller('TrafficCtrl', function($scope,$state, $stateParams, $http) {
 
