@@ -22,6 +22,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 .controller('ThemeEventsCtrl', function($scope,$state, $stateParams, ThemeEvents_serve,$http) {
+/*
 	var alphabet_list;
 	var i;
 	var j;
@@ -58,13 +59,27 @@ angular.module('starter.controllers', ['starter.services'])
 		})
 		.error(function (response) {
 			//$scope.test = "你可以去死了!!!";
-		});  
+		});  */
 })
 .controller('TrafficCtrl', function($scope,$state, $stateParams, $http) {
 
 })
-.controller('NewsCtrl', function($scope,$state, $stateParams) {
-
+.controller('NewsCtrl', function($scope,$state, $stateParams, $http, News, $ionicPopup, $timeout) {
+	var tmpList;
+	News.getNewsList()
+		.success(function(res) {
+            $scope.News_Set = res.news_set;
+            tmpList = res.news_set;
+		})
+		.error(function(res){
+		});
+	$scope.getNews = function(newsTitle) {
+		var tmp = News.searchNews(newsTitle , tmpList);
+        $ionicPopup.alert({
+            title: tmp.title,
+            template: tmp.content
+        });
+	}
 })
 .controller('QuestionnaireSelect', function($scope, $window, $http, Questionnaire_serve,  $state, $ionicHistory, localStorage) {
 	var qSet;
@@ -207,8 +222,21 @@ angular.module('starter.controllers', ['starter.services'])
 .controller('LikeListCrtl', function($scope,$state, $stateParams) {
 
 })
-.controller('LecturetimeCrtl', function($scope,$state, $stateParams) {
-
+.controller('LecturetimeCrtl', function($scope,$state, $stateParams, $http, Lecture) {
+    var tmpList;
+	Lecture.getLectureList()
+		.success(function(res) {
+			$scope.button_Set = res.area_set;
+			$scope.Lecture_Set = res.area_set[0].lec_Set;
+			tmpList = res.area_set;
+		})
+		.error(function(res){
+			
+		});
+	$scope.setLecture = function(areaName) {
+		var tmp = Lecture.searchLecture(areaName , tmpList);
+		$scope.Lecture_Set = tmp.lec_Set;
+	}
 })
 .controller('OtherCtrl', function($scope,$state, $stateParams) {
 

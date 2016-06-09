@@ -62,5 +62,41 @@ angular.module('starter.services', [])
 		}
 		return self;
 	})
-
+    .factory('News',function ($filter, $http) {
+        var self = this;
+        self.searchNews = function(newsTitle , tmpList) {
+            var news_tmp = null;
+            
+            var found = $filter('filter')(tmpList,{"title": newsTitle}, true)
+            if (found.length) {
+                news_tmp = angular.fromJson(found[0]);
+            }
+            return news_tmp;
+        }
+        self.getNewsList = function() {
+            var News_List;
+            var link = 'http://163.22.17.174:8080/V1/news/my';
+            News_List = $http.get(link);
+            return News_List;
+        }
+        return self;
+    })
+    .factory('Lecture',function ($filter, $http) {
+        var self = this;
+        self.searchLecture = function(areaName , tmpList) {
+            var lec_tmp = null;
+            var found = $filter('filter')(tmpList,{"area": areaName}, true)
+            if (found.length) {
+                lec_tmp = angular.fromJson(found[0]);
+            }
+            return lec_tmp;
+        }
+        self.getLectureList = function() {
+            var Lecture_List;
+            var link = 'http://163.22.17.174:8080/V1/exhibitions/lectures/my';
+            Lecture_List = $http.get(link);
+            return Lecture_List;
+        }
+        return self;
+    })
 ;
