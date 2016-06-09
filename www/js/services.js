@@ -57,10 +57,10 @@ angular.module('starter.services', [])
 		var self = this;
 		self.getalphabet = function(country,id){
 			var link = 'http://163.22.17.174:8080/V1/exhibitions/activity/'+id+'/'+country+'/collectionbox';
-			alphabet_list = http.get(link);
+			alphabet_list = $http.get(link);
 			return alphabet_list;
 		}
-		
+		return self;
 	})
 
 ;

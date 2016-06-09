@@ -21,17 +21,44 @@ angular.module('starter.controllers', ['starter.services'])
 .controller('SchoolSearchCtrl', function($scope,$state, $stateParams) {
 
 })
-.controller('ThemeEventsCtrl', function($scope,$state, $stateParams/* , ThemeEvents_serve, $http, $window */) {
+.controller('ThemeEventsCtrl', function($scope,$state, $stateParams, ThemeEvents_serve,$http) {
 	var alphabet_list;
-	$scope.alphabet = ['Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png','Block.png'];
-/* 	ThemeEvents_serve.getalphabet('my','test003')
+	var i;
+	var j;
+	var picture = "";
+	var alphabet_tmp = [];
+	var Block = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAYAAAA+s9J6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAKISURBVHhe7dMxAQAgDMCwgX/PwIGHPslTBV3nGSCzf4GICSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQUjMXJIEFvkOhX5EAAAAASUVORK5CYII=";
+ 	
+	//$scope.test = "你可以去死了!!!";
+	ThemeEvents_serve.getalphabet('my','test003')
 		.success(function(response){
-			alphabet_list = response.alphabet_list.collectionbox;
-			$scope.test = alphabet_list[0].picture;
+			//$scope.alphabet = [Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block];
+			alphabet_list = response.collectionbox;
+			if(alphabet_list.length == 0){
+				for (i = 1;i <= 30;i++){
+					alphabet_tmp.push(Block);
+				}
+			}else{
+				if (alphabet_list.length == 30){
+					$scope.test = "可兌換";
+				}
+				
+				for (i = 0;i <= alphabet_list.length-1;i++){
+					$scope.test = "可兌換";
+					picture = alphabet_list[i].picture;
+					alphabet_tmp.push(picture);
+				}
+				$scope.list_num = 30-alphabet_list.length;
+				for (j = 1;j <= $scope.list_num;j++){
+					alphabet_tmp.push(Block);
+				}
+			}
+			//$scope.test = alphabet_list[0].picture;
+			$scope.alphabet = alphabet_tmp;
 		})
 		.error(function (response) {
-			$scope.test = "你可以去死了!!!";
-		});  */
+			//$scope.test = "你可以去死了!!!";
+		});  
 })
 .controller('TrafficCtrl', function($scope,$state, $stateParams, $http) {
 
