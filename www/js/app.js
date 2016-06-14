@@ -3,9 +3,9 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $rootScope, $location, $timeout, $ionicHistory, $cordovaToast) {
 	$ionicPlatform.ready(function() {
 		// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
 		// for form inputs)
@@ -17,6 +17,23 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 		  StatusBar.styleDefault();
 		}
 	});
+    $ionicPlatform.registerBackButtonAction(function (e) {
+        if ($ionicHistory.backView()) {
+            $ionicHistory.goBack();
+        } else {
+            if ($rootScope.backButtonPressedOnceToExit) {
+                ionic.Platform.exitApp();
+            } else {
+                $rootScope.backButtonPressedOnceToExit = true;
+                $cordovaToast.showShortTop("Press Again to Exit.");
+                setTimeout(function () {
+                  $rootScope.backButtonPressedOnceToExit = false;
+                }, 2000);
+            }
+        }
+        e.preventDefault();
+        return false;
+    }, 101);
 })
 .config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
     //設定全域返回鍵，去除標示的text，並統一套用icon
