@@ -38,6 +38,12 @@
 	text-align:right;
 }
 /*Lobby layout Setting(index.html)*/
+div.lobby-row {
+    margin-top: 0px auto;
+    margin-left: 0px auto;
+    margin-right: 0px auto;
+    margin-bottom: 50px;
+}
 .lobby-col {
     text-align: Center;
 }
@@ -56,7 +62,7 @@
     font-size: 420%;
 }
 .item-description {
-    font-size: 50%;
+    font-size: 100%;
 }
 /*參展學校 CSS Setting(search_result.html)*/
 .header-favorite-icon {
@@ -92,7 +98,7 @@
     padding: 0px !important;
     font-size: 80%;
 }
-/*主題活動 CSS Setting(Theme_event.html)*/
+/*大學巡禮 CSS Setting(Theme_event.html)*/
 .stickerbook {
     border-width:2px; 
     border-style:solid;
