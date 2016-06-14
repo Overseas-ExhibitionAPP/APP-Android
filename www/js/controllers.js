@@ -21,7 +21,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
 .controller('SchoolSearchCtrl', function($scope,$state, $stateParams) {
 
 })
-.controller('ThemeEventsCtrl', function($scope,$state, $stateParams, ThemeEvents_serve,$http) {
+.controller('ThemeEventsCtrl', function($scope,$state, $stateParams, ThemeEvents_serve,$http,$cordovaBarcodeScanner) {
 
 	var alphabet_list;
 	var i;
@@ -29,11 +29,8 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
 	var picture = "";
 	var alphabet_tmp = [];
 	var Block = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAYAAAA+s9J6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAKISURBVHhe7dMxAQAgDMCwgX/PwIGHPslTBV3nGSCzf4GICSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQUjMXJIEFvkOhX5EAAAAASUVORK5CYII=";
- 	
-	//$scope.test = "你可以去死了!!!";
 	ThemeEvents_serve.getalphabet('my','test003')
 		.success(function(response){
-			//$scope.alphabet = [Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block,Block];
 			alphabet_list = response.collectionbox;
 			if(alphabet_list.length == 0){
 				for (i = 1;i <= 30;i++){
@@ -54,12 +51,22 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
 					alphabet_tmp.push(Block);
 				}
 			}
-			//$scope.test = alphabet_list[0].picture;
 			$scope.alphabet = alphabet_tmp;
 		})
 		.error(function (response) {
-			//$scope.test = "你可以去死了!!!";
-		});  
+		});
+    $scope.scanBarcodeStamp = function () {
+        //掃描學校QRcode
+        $cordovaBarcodeScanner.scan().then(function (result) {                   
+            $scope.barcode = result.text;
+            $scope.format = result.format;
+        }, function (error) {
+            console.warn("An error happened -> " + error);
+        });
+    };
+    $scope.scanBarcode = function() {
+    
+    };
 })
 .controller('TrafficCtrl', function($scope,$state, $stateParams, $http) {
 

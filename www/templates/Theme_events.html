@@ -5,7 +5,6 @@
     </ion-nav-bar>
     <ion-content class="page-back">
         <h2>集章簿</h2>
-		{{test}}<br>
 		<!-- {{list_num}}-->
 		
         <div class="stickerbook">
@@ -19,17 +18,19 @@
         </div>
         <div  class="row button-area">
             <div class="col col-50 button-item">
-                <button class="button button-balanced">
+                <button class="button button-balanced" ng-click="scanBarcodeStamp()">
                     集章
                 </button>
             </div>
             <div class=" col col-50 button-item">
-                <button class="button button-balanced">
+                <button class="button button-balanced" ng-click="scanBarcode()">
                     兌換
                 </button>
             </div>
-			<br>
-			 
+        </div>
+        <div class="list">
+            <div class="item">{{barcode}}</div>
+            <div class="item">{{format}}</div>
         </div>
   </ion-content>
 </ion-view>

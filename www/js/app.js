@@ -6,17 +6,17 @@
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova'])
 
 .run(function($ionicPlatform, $rootScope, $location, $timeout, $ionicHistory, $cordovaToast) {
-	$ionicPlatform.ready(function() {
-		// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-		// for form inputs)
+    $ionicPlatform.ready(function() {
+        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+        // for form inputs)
         if (window.cordova && window.cordova.plugins.Keyboard) {
-			cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-		}
-		if (window.StatusBar) {
-		  // org.apache.cordova.statusbar required
-		  StatusBar.styleDefault();
-		}
-	});
+            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        }
+        if (window.StatusBar) {
+          // org.apache.cordova.statusbar required
+          StatusBar.styleDefault();
+        }
+    });
     $ionicPlatform.registerBackButtonAction(function (e) {
         if ($ionicHistory.backView()) {
             $ionicHistory.goBack();
@@ -37,7 +37,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 })
 .config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
     //設定全域返回鍵，去除標示的text，並統一套用icon
-	$ionicConfigProvider.navBar.alignTitle('center');
+    $ionicConfigProvider.navBar.alignTitle('center');
     $ionicConfigProvider.backButton.previousTitleText(false);
     $ionicConfigProvider.backButton.icon('ion-chevron-left');
     $ionicConfigProvider.backButton.text('')
@@ -47,7 +47,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           templateUrl: 'templates/lobby.html',
           controller: 'LobbyCtrl'
         })
-		.state('Stalls', {
+        .state('Stalls', {
           url: '/Stall',
           templateUrl: 'templates/Stalls.html',
           controller: 'StallsCtrl'
@@ -80,12 +80,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           controller: 'QuestionnaireSelect'
         })
         
-		.state('Q_show', {
+        .state('Q_show', {
           url: '/Q_show',
           templateUrl: 'templates/Questionnaire/Q_show.html',
           controller: 'QuestionnaireSelect'
         })
-		
+        
         .state('Q-end', {
           url: '/Q-end',
           templateUrl: 'templates/Questionnaire/Q-end.html',
@@ -102,7 +102,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           templateUrl: 'templates/like_list.html',
           controller: 'LikeListCrtl'
         })
-		.state('lecturetime', {
+        .state('lecturetime', {
           url: '/lecturetime',
           templateUrl: 'templates/lectures.html',
           controller: 'LecturetimeCrtl'
@@ -112,7 +112,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           templateUrl: 'templates/others.html',
           controller: 'OtherCtrl'
         })
-		.state('search_area', {
+        .state('search_area', {
           url: '/search_area',
           templateUrl: 'templates/school/search_area.html',
           /*controller: 'PlaylistsCtrl'*/
