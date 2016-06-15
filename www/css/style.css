@@ -99,6 +99,16 @@ div.lobby-row {
     font-size: 80%;
 }
 /*大學巡禮 CSS Setting(Theme_event.html)*/
+.theme-title {
+    font-size: 120%; 
+    color: red; 
+    font-weight: 900;
+}
+.theme-description {
+    border-width:1px; 
+    border-style:dashed;
+    margin-bottom: 10px
+}
 .stickerbook {
     border-width:2px; 
     border-style:solid;
