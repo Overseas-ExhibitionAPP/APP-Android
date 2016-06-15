@@ -60,6 +60,21 @@ angular.module('starter.services', [])
 			alphabet_list = $http.get(link);
 			return alphabet_list;
 		}
+        self.collectStamp = function(country,id,schoolnum){
+			var link = 'http://163.22.17.174:8080/V1/exhibitions/activity/collectionbox';
+            var data = {
+                "userid": id,
+                "country": country,
+                "schoolnum": schoolnum
+            };
+            var response = $http.put(link, data);
+			return response;
+		}
+        self.exchangeCBox = function(country,id,url){
+			var link = 'http://163.22.17.174:8080/V1/exhibitions/activity/'+id+'/'+country+url;
+            var response = $http.get(link);
+			return response;
+		}
 		return self;
 	})
     .factory('News',function ($filter, $http) {

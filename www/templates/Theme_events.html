@@ -1,12 +1,12 @@
-<ion-view view-title="主題活動">
+<ion-view view-title="大學巡禮">
     <ion-nav-bar class="bar bar-header bar-balanced">
         <ion-nav-back-button><!-- 這是返回鍵，直接插入即可 -->
         </ion-nav-back-button>
     </ion-nav-bar>
     <ion-content class="page-back">
         <h2>集章簿</h2>
-		<!-- {{list_num}}-->
-		
+		集章個數:已收集{{StampNum}}個集章<br/>
+        兌換狀態:{{CboxStatus}}
         <div class="stickerbook">
             <div class="row" ng-repeat="letter in alphabet track by $index" ng-if="$index % 5 == 0">
                 <div class="col"
@@ -23,14 +23,11 @@
                 </button>
             </div>
             <div class=" col col-50 button-item">
-                <button class="button button-balanced" ng-click="scanBarcode()">
+                <button class="button button-balanced" ng-click="scanBarcodeExchange()">
                     兌換
                 </button>
             </div>
         </div>
-        <div class="list">
-            <div class="item">{{barcode}}</div>
-            <div class="item">{{format}}</div>
-        </div>
+        {{test}}
   </ion-content>
 </ion-view>
