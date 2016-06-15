@@ -147,7 +147,8 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
         var tmp = News.searchNews(newsTitle , tmpList);
         $ionicPopup.alert({
             title: tmp.title,
-            template: tmp.content
+            template: tmp.content,
+            cssClass: 'news-alert'
         });
     }
 })

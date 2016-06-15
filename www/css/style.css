@@ -8,6 +8,13 @@
 	-o-background-size: cover;
 	background-size: cover;
 }
+/*最新消息 CSS Setting (News.html)*/
+.news-alert .popup-head{
+    background-color: #00BB00;
+}
+.news-alert .popup-body{
+    height: 500px;
+}
 /* 交通資訊 CSS Setting(Traffic.html)*/
 .scroll {
     height: 100%;
