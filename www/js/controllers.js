@@ -131,8 +131,31 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
         });
     };
 })
-.controller('TrafficCtrl', function($scope,$state, $stateParams, $http) {
+.controller('TrafficCtrl', function($scope,$state, $stateParams, $http,MAP) {
+    var mapList;
+    MAP.getPosList()
+		.success(function(res){
+			$scope.Pos_Set = res.traffic_list;
+			mapList = res.traffic_list;
+			$scope.name = "地點；" + mapList[0].name;
+			$scope.address = "地址：" + mapList[0].address;
+			$scope.time = "時間：" + mapList[0].starttime + "~" + mapList[0].endtime;
+			//預設地圖為參展資料之第一筆地區資料
+			var posT = MAP.searchPos(mapList[0].name, mapList);
+            $scope.position = posT.position;
+		})
+		.error(function(res){
+			
+		});
+    //偵測到地區按鈕被點擊，即reload該地區圖資
+    $scope.setPos=function(posName) {
+        var posT = MAP.searchPos(posName, mapList);
+        $scope.position = posT.position;
+		$scope.name = "地點；" + posT.name;
+		$scope.address = "地址：" + posT.address;
+		$scope.time = "時間：" + posT.starttime + "~" + posT.endtime;
 
+    };
 })
 .controller('NewsCtrl', function($scope,$state, $stateParams, $http, News, $ionicPopup, $timeout) {
     var tmpList;

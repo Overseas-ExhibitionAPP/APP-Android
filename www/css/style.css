@@ -9,6 +9,10 @@
 	background-size: cover;
 }
 /*最新消息 CSS Setting (News.html)*/
+.news-alert .popup {
+    border: 5px solid red;
+    width: auto;
+}
 .news-alert .popup-head{
     background-color: #00BB00;
 }
