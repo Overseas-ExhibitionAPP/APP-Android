@@ -8,6 +8,17 @@
 	-o-background-size: cover;
 	background-size: cover;
 }
+/*最新消息 CSS Setting (News.html)*/
+.news-alert .popup {
+    border: 5px solid red;
+    width: auto;
+}
+.news-alert .popup-head{
+    background-color: #00BB00;
+}
+.news-alert .popup-body{
+    height: 500px;
+}
 /* 交通資訊 CSS Setting(Traffic.html)*/
 .scroll {
     height: 100%;
@@ -38,6 +49,12 @@
 	text-align:right;
 }
 /*Lobby layout Setting(index.html)*/
+div.lobby-row {
+    margin-top: 0px auto;
+    margin-left: 0px auto;
+    margin-right: 0px auto;
+    margin-bottom: 50px;
+}
 .lobby-col {
     text-align: Center;
 }
@@ -56,7 +73,7 @@
     font-size: 420%;
 }
 .item-description {
-    font-size: 50%;
+    font-size: 100%;
 }
 /*參展學校 CSS Setting(search_result.html)*/
 .header-favorite-icon {
@@ -92,7 +109,17 @@
     padding: 0px !important;
     font-size: 80%;
 }
-/*主題活動 CSS Setting(Theme_event.html)*/
+/*大學巡禮 CSS Setting(Theme_event.html)*/
+.theme-title {
+    font-size: 120%; 
+    color: red; 
+    font-weight: 900;
+}
+.theme-description {
+    border-width:1px; 
+    border-style:dashed;
+    margin-bottom: 10px
+}
 .stickerbook {
     border-width:2px; 
     border-style:solid;
