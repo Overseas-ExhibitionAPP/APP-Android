@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.bootstrap',,'ngAnimate'])
+=======
+angular.module('starter.controllers', ['starter.services', 'ngCordova'])
+>>>>>>> 84aa8e9daf3b4f7db986ef83e524cb0ad765a6a2
 .controller('LobbyCtrl', function($scope,$state, $stateParams) {
 
 })
@@ -18,6 +22,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
         $scope.pic_model = tmp.layout;
     }
 })
+<<<<<<< HEAD
 .controller('SchoolSearchCtrl', function($scope,$state, $stateParams,DepartInfoSet, SchoolFunc, FavoriteList_Func) {
 	$scope.groups = DepartInfoSet;
     $scope.getInfoSet = function(gName) {
@@ -28,6 +33,10 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
         console.log(result);
     }
     $scope.oneAtATime = true;
+=======
+.controller('SchoolSearchCtrl', function($scope,$state, $stateParams) {
+
+>>>>>>> 84aa8e9daf3b4f7db986ef83e524cb0ad765a6a2
 })
 .controller('ThemeEventsCtrl', function($scope,$state, $stateParams, ThemeEvents_serve,$http,$cordovaBarcodeScanner,$ionicPopup, $timeout,$window) {
     var boxS;
