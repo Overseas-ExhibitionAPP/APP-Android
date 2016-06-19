@@ -122,20 +122,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           templateUrl: 'templates/others.html',
           controller: 'OtherCtrl'
         })
-<<<<<<< HEAD
 
-=======
-        .state('search_area', {
-          url: '/search_area',
-          templateUrl: 'templates/school/search_area.html',
-          /*controller: 'PlaylistsCtrl'*/
-        })
-        .state('search_result', {
-          url: '/search_result',
-          templateUrl: 'templates/school/search_result.html',
-          /*controller: 'SchoolInfoCtrl'*/
-        })
->>>>>>> 84aa8e9daf3b4f7db986ef83e524cb0ad765a6a2
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/lobby'); //這是頁面起始點
 })
