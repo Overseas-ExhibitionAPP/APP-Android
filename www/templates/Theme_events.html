@@ -5,8 +5,7 @@
     </ion-nav-bar>
     <ion-content class="page-back">
         <span class="theme-title">巡禮小提醒</span><br/>
-        <div class="theme-description" >
-            
+        <div class="theme-description" > 
             <p>
                 <b>找一找</b> 學校攤位的QR Code<br/>
                 <b>掃一掃</b> 各校專屬QR Code<br/>
@@ -16,17 +15,8 @@
         </div>
         <span class="theme-title">巡禮進度</span><br/>
         <div class="theme-description" >
-		<b>學校校徽</b>:已收集{{StampNum}}個校徽<br/>
-        <b>兌換狀態</b>:{{CboxStatus}}
-        </div>
-        <div class="stickerbook">
-            <div class="row" ng-repeat="letter in alphabet track by $index" ng-if="$index % 5 == 0">
-                <div class="col"
-                    ng-repeat="i in [$index, $index + 1, $index + 2, $index + 3, $index + 4]" 
-                    ng-if="alphabet[i] != null">
-                        <ion-item class="sticker-item"><img class="full-image" data-ng-src="{{alphabet[i]}}"></img></ion-item>
-                </div>
-            </div>
+            <b>學校校徽</b>:已收集{{StampNum}}個校徽<br/>
+            <b>兌換狀態</b>:{{CboxStatus}}
         </div>
         <div  class="row button-area">
             <div class="col col-50 button-item">
@@ -40,6 +30,15 @@
                 </button>
             </div>
         </div>
-        {{test}}
+        <div class="stickerbook">
+            <div class="row" ng-repeat="letter in alphabet track by $index" ng-if="$index % 5 == 0">
+                <div class="col"
+                    ng-repeat="i in [$index, $index + 1, $index + 2, $index + 3, $index + 4]" 
+                    ng-if="alphabet[i] != null">
+                        <ion-item class="sticker-item"><img class="full-image" data-ng-src="{{alphabet[i]}}"></img></ion-item>
+                </div>
+            </div>
+        </div>
+
   </ion-content>
 </ion-view>

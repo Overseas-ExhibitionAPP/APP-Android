@@ -43,13 +43,13 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
             boxS = response.box_status;
             $scope.CboxStatus = "不可兌換";
             if(response.status == "403") {
-                for (i = 1;i <= 30;i++){
+                for (i = 1;i <= 15;i++){
                     alphabet_tmp.push(Block);
                 }
                 $scope.StampNum = 0;
             }else{
                 alphabet_list = response.collectionbox;
-                if (alphabet_list.length == 30){
+                if (alphabet_list.length == 15){
                     if(boxS == 0) {
                         $scope.CboxStatus = "可兌換";
                     } else {
@@ -61,7 +61,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
                     alphabet_tmp.push(picture);
                 }
                 $scope.StampNum = alphabet_list.length;
-                for (j = 1;j <= (30 - alphabet_list.length);j++){
+                for (j = 1;j <= (15 - alphabet_list.length);j++){
                     alphabet_tmp.push(Block);
                 }
             }
@@ -90,7 +90,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
                                     picture = alphabet_list[i].picture;
                                     alphabet_tmp[i] = picture;
                                 }
-                                if (alphabet_list.length == 30){
+                                if (alphabet_list.length == 15){
                                     if(boxS == 0) {
                                         $scope.CboxStatus = "可兌換";
                                     } else {
