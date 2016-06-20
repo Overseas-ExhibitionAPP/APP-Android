@@ -38,7 +38,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
     var alphabet_tmp = [];
     var Block = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAYAAAA+s9J6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAKISURBVHhe7dMxAQAgDMCwgX/PwIGHPslTBV3nGSCzf4GICSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQUjMXJIEFvkOhX5EAAAAASUVORK5CYII=";
     //集章簿初始化
-    ThemeEvents_serve.getalphabet('my','test003')
+    ThemeEvents_serve.getalphabet('my','test0001')
         .success(function(response){
             boxS = response.box_status;
             $scope.CboxStatus = "不可兌換";
@@ -73,7 +73,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
         //掃描學校QRcode，並回傳給後端資料庫
         $cordovaBarcodeScanner.scan().then(function (result) {
             var tmp = angular.fromJson(result.text);
-            ThemeEvents_serve.collectStamp('my','test003',tmp.schoolnum)
+            ThemeEvents_serve.collectStamp('my','test0001',tmp.schoolnum)
                 .success(function(response){
                     //該頁面reload
                     var alertPopup = $ionicPopup.alert({
@@ -82,26 +82,28 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
                     });
                     alertPopup.then(function(res) {
                         //更新目前的集章簿
-                        ThemeEvents_serve.getalphabet('my','test003')
-                            .success(function(response){
-                                boxS = response.box_status;
-                                alphabet_list = response.collectionbox;
-                                for (i = 0;i <= alphabet_list.length-1;i++){
-                                    picture = alphabet_list[i].picture;
-                                    alphabet_tmp[i] = picture;
-                                }
-                                if (alphabet_list.length == 15){
-                                    if(boxS == 0) {
-                                        $scope.CboxStatus = "可兌換";
-                                    } else {
-                                        $scope.CboxStatus = "已兌換";
+                        if(response.status == 201 || response.status ==200) {
+                            ThemeEvents_serve.getalphabet('my','test0001')
+                                .success(function(response){
+                                    boxS = response.box_status;
+                                    alphabet_list = response.collectionbox;
+                                    for (i = 0;i <= alphabet_list.length-1;i++){
+                                        picture = alphabet_list[i].picture;
+                                        alphabet_tmp[i] = picture;
                                     }
-                                }
-                                $scope.StampNum = alphabet_list.length;
-                                $scope.alphabet = alphabet_tmp;
-                            })
-                            .error(function (response) {
-                            });
+                                    if (alphabet_list.length == 15){
+                                        if(boxS == 0) {
+                                            $scope.CboxStatus = "可兌換";
+                                        } else {
+                                            $scope.CboxStatus = "已兌換";
+                                        }
+                                    }
+                                    $scope.StampNum = alphabet_list.length;
+                                    $scope.alphabet = alphabet_tmp;
+                                })
+                                .error(function (response) {
+                                });
+                        }
                     });
                 })
                 .error(function (response) {
@@ -115,7 +117,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
         //掃描兌換QRcode，並回傳給後端資料庫來判斷是否可兌換
         $cordovaBarcodeScanner.scan().then(function (result) {
             var tmpurl = result.text;
-            ThemeEvents_serve.exchangeCBox('my','test003',tmpurl)
+            ThemeEvents_serve.exchangeCBox('my','test0001',tmpurl)
                 .success(function(response){
                     //該頁面reload
                     var alertPopup = $ionicPopup.alert({
