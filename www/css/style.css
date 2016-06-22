@@ -50,7 +50,10 @@
 }
 /*Lobby layout Setting(index.html)*/
 div.lobby-row {
-    margin: 0 auto !important;
+    margin-top: 0px auto;
+    margin-left: 0px auto;
+    margin-right: 0px auto;
+    margin-bottom: 50px;
 }
 .lobby-col {
     text-align: Center;

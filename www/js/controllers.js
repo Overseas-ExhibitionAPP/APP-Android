@@ -82,19 +82,135 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
 	$scope.filterResultGroup.length = 0;
 
 })
-.controller('SchoolFilterCtrl', function($scope,localStorage,schoolSearchRes) {
+.controller('SchoolFilterCtrl', function($scope,localStorage,schoolSearchRes,$window) {
 	var filterSunmary = localStorage.getObject('filterSunmary');	
 	$scope.filterSunmary = filterSunmary;
 	schoolSearchRes.getResult(filterSunmary)
 		.success(function (response) {      
             $scope.searchList = response.searchList;
-			
+			$scope.schoolNum = response.searchList.schoolNum;
         })
         .error(function (response) {
 
         });
-	
-	
+	$scope.getSchoolNum = function(schoolNum){
+		console.log("1111:"+schoolNum);
+		 /* if(schoolNum < 10){
+			schoolNum = "0"+schoolNum;
+			console.log("2222:"+schoolNum);
+		} */ 
+		console.log("3333:"+schoolNum);
+		localStorage.set('SchoolNum', schoolNum);
+		$window.location.href = '#search_result';
+	}
+})
+.controller('webviewCtrl', function($scope,localStorage) {
+	var weblink = localStorage.getObject('weblink');
+	$scope.link = weblink;
+})
+.controller('SchoolResultCtrl', function($scope,localStorage,schoolSearchRes,$window) {
+	var schoolNum = localStorage.get('SchoolNum');
+	var schoolInformation;
+	var res_status;
+	$scope.schoolNum = schoolNum;
+	schoolSearchRes.getSchoolDetail(schoolNum,'my')
+		.success(function (response) {
+		   res_status = response.status;
+		   $scope.res_status = res_status;
+		   if(res_status == "200-1"){
+			   $scope.picture = response.picture;
+			   $scope.schoolnum = response.schoolnum;
+			   $scope.chineseName = response.chineseName;
+			   $scope.englishName = response.englishName;
+			   $scope.schoolInfo = response.schoolinfo.introduction;
+			   $scope.cList1 = response.schoolinfo.cList;
+			   $scope.schoollink = response.schoolinfo.website;
+			   $scope.groups = response.deptGList;
+			   $scope.Stalls = response.layoutList;
+		   }
+		   if(res_status == "200-2"){
+			   $scope.picture = response.picture;
+			   $scope.schoolnum = response.schoolnum;
+			   $scope.chineseName = response.chineseName;
+			   $scope.englishName = response.englishName;
+			   $scope.schoolInfo = response.schoolinfo.introduction;
+			   $scope.cList1 = response.schoolinfo.cList;
+			   $scope.schoollink = response.schoolinfo.website;
+			   $scope.groups = response.deptGList;
+			   if (response.layoutList != undefined){
+					$scope.Stalls = response.layoutList;
+					$scope.stalltitle = "教育展相關資訊";
+			   }else{
+				   $scope.StallsError = "無教育展相關資訊";
+			   }
+		   }
+		   if(res_status == "200-3"){
+			   $scope.picture = response.picture;
+			   $scope.schoolnum = response.schoolnum;
+			   $scope.chineseName = response.chineseName;
+			   $scope.englishName = response.englishName;
+			   $scope.schoolInfo = "無學校資訊資訊";
+			   if (response.schoolinfo != undefined){
+				   if (response.schoolinfo.cList!= undefined){
+					   $scope.cList1 = response.schoolinfo.cList;
+				   }else{
+					   $scope.error = "無學校資訊資訊";
+				   }
+			   }else{
+				   $scope.error = "無學校資訊資訊";
+			   }
+			   $scope.schoollink = "";
+			   if (response.deptGList != undefined){
+				   $scope.groups = response.deptGList;
+			   }else{
+				   if (response.deptGList.deptList != undefined){
+						$scope.deptGList_error = "";					   
+				   }
+			   } 
+			   $scope.Stalls = response.layoutList;
+		   }
+		   if(res_status == "200-4"){
+			   $scope.picture = response.picture;
+			   $scope.schoolnum = response.schoolnum;
+			   $scope.chineseName = response.chineseName;
+			   $scope.englishName = response.englishName;
+			   $scope.schoolInfo = "無學校資訊資訊";
+			   if (response.schoolinfo != undefined){
+				   if (response.schoolinfo.cList!= undefined){
+					   $scope.cList1 = response.schoolinfo.cList;
+				   }else{
+					   $scope.error = "無學校資訊資訊";
+				   }
+			   }else{
+				   $scope.error = "無學校資訊資訊";
+			   }
+			   $scope.schoollink = "";
+			   if (response.deptGList != undefined){
+				   $scope.groups = response.deptGList;
+			   }else{
+				   if (response.deptGList.deptList != undefined){
+						$scope.deptGList_error = "";					   
+				   }
+			   } 
+			   if (response.layoutList != undefined){
+					$scope.Stalls = response.layoutList;
+					$scope.stalltitle = "教育展相關資訊";
+			   }else{
+				   $scope.StallsError = "無教育展相關資訊";
+			   }
+		   }
+		   //console.log(response);
+		   
+		   
+		   
+		})
+		.error(function (response) {
+
+		}); 
+		$scope.selected = function(weblink){
+			localStorage.setObject('weblink', weblink);
+			$window.location.href = '#webview';
+		}
 })
 .controller('ThemeEventsCtrl', function($scope,$state, $stateParams, ThemeEvents_serve,$http,$cordovaBarcodeScanner,$ionicPopup, $timeout,$window) {
     var boxS;
@@ -390,16 +506,8 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
 .controller('PhotosCtrl', function($scope,$state, $stateParams) {
 
 })
-.controller('LikeListCrtl', function($scope,$state, $stateParams, FavoriteList_Func) {
-    FavoriteList_Func.getFavoriteList('test001')
-        .success(function(res) {
-            $scope.fList = res.favoriteList;
-        })
-        .error(function(res){
-        });
-    $scope.getSchoolinfo = function() {
-        
-    }
+.controller('LikeListCrtl', function($scope,$state, $stateParams) {
+
 })
 .controller('LecturetimeCrtl', function($scope,$state, $stateParams, $http, Lecture) {
     var tmpList;

@@ -142,6 +142,13 @@ services.factory('schoolSearchRes', function($http){
 		result = $http.put(link,data);
 		return result;
 	}
+	
+	self.getSchoolDetail = function(schoolNum,country){
+		var SchoolDetail;
+		var link = 'http://163.22.17.174:8080/V1/school/'+schoolNum+'?country='+country;
+		SchoolDetail = $http.get(link);
+		return SchoolDetail;
+	}
 	return self;
 });
 services.factory('SchoolFunc', function (DepartInfoSet, $filter) {
@@ -321,13 +328,26 @@ services.value('DepartInfoSet', [
             ]
         }
     ]);
-services.factory('FavoriteList_Func', function ($http,$filter) {
-    var self = this;
-    self.getFavoriteList = function(uid) {
-        var FavoriteList = null;
-        var link = 'http://163.22.17.174:8080/V1/school/' + uid + '/favoritelist';
-        FavoriteList = $http.get(link);
-        return FavoriteList;
-    }
-    return self
-});
+services.factory('FavoriteList_Func', function (FavoriteList, $filter) {
+            var self = this;
+            self.add = function(sName) {
+                var tmp = null;
+                //利用posName來找出陣列中符合的gps資訊
+                var found = $filter('filter')(FavoriteList, {"schoolName": sName}, true);
+                if (found.length) {
+                    tmp = angular.fromJson(found[0]);
+                } else {
+                    var item = { "schoolName": sName};
+                    FavoriteList.push(item);
+                }
+                return FavoriteList;
+            }
+            return self
+        });
+services.value('FavoriteList',[
+            {
+                "schoolName" : "國立暨南國際大學",
+                "layout_Number": "72",
+                "Speech": "true"
+            }
+        ]);

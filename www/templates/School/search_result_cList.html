@@ -16,18 +16,12 @@
                 <a href="{{schoollink}}"><h2>{{chineseName}}<h2></a>
 				<a href="{{schoollink}}"><h3>{{englishName}}<h3></a>
             </div>
-			<h5>{{StallsError}}<h5>
-			<div class="item item-body">
-				<h2>{{stalltitle}}<h2>
-                <p ng-repeat="stall in Stalls">
-                    教育展名稱:{{stall.exhibNum}}<br>
-					攤位號碼:{{stall.layoutNum}}
-                </p>
-            </div>
             <div class="item item-body">
-                <p>
-                    {{schoolInfo}}
-                </p>
+				<div class="item"><h2>{{error}}<h2></div>
+				<div class="list" ng-repeat="list in cList1">
+				   <div class="item"><h2>{{list.ctitle}}<h2></div>
+				   <div class="item"><h3>{{list.characteristic}}<h3></div>
+				</div>
             </div>
         </div>
     </ion-content>

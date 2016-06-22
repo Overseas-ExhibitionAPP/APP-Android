@@ -70,7 +70,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         .state('search_result', {
           url: '/search_result',
           templateUrl: 'templates/school/search_result.html',
-          controller: 'SchoolSearchCtrl'
+          controller: 'SchoolResultCtrl'
+        })
+		.state('search_result_group', {
+          url: '/search_result_group',
+          templateUrl: 'templates/school/search_result_group.html',
+          controller: 'SchoolResultCtrl'
+        })
+		.state('search_result_cList', {
+          url: '/search_result_cList',
+          templateUrl: 'templates/school/search_result_cList.html',
+          controller: 'SchoolResultCtrl'
+        })
+		.state('webview', {
+          url: '/webview',
+          templateUrl: 'templates/school/webview.html',
+          controller: 'webviewCtrl'
         })
         .state('Theme_events', {
           url: '/Theme_events',
