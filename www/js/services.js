@@ -336,6 +336,18 @@ services.factory('FavoriteList_Func', function ($http) {
 		FavoriteList = $http.get(link);
         return FavoriteList;
     }
+    self.updateFavoriteList = function(uid,country,schid,schName) {
+        var output = null;
+        var data = {
+            "userid": uid,
+            "country": country,
+            "schoolnum": schid,
+            "schoolname": schName
+        }
+        var link = 'http://163.22.17.174:8080/V1/school/favoritelist';
+        output = $http.put(link, data);
+        return output;
+    }
     return self
 });
 services.value('FavoriteList',[

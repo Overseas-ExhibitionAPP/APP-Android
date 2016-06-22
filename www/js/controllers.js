@@ -108,14 +108,16 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
 	
 	$scope.link = weblink;
 }) */
-.controller('SchoolResultCtrl', function($scope,localStorage,schoolSearchRes,$window) {
+.controller('SchoolResultCtrl', function($scope,localStorage,schoolSearchRes,$window,FavoriteList_Func,$ionicPopup) {
 	var schoolNum = localStorage.get('SchoolNum');
 	var schoolInformation;
 	var res_status;
+    var schName;
 	$scope.schoolNum = schoolNum;
 	schoolSearchRes.getSchoolDetail(schoolNum,'my')
 		.success(function (response) {
 		   res_status = response.status;
+           schName = response.chineseName;
 		   $scope.res_status = res_status;
 		   if(res_status == "200-1"){
 			   $scope.picture = response.picture;
@@ -211,6 +213,18 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
 			localStorage.setObject('weblink', weblink);
 			$window.location.href = '#webview';
 		}
+        $scope.setFavoriteList = function() {
+            FavoriteList_Func.updateFavoriteList('test001','my',schoolNum,schName)
+                .success(function(res) {
+                    var alertPopup = $ionicPopup.alert({
+                        title: '',
+                        template: res.message
+                    });
+                })
+                .error(function(res){
+
+                });
+        }
         $scope.backToindex = function() {
             $window.location.href = '#lobby';
         }
