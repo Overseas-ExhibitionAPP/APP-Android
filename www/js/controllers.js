@@ -84,7 +84,6 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
 })
 .controller('SchoolFilterCtrl', function($scope,localStorage,schoolSearchRes,$window) {
 	var filterSunmary = localStorage.getObject('filterSunmary');	
-	$scope.filterSunmary = filterSunmary;
 	schoolSearchRes.getResult(filterSunmary)
 		.success(function (response) {      
             $scope.searchList = response.searchList;
@@ -212,6 +211,9 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
 			localStorage.setObject('weblink', weblink);
 			$window.location.href = '#webview';
 		}
+        $scope.backToindex = function() {
+            $window.location.href = '#lobby';
+        }
 })
 .controller('ThemeEventsCtrl', function($scope,$state, $stateParams, ThemeEvents_serve,$http,$cordovaBarcodeScanner,$ionicPopup, $timeout,$window) {
     var boxS;
