@@ -8,7 +8,11 @@
             <button class="button button-clear button-positive glyphicon glyphicon-home header-favorite-icon" ng-click="backToindex()"></button>
     </ion-nav-buttons>
     </ion-nav-bar>
-    <ion-content>
-	<iframe name="eventsPage" src="{{link}}">
+    <ion-content scroll="true" overflow-scroll="true" class="has-header padding">
+	{{link}}
+	<iframe ng-src="{{link}}">
     </iframe> 
+	
+    <iframe style="width:100%;height:100%" src="{{link}}"></iframe>
+	</ion-content>
 </ion-view>
