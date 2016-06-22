@@ -8,6 +8,18 @@
 	-o-background-size: cover;
 	background-size: cover;
 }
+/*我的最愛 CSS Setting (News.html)*/
+.favorite-item {
+    background-color: #CEFFCE;
+    vertical-align:middle;
+}
+.favorite-title {
+    height:50px;
+}
+.favorite-layout {
+    font-size: 50%;
+    margin-left: 50px;
+}
 /*最新消息 CSS Setting (News.html)*/
 .news-alert .popup {
     border: 5px solid red;
@@ -50,10 +62,7 @@
 }
 /*Lobby layout Setting(index.html)*/
 div.lobby-row {
-    margin-top: 0px auto;
-    margin-left: 0px auto;
-    margin-right: 0px auto;
-    margin-bottom: 50px;
+    margin: 0 auto !important;
 }
 .lobby-col {
     text-align: Center;

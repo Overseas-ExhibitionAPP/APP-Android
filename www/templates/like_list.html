@@ -4,20 +4,17 @@
         </ion-nav-back-button>
     </ion-nav-bar>
     <ion-content>
-		<!--
         <ion-list>
-
-            <ion-item ng-repeat="item in items">
-                <div class="row">
-                    <div class="col col-75">
-                        {{item.schoolName}}
+            <ion-item ng-repeat="fitem in fList" ng-class-even="'favorite-item'">
+                <div class="row" ng-click="getSchoolinfo('{{fitem.schoolnum}}')">
+                    <div class="col col-66 item-text-wrap favorite-title">
+                        {{fitem.schName}}
                     </div>
-                    <div class="col col-25 ">
-                        <i class="col col-10 ion-speakerphone"> {{item.layout_Number}}</i>
+                    <div class="col col-33 item-text-wrap favorite-layout" >
+                        <i ng-repeat="layout in fitem.layoutList">{{layout.exhibName}}:{{layout.layoutNum}}<br/> </i>
                     </div>
                 </div>
             </ion-item>
         </ion-list>
-		-->
     </ion-content>
 </ion-view>
