@@ -104,10 +104,11 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
 		$window.location.href = '#search_result';
 	}
 })
-.controller('webviewCtrl', function($scope,localStorage) {
+/* .controller('webviewCtrl', function($scope,localStorage) {
 	var weblink = localStorage.getObject('weblink');
+	
 	$scope.link = weblink;
-})
+}) */
 .controller('SchoolResultCtrl', function($scope,localStorage,schoolSearchRes,$window) {
 	var schoolNum = localStorage.get('SchoolNum');
 	var schoolInformation;
