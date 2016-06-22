@@ -4,20 +4,20 @@
         </ion-nav-back-button>
     </ion-nav-bar>
     <ion-content>
-		<!--
         <ion-list>
-
-            <ion-item ng-repeat="item in items">
-                <div class="row">
-                    <div class="col col-75">
-                        {{item.schoolName}}
+            <ion-item ng-repeat="fitem in fList">
+                <div class="row" ng-click="getSchoolinfo({{fitem.schoolnum}})">
+                    <div class="col col-66 item-text-wrap">
+                        {{fitem.schName}}
                     </div>
-                    <div class="col col-25 ">
-                        <i class="col col-10 ion-speakerphone"> {{item.layout_Number}}</i>
+                    <div class="col col-33">
+                        <i>吉隆坡悾悾:10</i><br/>
+                        <i>檳城:L2</i><br/>
+                        <i>亞比:E3</i><br/>
                     </div>
                 </div>
             </ion-item>
         </ion-list>
-		-->
+        {{test}}
     </ion-content>
 </ion-view>

@@ -390,8 +390,16 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
 .controller('PhotosCtrl', function($scope,$state, $stateParams) {
 
 })
-.controller('LikeListCrtl', function($scope,$state, $stateParams) {
-
+.controller('LikeListCrtl', function($scope,$state, $stateParams, FavoriteList_Func) {
+    FavoriteList_Func.getFavoriteList('test001')
+        .success(function(res) {
+            $scope.fList = res.favoriteList;
+        })
+        .error(function(res){
+        });
+    $scope.getSchoolinfo = function() {
+        
+    }
 })
 .controller('LecturetimeCrtl', function($scope,$state, $stateParams, $http, Lecture) {
     var tmpList;
