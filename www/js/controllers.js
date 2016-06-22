@@ -506,7 +506,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
 .controller('PhotosCtrl', function($scope,$state, $stateParams) {
 
 })
-.controller('LikeListCrtl', function($scope,$state, $stateParams,FavoriteList_Func,$http) {
+.controller('LikeListCrtl', function($scope,$state, $stateParams,FavoriteList_Func,$http,localStorage,$window) {
     FavoriteList_Func.getFavoriteList('test001')
         .success(function(res) {
             $scope.fList = res.favoriteList;
@@ -515,7 +515,10 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
             
         });
     $scope.getSchoolinfo = function(schoolnum) {
-
+        var tmp = schoolnum;
+		localStorage.set('SchoolNum', tmp);
+        localStorage.set('PrePage', 'like_list');
+		$window.location.href = '#search_result';
     }
 })
 .controller('LecturetimeCrtl', function($scope,$state, $stateParams, $http, Lecture) {
