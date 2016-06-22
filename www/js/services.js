@@ -134,6 +134,16 @@ services.factory('MAP', function ($filter, $http) {
     }
     return self
 });
+services.factory('schoolSearchRes', function($http){
+	var self = this;
+	self.getResult = function(data){
+		var result;
+		var link = 'http://163.22.17.174:8080/V1/school/search';
+		result = $http.put(link,data);
+		return result;
+	}
+	return self;
+});
 services.factory('SchoolFunc', function (DepartInfoSet, $filter) {
         var self = this;
         self.getDepartSet = function(gName) {
@@ -147,6 +157,29 @@ services.factory('SchoolFunc', function (DepartInfoSet, $filter) {
         }
         return self
     });
+services.value('schoolFilter',[
+	"北部","中部","南部","東部","外島"
+]);
+services.value('staudyGroup',[
+	"資訊學群",
+	"工程學群",
+	"數理化學群",
+	"醫藥衛生學群",
+	"生命科學學群",
+	"生物資源學群",
+	"地球與環境學群",
+	"外語學群",
+	"文史哲學群",
+	"教育學群",
+	"法政學群",
+	"管理學群",
+	"財經學群",
+	"社會與心理學群",
+	"大眾傳播學群",
+	"建築與設計學群",
+	"藝術學群",
+	"體育休閒學群"
+])
 services.value('DepartInfoSet', [
         {
             "groupName": "資訊學群",

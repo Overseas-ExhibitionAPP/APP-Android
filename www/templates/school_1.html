@@ -1,0 +1,47 @@
+<ion-view view-title="參展學校">
+    <ion-nav-bar class="bar bar-header bar-balanced">
+        <ion-nav-back-button><!-- 這是返回鍵，直接插入即可 -->
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content>
+			<div >
+				<div class="school-conditionSearch">
+				<button class="button button-balanced" ng-click="Filtersubmit()">搜尋</button>
+				<uib-accordion close-others="oneAtATime">
+					<uib-accordion-group  is-open="status.open">
+						<uib-accordion-heading>
+							<div class= "accordion-header-div ">
+							地區
+							<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+							</div>
+						</uib-accordion-heading>
+						<ion-checkbox ng-repeat="SchoolareaName in school_fifter" 
+								  ng-model="schoolArea"
+								  ng-change="checkedOrNotAera(SchoolareaName, schoolArea, $index)">
+						{{SchoolareaName}}
+						</ion-checkbox>
+					</uib-accordion-group>
+				</uib-accordion>
+				<uib-accordion close-others="oneAtATime">
+					<uib-accordion-group  is-open="status.open">
+						<uib-accordion-heading>
+							<div class= "accordion-header-div ">
+							學群
+							<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+							</div>
+						</uib-accordion-heading>
+						<ion-checkbox ng-repeat="Group in staudyGroup" 
+								  ng-model="staudyGroup_data"
+								  ng-change="checkedOrNotGroup(Group, staudyGroup_data, $index)">
+						{{Group}}
+						</ion-checkbox>	
+					</uib-accordion-group>
+				</uib-accordion>
+				</div>
+			</div>
+    </ion-content>
+	<ion-tabs class="tabs-icon-top">
+		<ion-tab title="條件式搜尋" icon="ion-compose" href="/school_filter"></ion-tab>
+        <ion-tab title="校名搜尋" icon="ion-home" href="/school"></ion-tab>
+    </ion-tabs>
+</ion-view>

@@ -57,10 +57,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           templateUrl: 'templates/school.html',
           controller: 'SchoolSearchCtrl'
         })
+		.state('school_filter', {
+          url: '/school_filter',
+          templateUrl: 'templates/school_filter.html',
+          controller: 'SchoolSearchCtrl'
+        })
         .state('search_area', {
           url: '/search_area',
           templateUrl: 'templates/school/search_area.html',
-          controller: 'SchoolSearchCtrl'
+          controller: 'SchoolFilterCtrl'
         })
         .state('search_result', {
           url: '/search_result',

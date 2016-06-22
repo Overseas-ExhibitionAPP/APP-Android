@@ -4,64 +4,17 @@
         </ion-nav-back-button>
     </ion-nav-bar>
     <ion-content>
-<div class="list list-inset">
-            <label class="item item-input item-stacked-label">
-                <input type="text" placeholder="請輸入校名">
-            </label>
-            <ion-item href="#/search_area" >
-               <button class="button button-balanced">搜尋</button>
-            </ion-item>
-            <span class="input-label">搜尋條件：</span>
-        
-		<div class="school-conditionSearch">
-		<uib-accordion close-others="oneAtATime">
-			<uib-accordion-group  is-open="status.open">
-				<uib-accordion-heading>
-					<div class= "accordion-header-div ">
-					地區
-					<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-					</div>
-				</uib-accordion-heading>
-				<ion-list>
-				  <ion-checkbox ng-model="filter.all">不分區</ion-checkbox>
-				  <ion-checkbox ng-model="filter.nouth">北部</ion-checkbox>
-				  <ion-checkbox ng-model="filter.center">中部</ion-checkbox>
-				  <ion-checkbox ng-model="filter.south">南部</ion-checkbox>
-				  <ion-checkbox ng-model="filter.east">東部</ion-checkbox>
-				  <ion-checkbox ng-model="filter.outlead">離島</ion-checkbox>
-				</ion-list>
-			</uib-accordion-group>
-		</uib-accordion>
-		<uib-accordion close-others="oneAtATime">
-			<uib-accordion-group  is-open="status.open">
-				<uib-accordion-heading>
-					<div class= "accordion-header-div ">
-					學群
-					<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
-					</div>
-				</uib-accordion-heading>
-				<ion-list>
-				  <ion-checkbox ng-model="filter.im">資訊學群</ion-checkbox>
-				  <ion-checkbox ng-model="filter.eng">工程學群</ion-checkbox>
-				  <ion-checkbox ng-model="filter.medicine">醫藥衛生學群</ion-checkbox>
-				  <ion-checkbox ng-model="filter.life">生命科學學群</ion-checkbox>
-				  <ion-checkbox ng-model="filter.fish">農林漁牧學群</ion-checkbox>
-				  <ion-checkbox ng-model="filter.earth">地球與環境學群</ion-checkbox>
-				  <ion-checkbox ng-model="filter.lang">外語學群</ion-checkbox>
-				  <ion-checkbox ng-model="filter.history">文史哲學群</ion-checkbox>
-				  <ion-checkbox ng-model="filter.edu">教育學群</ion-checkbox>
-				  <ion-checkbox ng-model="filter.Hosei ">法政學群</ion-checkbox>
-				  <ion-checkbox ng-model="filter.manger">管理學群</ion-checkbox>
-				  <ion-checkbox ng-model="filter.money">財經學群</ion-checkbox>
-				  <ion-checkbox ng-model="filter.think">社會與心理學群</ion-checkbox>
-				  <ion-checkbox ng-model="filter.ad">大眾傳播學群</ion-checkbox>
-				  <ion-checkbox ng-model="filter.desien">建築與設計學群</ion-checkbox>
-				  <ion-checkbox ng-model="filter.art">藝術學群</ion-checkbox>
-				  <ion-checkbox ng-model="filter.pe">體育休閒學群</ion-checkbox>
-				</ion-list>
-			</uib-accordion-group>
-		</uib-accordion>
-                </div>
-                </div>
+		<div>
+			<label class="item item-input item-stacked-label">
+				<input type="text" placeholder="請輸入校名">
+			</label>
+			<ion-item href="#/search_area" >
+			<button class="button button-balanced" >搜尋</button>
+			</ion-item>
+		</div>
     </ion-content>
+	<ion-tabs class="tabs-icon-top">
+		<ion-tab title="條件式搜尋" icon="ion-compose" href="#/school_filter"></ion-tab>
+        <ion-tab title="校名搜尋" icon="ion-home" href="#/school"></ion-tab>
+    </ion-tabs>
 </ion-view>

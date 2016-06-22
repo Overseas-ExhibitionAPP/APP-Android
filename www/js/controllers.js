@@ -18,16 +18,83 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
         $scope.pic_model = tmp.layout;
     }
 })
-.controller('SchoolSearchCtrl', function($scope,$state, $stateParams,DepartInfoSet, SchoolFunc, FavoriteList_Func) {
+.controller('SchoolSearchCtrl', function($scope,$state, $stateParams,$window,DepartInfoSet, SchoolFunc, FavoriteList_Func, schoolFilter, staudyGroup,localStorage) {
+	
+	var filterSunmary = {};
+	$scope.school_fifter = schoolFilter;
+	$scope.staudyGroup = staudyGroup;
 	$scope.groups = DepartInfoSet;
+	$scope.filterResultArea = [];
+	$scope.filterResultGroup = [];
+	
+	localStorage.removeItem('filterSunmary');
     $scope.getInfoSet = function(gName) {
         $scope.departs = SchoolFunc.getDepartSet(gName);
-    }
+    };
     $scope.addItem = function() {
         var result = FavoriteList_Func.add("國立暨南國際大學")
         console.log(result);
-    }
+    };
+	$scope.backToindex = function(){
+		$window.location.href = '#index';
+		$window.location.reload();
+	};
+	$scope.checkedOrNotAera = function (SchoolareaName, schoolArea, $index) {
+		if (schoolArea) {
+			$scope.filterResultArea.push(""+$index);
+		} else {
+        var _index = $scope.filterResultArea.indexOf(""+$index);
+			$scope.filterResultArea.splice(_index, 1);
+		}	
+	};
+	$scope.checkedOrNotGroup = function (Group, staudyGroup_data, $index) {
+		var _index;
+		if (staudyGroup_data) {
+			$index = $index +1;
+			if ($index < 10){
+				$scope.filterResultGroup.push("0"+$index);
+			}else{
+				$scope.filterResultGroup.push(""+$index);
+			}
+		} else {
+			$index = $index +1;
+			if ($index < 10){
+				_index = $scope.filterResultGroup.indexOf("0"+$index);
+				$scope.filterResultGroup.splice(_index, 1);
+				
+			}else{
+				_index = $scope.filterResultGroup.indexOf(""+$index);
+				$scope.filterResultGroup.splice(_index, 1);
+			}
+		}
+	};
     $scope.oneAtATime = true;
+	$scope.Filtersubmit = function(){
+		filterSunmary = {
+			"DepartList" : $scope.filterResultGroup,
+			"AreaList" : $scope.filterResultArea
+		}
+		localStorage.setObject('filterSunmary', filterSunmary);
+		$window.location.href = '#search_area';
+		
+	};
+	$scope.filterResultArea.length = 0;
+	$scope.filterResultGroup.length = 0;
+
+})
+.controller('SchoolFilterCtrl', function($scope,localStorage,schoolSearchRes) {
+	var filterSunmary = localStorage.getObject('filterSunmary');	
+	$scope.filterSunmary = filterSunmary;
+	schoolSearchRes.getResult(filterSunmary)
+		.success(function (response) {      
+            $scope.searchList = response.searchList;
+			
+        })
+        .error(function (response) {
+
+        });
+	
+	
 })
 .controller('ThemeEventsCtrl', function($scope,$state, $stateParams, ThemeEvents_serve,$http,$cordovaBarcodeScanner,$ionicPopup, $timeout,$window) {
     var boxS;
@@ -244,9 +311,9 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
         });
     $scope.state = "下一題";
     $scope.nextQ = function() {    //下一題的功能區塊
-    var tmp = {
-        "options" : $scope.selected
-    };
+		var tmp = {
+			"options" : $scope.selected
+		};
         if (count == qSet.length+1){
             $window.location.href = '#index';
             $window.location.reload();

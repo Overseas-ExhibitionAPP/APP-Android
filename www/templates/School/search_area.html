@@ -4,40 +4,18 @@
         </ion-nav-back-button>
     </ion-nav-bar>
     <ion-content>
+<!-- 	filterResultArea:{{filterResultArea_Local}}<br>
+	filterResultGroup:{{filterResultGroup_Local}}<br> -->
+	{{filterSunmary}}
         <div class="list">
             <div class="item item-divider">
-                中部地區
+                搜尋結果
             </div>
-            <a class="item" href="#">
-                中興大學
-            </a>
-            <a class="item" href="#/search_result">
-                暨南國際大學
-            </a>
-            <a class="item" href="#">
-                臺中教育大學
-            </a>
-            <a class="item" href="#">
-                彰化師範大學
-            </a>
-            <a class="item" href="#">
-                臺灣體育運動大學
-            </a>
-            <a class="item" href="#">
-                東海大學
-            </a>
-            <a class="item" href="#">
-                逢甲大學
-            </a>
-            <a class="item" href="#">
-                亞洲大學
-            </a>
-            <a class="item" href="#">
-                靜宜大學
-            </a>
-            <a class="item" href="#">
-                明道大學
-            </a>
+			<div ng-repeat="item in searchList">
+				<a class="item" href="#/search_result">
+					{{item.schoolname}}
+				</a>
+			</div>			
         </div>
     </ion-content>
 </ion-view>
