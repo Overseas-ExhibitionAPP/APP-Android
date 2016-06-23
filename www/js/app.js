@@ -54,45 +54,25 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         })
 		.state('school', {
           url: '/school',
+          cache: false,
           templateUrl: 'templates/school.html',
           controller: 'SchoolSearchCtrl'
-        })
-		.state('school_filter', {
-          url: '/school_filter',
-          templateUrl: 'templates/school_filter.html',
-          controller: 'SchoolSearchCtrl'
-        })
-        .state('search_area', {
-          url: '/search_area',
-          templateUrl: 'templates/school/search_area.html',
-          controller: 'SchoolFilterCtrl'
-        })
-        .state('search_result', {
-          url: '/search_result',
-          templateUrl: 'templates/school/search_result.html',
-          controller: 'SchoolResultCtrl'
-        })
-		.state('search_result_group', {
-          url: '/search_result_group',
-          templateUrl: 'templates/school/search_result_group.html',
-          controller: 'SchoolResultCtrl'
-        })
-		.state('search_result_cList', {
-          url: '/search_result_cList',
-          templateUrl: 'templates/school/search_result_cList.html',
-          controller: 'SchoolResultCtrl'
-        })
-		.state('webview', {
-          url: '/webview',
-          templateUrl: 'templates/school/webview.html',
-          controller: 'webviewCtrl'
         })
         .state('Theme_events', {
           url: '/Theme_events',
           templateUrl: 'templates/Theme_events.html',
           controller: 'ThemeEventsCtrl'
         })
-        
+        .state('schoolinfo', {
+          url: '/schoolinfo',
+          templateUrl: 'templates/schoolinfo.html',
+          controller: 'SchoolinfoCtrl'
+        })
+        .state('searchlist', {
+          url: '/searchlist',
+          templateUrl: 'templates/searchlist.html',
+          controller: 'SearchListCtrl'
+        })
         .state('traffic', {
           url: '/traffic',
           templateUrl: 'templates/traffic.html',
@@ -129,6 +109,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         })
         .state('like_list', {
           url: '/like_list',
+          cache: false,
           templateUrl: 'templates/like_list.html',
           controller: 'LikeListCrtl'
         })

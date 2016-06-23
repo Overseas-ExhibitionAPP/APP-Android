@@ -1,0 +1,58 @@
+<ion-view view-title="參展學校">
+    <ion-nav-bar class="bar bar-header bar-balanced">
+        <ion-nav-back-button>
+        </ion-nav-back-button><!-- 這是返回鍵，直接插入即可 -->
+        <ion-nav-buttons side=" right">
+            <img style="height:30px; width: auto;" ng-src="img/btn-favorite-on.png" ng-click="setFavoriteList()"></img>&nbsp&nbsp
+            <img style="height:30px; width: auto;" ng-src="img/btn-home.png" ng-click="backToindex()"></img>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content>
+        <div class="list card">
+            <div class="item item-avatar">
+                <img class = "col col-95 school-logo" ng-src="{{picture}}" />
+                <a href="{{schoollink}}"><h2>{{chineseName}}<h2></a>
+                <a href="{{schoollink}}"><h3>{{englishName}}<h3></a>
+            </div>
+            <h5>{{StallsError}}<h5>
+            <div class="item item-body">
+                <h2>{{stalltitle}}<h2>
+                <p ng-repeat="stall in Stalls">
+                    教育展名稱:{{stall.exhibNum}}<br>
+                    攤位號碼:{{stall.layoutNum}}
+                </p>
+            </div>
+            <div class="item item-body">
+                <p>
+                    {{schoolInfo}}
+                </p>
+            </div>
+        </div>
+        <div class="list card">
+            <div class="item item-divider">
+                學校特色
+            </div>
+            <div class="item item-body">
+				<div class="item"><h2>{{error}}<h2></div>
+				<div class="list" ng-repeat="list in cList1">
+				   <div class="item" style= "color:red;"><h2>{{list.ctitle}}<h2></div>
+				   <div class="item"><h3>{{list.characteristic}}<h3></div>
+				</div>
+            </div>
+        </div>
+        
+        <div class="list card">
+            <div class="item item-divider">
+                學群與學系對照表
+            </div>
+            
+            <div class="item item-body" ng-repeat="group in groups">
+                    <h2>{{group.deptGroup}}</h2>
+                    <li class="list" ng-repeat="depart in group.deptList">
+                        <a  href="{{depart.deptURL}}">{{depart.deptName}}</a>
+                    </li>
+                </div>
+			</div>
+        </div>
+    </ion-content>
+</ion-view>

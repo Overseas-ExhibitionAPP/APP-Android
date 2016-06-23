@@ -350,10 +350,3 @@ services.factory('FavoriteList_Func', function ($http) {
     }
     return self
 });
-services.value('FavoriteList',[
-            {
-                "schoolName" : "國立暨南國際大學",
-                "layout_Number": "72",
-                "Speech": "true"
-            }
-        ]);

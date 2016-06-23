@@ -4,17 +4,34 @@
         </ion-nav-back-button>
     </ion-nav-bar>
     <ion-content overflow-scroll="true">
-		<div>
-			<label class="item item-input item-stacked-label">
-				<input type="text" placeholder="請輸入校名">
-			</label>
-			<ion-item href="#/search_area" >
-			<button class="button button-balanced" >搜尋</button>
-			</ion-item>
-		</div>
+			<div>
+				<div class="school-conditionSearch">
+                    <button class="button button-full button-balanced" ng-click="Filtersubmit()">搜尋</button>
+                    <div class="list card">
+                        <div class="item item-divider">
+                            地區
+                        </div>
+                        <div class="item item-body">
+                            <ion-checkbox ng-repeat="SchoolareaName in school_fifter" 
+                                      ng-model="schoolArea"
+                                      ng-change="checkedOrNotAera(SchoolareaName, schoolArea, $index)">
+                            {{SchoolareaName}}
+                            </ion-checkbox>
+                        </div>
+                    </div>
+                    <div class="list card">
+                        <div class="item item-divider">
+                            學群
+                        </div>
+                        <div class="item item-body">
+                            <ion-checkbox ng-repeat="Group in staudyGroup" 
+                                      ng-model="staudyGroup_data"
+                                      ng-change="checkedOrNotGroup(Group, staudyGroup_data, $index)">
+                            {{Group}}
+                            </ion-checkbox>	
+                        </div>
+                    </div>
+				</div>
+			</div>
     </ion-content>
-	<ion-tabs class="tabs-icon-top">
-		<ion-tab title="條件式搜尋" icon="ion-compose" href="#/school_filter"></ion-tab>
-        <ion-tab title="校名搜尋" icon="ion-compose" href="#/school"></ion-tab>
-    </ion-tabs>
 </ion-view>
