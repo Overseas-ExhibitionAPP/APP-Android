@@ -150,8 +150,12 @@ div.lobby-row {
 }
 /*school.html*/
 .school-conditionSearch {
-    border-width:2px; 
-    border-style:dashed
+    text-align: Center;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-width:3px;
+    border-top-style:dotted;
+    border-bottom-style:dotted;
 }
 /*news.html*/
 div.table-title {

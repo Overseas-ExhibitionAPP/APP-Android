@@ -10,7 +10,7 @@
 				<button ng-repeat="Stall in Stall_Set" class="button button-balanced area-item" ng-click="setPic(Stall.name)">{{Stall.btn_name}}</button>
 			</div>
             <div class="item item-body">
-            <ion-scroll zooming="true" direction="xy"  style="width: 500px; height: 500px">
+            <ion-scroll zooming="true" direction="xy"  style="width: 100%; height: 100%">
                 <div style="width: 700px; height: 700px;">
                     <img class="full-image" data-ng-src="{{pic_model}}"/>
                 </div>
