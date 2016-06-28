@@ -1,0 +1,20 @@
+﻿<ion-view view-title="學校查詢">
+    <ion-nav-bar class="bar bar-header bar-balanced">
+        <ion-nav-back-button><!-- 這是返回鍵，直接插入即可 -->
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content>
+        <div>
+            <h3>操作說明:</h3>
+            <p>
+                請勾選想要的地區與學群的條件，再按下搜尋鍵
+            </p>
+        </div>
+        <label class="item item-input item-stacked-label">
+            <input ng-model="schname" type="text" placeholder="請輸入校名"/>
+        </label>
+        <div class="schname-Search">
+            <button class="button button-full button-calm" ng-click="Filtersubmit()">搜尋</button>
+        </div>
+    </ion-content>
+</ion-view>

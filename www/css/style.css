@@ -157,6 +157,12 @@ div.lobby-row {
     border-top-style:dotted;
     border-bottom-style:dotted;
 }
+/*schname.html*/
+.schname-Search {
+    text-align: Center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
 /*news.html*/
 div.table-title {
     display: block;

@@ -58,6 +58,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           templateUrl: 'templates/school.html',
           controller: 'SchoolSearchCtrl'
         })
+        .state('schname', {
+          url: '/schname',
+          cache: false,
+          templateUrl: 'templates/schname.html',
+          controller: 'SchnameSearchCtrl'
+        })
         .state('Theme_events', {
           url: '/Theme_events',
           templateUrl: 'templates/Theme_events.html',
