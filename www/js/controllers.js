@@ -18,19 +18,15 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
         $scope.pic_model = tmp.layout;
     }
 })
-.controller('SchoolSearchCtrl', function($scope,$state, $stateParams,$window,DepartInfoSet, SchoolFunc, FavoriteList_Func, schoolFilter, staudyGroup,localStorage) {
+.controller('SchoolSearchCtrl', function($scope,$state, $stateParams,$window, FavoriteList_Func, schoolFilter, studyGroup,localStorage) {
 	
 	var filterSunmary = {};
 	$scope.school_fifter = schoolFilter;
-	$scope.staudyGroup = staudyGroup;
-	$scope.groups = DepartInfoSet;
+	$scope.studyGroup = studyGroup;
 	$scope.filterResultArea = [];
 	$scope.filterResultGroup = [];
 	
 	localStorage.removeItem('filterSunmary');
-    $scope.getInfoSet = function(gName) {
-        $scope.departs = SchoolFunc.getDepartSet(gName);
-    };
 	$scope.checkedOrNotAera = function (SchoolareaName, schoolArea, $index) {
 		if (schoolArea) {
 			$scope.filterResultArea.push(""+$index);
@@ -39,9 +35,9 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
 			$scope.filterResultArea.splice(_index, 1);
 		}	
 	};
-	$scope.checkedOrNotGroup = function (Group, staudyGroup_data, $index) {
+	$scope.checkedOrNotGroup = function (Group, studyGroup_data, $index) {
 		var _index;
-		if (staudyGroup_data) {
+		if (studyGroup_data) {
 			$index = $index +1;
 			if ($index < 10){
 				$scope.filterResultGroup.push("0"+$index);
@@ -83,7 +79,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
     var alphabet_tmp = [];
     var Block = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAYAAAA+s9J6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAKISURBVHhe7dMxAQAgDMCwgX/PwIGHPslTBV3nGSCzf4GICSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQUjMXJIEFvkOhX5EAAAAASUVORK5CYII=";
     //集章簿初始化
-    ThemeEvents_serve.getalphabet('my','test0001')
+    ThemeEvents_serve.getalphabet('test0001')
         .success(function(response){
             boxS = response.box_status;
             $scope.CboxStatus = "不可兌換";
@@ -118,7 +114,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
         //掃描學校QRcode，並回傳給後端資料庫
         $cordovaBarcodeScanner.scan().then(function (result) {
             var tmp = angular.fromJson(result.text);
-            ThemeEvents_serve.collectStamp('my','test0001',tmp.schoolnum)
+            ThemeEvents_serve.collectStamp('test0001',tmp.schoolnum)
                 .success(function(response){
                     //該頁面reload
                     var alertPopup = $ionicPopup.alert({
@@ -162,7 +158,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
         //掃描兌換QRcode，並回傳給後端資料庫來判斷是否可兌換
         $cordovaBarcodeScanner.scan().then(function (result) {
             var tmpurl = result.text;
-            ThemeEvents_serve.exchangeCBox('my','test0001',tmpurl)
+            ThemeEvents_serve.exchangeCBox('test0001',tmpurl)
                 .success(function(response){
                     //該頁面reload
                     var alertPopup = $ionicPopup.alert({
@@ -237,7 +233,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
     var ansSunmary={};
     var UserId = "test0001";
     
-    Questionnaire_serve.getQuestionnaire('hk','2016')
+    Questionnaire_serve.getQuestionnaire()
         .success(function (response) {      
             qSet = response.questionset; 
             $scope.selected = [];
@@ -423,7 +419,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
 	var res_status = "";
     var schName="";
     
-    schoolSearchRes.getSchoolDetail(schoolNum,'my')
+    schoolSearchRes.getSchoolDetail(schoolNum)
 		.success(function (response) {
 		   res_status = response.status;
            schName = response.chineseName;
@@ -514,8 +510,9 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
 		.error(function (response) {
 
 		});
+    
     $scope.setFavoriteList = function() {
-        FavoriteList_Func.updateFavoriteList('test0001','my',schoolNum,schName)
+        FavoriteList_Func.updateFavoriteList('test0001',schoolNum,schName)
             .success(function(res) {
                 var alertPopup = $ionicPopup.alert({
                     title: '',
@@ -532,6 +529,13 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
         $state.go('lobby');
     }
 })
+.controller('SchnameSearchCtrl', function($scope,$state, $stateParams) {
+    $scope.Filtersubmit = function() {
+        var tmp = $scope.schname.value;
+        console.log(tmp);
+    }
+})
 .controller('OtherCtrl', function($scope,$state, $stateParams) {
+    $state.go('schname');
 })
 ;

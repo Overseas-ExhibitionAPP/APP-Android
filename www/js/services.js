@@ -1,5 +1,6 @@
 ﻿var services = angular.module('starter.services', []);
-var urlBase = 'http://mathgress.ncnu.edu.tw:8080/V1';
+var urlBase = 'http://163.22.17.174:8080/V1';
+var root_country = 'my';
 services.factory('localStorage', ['$window', function($window) {
   return {
     set: function(key, value) {
@@ -32,7 +33,7 @@ services.factory('STALLS',function ($filter, $http) {
     }
     self.getStallList = function() {
         var Stalls_List;
-        var link = 'http://163.22.17.174:8080/V1/exhibitions/2016/layout/my';
+        var link = urlBase + '/exhibitions/layout/'+root_country;
         Stalls_List = $http.get(link);
         return Stalls_List;
     }
@@ -41,13 +42,13 @@ services.factory('STALLS',function ($filter, $http) {
 services.factory('Questionnaire_serve', function($http){
     var Questionnaire_List;
     var self = this;
-    self.getQuestionnaire = function(country,year){
-        var link = 'http://163.22.17.174:8080/V1/questionnaire/'+year+'/'+country;
+    self.getQuestionnaire = function(){
+        var link = urlBase + '/questionnaire/'+root_country;
         Questionnaire_List = $http.get(link);
         return Questionnaire_List;
     }
     self.postQuestionnaire = function(ansList,year,country){
-        var link = 'http://163.22.17.174:8080/V1/questionnaire/'+year+'/'+country;
+        var link = urlBase + '/questionnaire/'+root_country;
         var data = ansList;
         return $http.post(link,data);
     }
@@ -56,23 +57,23 @@ services.factory('Questionnaire_serve', function($http){
 services.factory('ThemeEvents_serve', function($http){
     var alphabet_list;
     var self = this;
-    self.getalphabet = function(country,id){
-        var link = 'http://163.22.17.174:8080/V1/exhibitions/activity/'+id+'/'+country+'/collectionbox';
+    self.getalphabet = function(id){
+        var link = urlBase +'/exhibitions/activity/'+id+'/'+root_country+'/collectionbox';
         alphabet_list = $http.get(link);
         return alphabet_list;
     }
-    self.collectStamp = function(country,id,schoolnum){
-        var link = 'http://163.22.17.174:8080/V1/exhibitions/activity/collectionbox';
+    self.collectStamp = function(id,schoolnum){
+        var link = urlBase + '/exhibitions/activity/collectionbox';
         var data = {
             "userid": id,
-            "country": country,
+            "country": root_country,
             "schoolnum": schoolnum
         };
         var response = $http.put(link, data);
         return response;
     }
-    self.exchangeCBox = function(country,id,url){
-        var link = 'http://163.22.17.174:8080/V1/exhibitions/activity/'+id+'/'+country+url;
+    self.exchangeCBox = function(id,url){
+        var link = urlBase + '/exhibitions/activity/'+id+'/'+root_country+url;
         var response = $http.get(link);
         return response;
     }
@@ -91,7 +92,7 @@ services.factory('News',function ($filter, $http) {
     }
     self.getNewsList = function() {
         var News_List;
-        var link = 'http://163.22.17.174:8080/V1/news/my';
+        var link = urlBase + '/news/'+ root_country;
         News_List = $http.get(link);
         return News_List;
     }
@@ -109,7 +110,7 @@ services.factory('Lecture',function ($filter, $http) {
     }
     self.getLectureList = function() {
         var Lecture_List;
-        var link = 'http://163.22.17.174:8080/V1/exhibitions/lectures/my';
+        var link = urlBase + '/exhibitions/lectures/'+ root_country;
         Lecture_List = $http.get(link);
         return Lecture_List;
     }
@@ -119,7 +120,7 @@ services.factory('MAP', function ($filter, $http) {
     var self = this;
     self.getPosList = function(){
         var Pos_List;
-        var link = 'http://163.22.17.174:8080/V1/exhibitions/2016/traffic/my';
+        var link = urlBase + '/exhibitions/traffic/'+ root_country;
         Pos_List = $http.get(link);
         return Pos_List;
     }
@@ -138,36 +139,23 @@ services.factory('schoolSearchRes', function($http){
 	var self = this;
 	self.getResult = function(data){
 		var result;
-		var link = 'http://163.22.17.174:8080/V1/school/search';
+		var link = urlBase + '/school/search';
 		result = $http.put(link,data);
 		return result;
 	}
 	
-	self.getSchoolDetail = function(schoolNum,country){
+	self.getSchoolDetail = function(schoolNum){
 		var SchoolDetail;
-		var link = 'http://163.22.17.174:8080/V1/school/'+schoolNum+'?country='+country;
+		var link = urlBase + '/school/'+schoolNum+'?country='+ root_country;
 		SchoolDetail = $http.get(link);
 		return SchoolDetail;
 	}
 	return self;
 });
-services.factory('SchoolFunc', function (DepartInfoSet, $filter) {
-        var self = this;
-        self.getDepartSet = function(gName) {
-            var tmp = null;
-            //利用posName來找出陣列中符合的gps資訊
-            var found = $filter('filter')(DepartInfoSet, {"groupName": gName}, true);
-            if (found.length) {
-                tmp = angular.fromJson(found[0]);
-            }
-            return tmp.departSet
-        }
-        return self
-    });
 services.value('schoolFilter',[
 	"北部","中部","南部","東部","外島"
 ]);
-services.value('staudyGroup',[
+services.value('studyGroup',[
 	"資訊學群",
 	"工程學群",
 	"數理化學群",
@@ -186,165 +174,24 @@ services.value('staudyGroup',[
 	"建築與設計學群",
 	"藝術學群",
 	"體育休閒學群"
-])
-services.value('DepartInfoSet', [
-        {
-            "groupName": "資訊學群",
-            "departSet": [
-                {
-                    "departName" : "資訊工程學系",
-                    "url": "http://www.csie.ncnu.edu.tw"
-                },
-                {
-                    "departName" : "資訊管理學系",
-                    "url": "http://www.im.ncnu.edu.tw"
-                }
-            ]
-        },
-        {
-            "groupName": "工程學群",
-            "departSet": [
-                {
-                    "departName" : "土木工程學系",
-                    "url": "http://www.ncnu.edu.tw/ncnuweb/home.aspx?unitId=O100"
-                },
-                {
-                    "departName" : "電機工程學系",
-                    "url": "http://www.ee.ncnu.edu.tw/"
-                }
-            ]
-        },
-        {
-            "groupName": "數理化學群",
-            "departSet": [
-                {
-                    "departName" : "應用化學系",
-                    "url": "http://www.ncnu.edu.tw/ncnuweb/home.aspx?unitId=o400"
-                }
-            ]
-        },
-        {
-            "groupName": "外語學群",
-            "departSet": [
-                {
-                    "departName" : "外國語文學系",
-                    "url": "http://www.dfll.ncnu.edu.tw"
-                }
-            ]
-        },
-        {
-            "groupName": "文史哲學群",
-            "departSet": [
-                {
-                    "departName" : "中國語文學系",
-                    "url": "http://www.cll.ncnu.edu.tw/"
-                },
-                {
-                    "departName" : "歷史學系",
-                    "url": "http://www.his.ncnu.edu.tw/"
-                }
-            ]
-        },
-        {
-            "groupName": "教育學群",
-            "departSet": [
-                {
-                    "departName" : "國際文教與比較教育學系",
-                    "url": "http://www.ced.ncnu.edu.tw/"
-                },
-                {
-                    "departName" : "教育政策與行政學系",
-                    "url": "http://www.doc.ncnu.edu.tw/epa"
-                }
-            ]
-        },
-        {
-            "groupName": "法政學群",
-            "departSet": [
-                {
-                    "departName" : "公共行政與政策學系",
-                    "url": "http://www.dppa.ncnu.edu.tw/"
-                }
-            ]
-        },
-        {
-            "groupName": "管理學群",
-            "departSet": [
-                {
-                    "departName" : "國際企業學系",
-                    "url": "http://www.ibs.ncnu.edu.tw/"
-                }
-            ]
-        },
-        {
-            "groupName": "財經學群",
-            "departSet": [
-                {
-                    "departName" : "經濟學系",
-                    "url": "http://www.econ.ncnu.edu.tw/"
-                },
-                {
-                    "departName" : "財務金融學系",
-                    "url": "http://www.finance.ncnu.edu.tw/"
-                }
-            ]
-        },
-        {
-            "groupName": "社會與心理學群",
-            "departSet": [
-                {
-                    "departName" : "社會政策與社會工作學系",
-                    "url": "http://www.spsw.ncnu.edu.tw/"
-                },
-                {
-                    "departName" : "東南亞學系東南亞組",
-                    "url": "http://www.ncnu.edu.tw/ncnuweb/home.aspx?unitId=m800"
-                },
-                {
-                    "departName" : "東南亞學系人類學組",
-                    "url": "http://www.ncnu.edu.tw/ncnuweb/home.aspx?unitId=m800"
-                },
-                {
-                    "departName" : "諮商心理與人力資源發展學系-諮商心理組",
-                    "url": "http://ncnu-dch.webnode.tw/"
-                },
-                {
-                    "departName" : "諮商心理與人力資源發展學系-終身學習與人力資源發展組",
-                    "url": "http://ncnu-dch.webnode.tw/"
-                }
-            ]
-        },
-        {
-            "groupName": "體育休閒學群",
-            "departSet": [
-                {
-                    "departName" : "觀光休閒與餐旅管理學系觀光休閒組",
-                    "url": "http://www.tourism.ncnu.edu.tw/"
-                },
-                {
-                    "departName" : "觀光休閒與餐旅管理學系餐旅管理組",
-                    "url": "http://www.tourism.ncnu.edu.tw/"
-                }
-            ]
-        }
-    ]);
+]);
 services.factory('FavoriteList_Func', function ($http) {
     var self = this;
     self.getFavoriteList = function(uid) {
         var FavoriteList = null;
-		var link = 'http://163.22.17.174:8080/V1/school/'+ uid + '/favoritelist';
+		var link = urlBase + '/school/'+ uid + '/favoritelist';
 		FavoriteList = $http.get(link);
         return FavoriteList;
     }
-    self.updateFavoriteList = function(uid,country,schid,schName) {
+    self.updateFavoriteList = function(uid,schid,schName) {
         var output = null;
         var data = {
             "userid": uid,
-            "country": country,
+            "country": root_country,
             "schoolnum": schid,
             "schoolname": schName
         }
-        var link = 'http://163.22.17.174:8080/V1/school/favoritelist';
+        var link = urlBase + '/school/favoritelist';
         output = $http.put(link, data);
         return output;
     }
