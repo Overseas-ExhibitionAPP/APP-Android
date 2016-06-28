@@ -143,7 +143,12 @@ services.factory('schoolSearchRes', function($http){
 		result = $http.put(link,data);
 		return result;
 	}
-	
+	self.getResult_schname = function(data) {
+        var result;
+		var link = urlBase + '/school/schname/search';
+		result = $http.put(link,data);
+		return result;
+    }
 	self.getSchoolDetail = function(schoolNum){
 		var SchoolDetail;
 		var link = urlBase + '/school/'+schoolNum+'?country='+ root_country;

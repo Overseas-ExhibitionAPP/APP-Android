@@ -63,9 +63,19 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
 			"AreaList" : $scope.filterResultArea
 		}
 		localStorage.setObject('filterSunmary', filterSunmary);
+        localStorage.set('filterType', '0');
         $state.go('searchlist');
 		
 	};
+    $scope.backtoLobby = function() {
+        if(localStorage.getObject('filterSunmary') != null) {
+            localStorage.removeItem('filterSunmary');
+        }
+        if(localStorage.get('filterType') != null) {
+            localStorage.removeItem('filterType');
+        }
+        $state.go('lobby');
+    }
 	$scope.filterResultArea.length = 0;
 	$scope.filterResultGroup.length = 0;
 
@@ -376,7 +386,6 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
     $scope.getSchoolinfo = function(schoolnum) {
         var tmp = schoolnum;
         localStorage.set('SchoolNum', tmp);
-        localStorage.set('PrePage', 'like_list');
         $state.go('schoolinfo');
     }
 })
@@ -397,18 +406,28 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
     }
 })
 .controller('SearchListCtrl', function($scope,$state, $stateParams,localStorage,schoolSearchRes) {
+    var filterType = localStorage.get('filterType');
     var filterSunmary = localStorage.getObject('filterSunmary');
-	schoolSearchRes.getResult(filterSunmary)
-		.success(function (response) {      
-            $scope.searchList = response.searchList;
-			$scope.schoolNum = response.searchList.schoolNum;
-        })
-        .error(function (response) {
+    if(filterType == '0') {
+        schoolSearchRes.getResult(filterSunmary)
+            .success(function (response) {      
+                $scope.searchList = response.searchList;
+                $scope.schoolNum = response.searchList.schoolNum;
+            })
+            .error(function (response) {
 
-        });
+            });
+    } else {
+        schoolSearchRes.getResult_schname(filterSunmary)
+            .success(function (response) {      
+                $scope.searchList = response.searchList;
+                $scope.schoolNum = response.searchList.schoolNum;
+            })
+            .error(function (response) {
+
+            });
+    }
 	$scope.getSchoolNum = function(schoolNum){
-		console.log("1111:"+schoolNum);
-		console.log("3333:"+schoolNum);
 		localStorage.set('SchoolNum', schoolNum);
         $state.go('schoolinfo');
 	}
@@ -524,15 +543,45 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
             });
     }
     $scope.backToindex = function() {
-        localStorage.removeItem('filterSunmary');
-        localStorage.removeItem('SchoolNum');
+        if(localStorage.getObject('filterSunmary') != null) {
+            localStorage.removeItem('filterSunmary');
+        }
+        if(localStorage.get('filterType') != null) {
+            localStorage.removeItem('filterType');
+        }
+        if(localStorage.get('SchoolNum') != null) {
+            localStorage.removeItem('SchoolNum');
+        }
         $state.go('lobby');
     }
 })
-.controller('SchnameSearchCtrl', function($scope,$state, $stateParams) {
-    $scope.Filtersubmit = function() {
-        var tmp = $scope.schname.value;
-        console.log(tmp);
+.controller('SchnameSearchCtrl', function($scope,$state, $stateParams, $ionicPopup, schoolSearchRes,localStorage) {
+    $scope.schname = "";//初始化輸入框
+    $scope.Filtersubmit = function(schname) {
+        var tmp = schname;
+        if (tmp == "") {
+            var alertPopup = $ionicPopup.alert({
+                title: '',
+                template: '輸入欄不可空白'
+            });
+        } else {
+            var data = {
+                "schname": tmp
+            };
+            localStorage.setObject('filterSunmary', data);
+            localStorage.set('filterType', '1');
+            $scope.schname = "";
+            $state.go('searchlist');
+        }
+    }
+    $scope.backtoLobby = function() {
+        if(localStorage.getObject('filterSunmary') != null) {
+            localStorage.removeItem('filterSunmary');
+        }
+        if(localStorage.get('filterType') != null) {
+            localStorage.removeItem('filterType');
+        }
+        $state.go('lobby');
     }
 })
 .controller('OtherCtrl', function($scope,$state, $stateParams) {
