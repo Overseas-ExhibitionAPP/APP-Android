@@ -64,6 +64,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
 		}
 		localStorage.setObject('filterSunmary', filterSunmary);
         localStorage.set('filterType', '0');
+        filterSunmary = {};
         $state.go('searchlist');
 		
 	};
@@ -74,11 +75,11 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
         if(localStorage.get('filterType') != null) {
             localStorage.removeItem('filterType');
         }
+        filterSunmary = {};
         $state.go('lobby');
     }
-	$scope.filterResultArea.length = 0;
-	$scope.filterResultGroup.length = 0;
-
+    $scope.filterResultArea.length = 0;
+    $scope.filterResultGroup.length = 0;
 })
 .controller('ThemeEventsCtrl', function($scope,$state, $stateParams, ThemeEvents_serve,$http,$cordovaBarcodeScanner,$ionicPopup, $timeout,$window) {
     var boxS;
