@@ -5,6 +5,13 @@
         </ion-nav-back-button>
     </ion-nav-bar>
     <ion-content>
+        <div>
+            <h3>操作說明:</h3>
+            <p>
+                1.請按下欲選擇的地區，即會代出對應的攤位地圖。</br>
+                2.地圖可用拖拉的方式移動，即可查詢想要的參展學校攤位位置。
+            </p>
+        </div>
         <div class="card">
             <div class="item item-divider">
 				<button ng-repeat="Stall in Stall_Set" class="button button-balanced area-item" ng-click="setPic(Stall.name)">{{Stall.btn_name}}</button>

@@ -509,11 +509,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
 			   }else{
 				   $scope.StallsError = "無教育展相關資訊";
 			   }
-		   }
-		   //console.log(response);
-		   
-		   
-		   
+		   } 
 		})
 		.error(function (response) {
 
@@ -531,6 +527,8 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
             });
     }
     $scope.backToindex = function() {
+        localStorage.removeItem('filterSunmary');
+        localStorage.removeItem('SchoolNum');
         $state.go('lobby');
     }
 })
