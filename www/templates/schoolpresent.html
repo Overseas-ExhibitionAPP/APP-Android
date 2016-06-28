@@ -9,23 +9,15 @@
     </ion-nav-bar>
     <ion-content>
         <div class="list card">
-            <div class="item item-avatar">
-                <img class = "col col-95 school-logo" ng-src="{{picture}}" />
-                <a href="{{schoollink}}"><h2>{{chineseName}}<h2></a>
-                <a href="{{schoollink}}"><h3>{{englishName}}<h3></a>
-            </div>
-            <h5>{{StallsError}}<h5>
-            <div class="item item-body">
-                <h2>{{stalltitle}}<h2>
-                <p ng-repeat="stall in Stalls">
-                    教育展名稱:{{stall.exhibNum}}<br>
-                    攤位號碼:{{stall.layoutNum}}
-                </p>
+            <div class="item item-divider">
+                學校特色
             </div>
             <div class="item item-body">
-                <p>
-                    {{schoolInfo}}
-                </p>
+				<div class="item"><h2>{{error}}<h2></div>
+				<div class="list" ng-repeat="list in cList1">
+				   <div class="item" style= "color:red;"><h2>{{list.ctitle}}<h2></div>
+				   <div class="item"><h3>{{list.characteristic}}<h3></div>
+				</div>
             </div>
         </div>
     </ion-content>

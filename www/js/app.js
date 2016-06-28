@@ -37,6 +37,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 })
 .config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
     //設定全域返回鍵，去除標示的text，並統一套用icon
+    $ionicConfigProvider.tabs.position('bottom');
     $ionicConfigProvider.navBar.alignTitle('center');
     $ionicConfigProvider.backButton.previousTitleText(false);
     $ionicConfigProvider.backButton.icon('ion-chevron-left');
@@ -88,26 +89,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           url: '/news',
           templateUrl: 'templates/news.html',
           controller: 'NewsCtrl'
-        })
-        
+        })       
         .state('Questionnaire', {
           url: '/Questionnaire',
           templateUrl: 'templates/Questionnaire.html',
           controller: 'QuestionnaireSelect'
-        })
-        
+        })       
         .state('Q_show', {
           url: '/Q_show',
           templateUrl: 'templates/Questionnaire/Q_show.html',
           controller: 'QuestionnaireSelect'
-        })
-        
+        })       
         .state('Q-end', {
           url: '/Q-end',
           templateUrl: 'templates/Questionnaire/Q-end.html',
           controller: 'QuestionnaireSelect'
-        })
-        
+        })       
         .state('photos', {
           url: '/photos',
           templateUrl: 'templates/photos.html',
@@ -128,6 +125,63 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           url: '/others',
           templateUrl: 'templates/others.html',
           controller: 'OtherCtrl'
+        })
+        .state('schoolSunmary', {
+            url: '/schoolSunmary',
+            abstract: true,
+            templateUrl: 'templates/schoolSunmary.html'
+        })
+        .state('schoolSunmary.school', {
+            url: '/school',
+            cache: false,
+            views: {
+              'schoolSunmary-school': {
+                templateUrl: 'templates/school.html',
+                controller: 'SchoolSearchCtrl'
+              }
+            }
+        })
+        .state('schoolSunmary.schname', {
+            url: '/schname',
+            cache: false,
+            views: {
+              'schoolSunmary-schname': {
+                templateUrl: 'templates/schname.html',
+                controller: 'SchnameSearchCtrl'
+              }
+            }
+        })
+        .state('schoolinfoSunmary', {
+            url: '/schoolinfoSunmary',
+            abstract: true,
+            templateUrl: 'templates/schoolinfoSunmary.html'
+        })
+        .state('schoolinfoSunmary.schoolinfo', {
+            url: '/schoolinfo',
+            views: {
+              'schoolinfoSunmary-schoolinfo': {
+                templateUrl: 'templates/schoolinfo.html',
+                controller: 'SchoolinfoCtrl'
+              }
+            }
+        })
+        .state('schoolinfoSunmary.schoolpresent', {
+            url: '/schoolpresent',
+            views: {
+              'schoolinfoSunmary-schoolpresent': {
+                templateUrl: 'templates/schoolpresent.html',
+                controller: 'SchoolpresentCtrl'
+              }
+            }
+        })
+        .state('schoolinfoSunmary.schoolunit', {
+            url: '/schoolunit',
+            views: {
+              'schoolinfoSunmary-schoolunit': {
+                templateUrl: 'templates/schoolunit.html',
+                controller: 'SchoolunitCtrl'
+              }
+            }
         })
 
   // if none of the above states are matched, use this as the fallback

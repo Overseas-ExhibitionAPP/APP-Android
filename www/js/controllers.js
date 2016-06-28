@@ -430,10 +430,256 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
     }
 	$scope.getSchoolNum = function(schoolNum){
 		localStorage.set('SchoolNum', schoolNum);
-        $state.go('schoolinfo');
+        $state.go('schoolinfoSunmary.schoolinfo');
 	}
 })
 .controller('SchoolinfoCtrl', function($scope,$state, $stateParams,localStorage,schoolSearchRes,$ionicPopup,FavoriteList_Func) {
+    var schoolNum = localStorage.get('SchoolNum');
+	var schoolInformation= {};
+	var res_status = "";
+    var schName="";
+    
+    schoolSearchRes.getSchoolDetail(schoolNum)
+		.success(function (response) {
+		   res_status = response.status;
+           schName = response.chineseName;
+		   $scope.res_status = res_status;
+		   if(res_status == "200-1"){
+			   $scope.picture = response.picture;
+			   $scope.schoolnum = response.schoolnum;
+			   $scope.chineseName = response.chineseName;
+			   $scope.englishName = response.englishName;
+			   $scope.schoolInfo = response.schoolinfo.introduction;
+			   $scope.cList1 = response.schoolinfo.cList;
+			   $scope.schoollink = response.schoolinfo.website;
+			   $scope.groups = response.deptGList;
+			   $scope.Stalls = response.layoutList;
+		   }
+		   if(res_status == "200-2"){
+			   $scope.picture = response.picture;
+			   $scope.schoolnum = response.schoolnum;
+			   $scope.chineseName = response.chineseName;
+			   $scope.englishName = response.englishName;
+			   $scope.schoolInfo = response.schoolinfo.introduction;
+			   $scope.cList1 = response.schoolinfo.cList;
+			   $scope.schoollink = response.schoolinfo.website;
+			   $scope.groups = response.deptGList;
+			   if (response.layoutList != undefined){
+					$scope.Stalls = response.layoutList;
+					$scope.stalltitle = "教育展相關資訊";
+			   }else{
+				   $scope.StallsError = "無教育展相關資訊";
+			   }
+		   }
+		   if(res_status == "200-3"){
+			   $scope.picture = response.picture;
+			   $scope.schoolnum = response.schoolnum;
+			   $scope.chineseName = response.chineseName;
+			   $scope.englishName = response.englishName;
+			   $scope.schoolInfo = "無學校資訊資訊";
+			   if (response.schoolinfo != undefined){
+				   if (response.schoolinfo.cList!= undefined){
+					   $scope.cList1 = response.schoolinfo.cList;
+				   }else{
+					   $scope.error = "無學校資訊資訊";
+				   }
+			   }else{
+				   $scope.error = "無學校資訊資訊";
+			   }
+			   $scope.schoollink = "";
+			   if (response.deptGList != undefined){
+				   $scope.groups = response.deptGList;
+			   }else{
+				   if (response.deptGList.deptList != undefined){
+						$scope.deptGList_error = ""; 
+				   }
+			   } 
+			   $scope.Stalls = response.layoutList;
+		   }
+		   if(res_status == "200-4"){
+			   $scope.picture = response.picture;
+			   $scope.schoolnum = response.schoolnum;
+			   $scope.chineseName = response.chineseName;
+			   $scope.englishName = response.englishName;
+			   $scope.schoolInfo = "無學校資訊資訊";
+			   if (response.schoolinfo != undefined){
+				   if (response.schoolinfo.cList!= undefined){
+					   $scope.cList1 = response.schoolinfo.cList;
+				   }else{
+					   $scope.error = "無學校資訊資訊";
+				   }
+			   }else{
+				   $scope.error = "無學校資訊資訊";
+			   }
+			   $scope.schoollink = "";
+			   if (response.deptGList != undefined){
+				   $scope.groups = response.deptGList;
+			   }else{
+				   if (response.deptGList.deptList != undefined){
+						$scope.deptGList_error = "";
+				   }
+			   } 
+			   if (response.layoutList != undefined){
+					$scope.Stalls = response.layoutList;
+					$scope.stalltitle = "教育展相關資訊";
+			   }else{
+				   $scope.StallsError = "無教育展相關資訊";
+			   }
+		   } 
+		})
+		.error(function (response) {
+
+		});
+    
+    $scope.setFavoriteList = function() {
+        FavoriteList_Func.updateFavoriteList('test0001',schoolNum,schName)
+            .success(function(res) {
+                var alertPopup = $ionicPopup.alert({
+                    title: '',
+                    template: res.message
+                });
+            })
+            .error(function(res){
+
+            });
+    }
+    $scope.backToindex = function() {
+        if(localStorage.getObject('filterSunmary') != null) {
+            localStorage.removeItem('filterSunmary');
+        }
+        if(localStorage.get('filterType') != null) {
+            localStorage.removeItem('filterType');
+        }
+        if(localStorage.get('SchoolNum') != null) {
+            localStorage.removeItem('SchoolNum');
+        }
+        $state.go('lobby');
+    }
+})
+.controller('SchoolunitCtrl', function($scope,$state, $stateParams,localStorage,schoolSearchRes,$ionicPopup,FavoriteList_Func) {
+    var schoolNum = localStorage.get('SchoolNum');
+	var schoolInformation= {};
+	var res_status = "";
+    var schName="";
+    
+    schoolSearchRes.getSchoolDetail(schoolNum)
+		.success(function (response) {
+		   res_status = response.status;
+           schName = response.chineseName;
+		   $scope.res_status = res_status;
+		   if(res_status == "200-1"){
+			   $scope.picture = response.picture;
+			   $scope.schoolnum = response.schoolnum;
+			   $scope.chineseName = response.chineseName;
+			   $scope.englishName = response.englishName;
+			   $scope.schoolInfo = response.schoolinfo.introduction;
+			   $scope.cList1 = response.schoolinfo.cList;
+			   $scope.schoollink = response.schoolinfo.website;
+			   $scope.groups = response.deptGList;
+			   $scope.Stalls = response.layoutList;
+		   }
+		   if(res_status == "200-2"){
+			   $scope.picture = response.picture;
+			   $scope.schoolnum = response.schoolnum;
+			   $scope.chineseName = response.chineseName;
+			   $scope.englishName = response.englishName;
+			   $scope.schoolInfo = response.schoolinfo.introduction;
+			   $scope.cList1 = response.schoolinfo.cList;
+			   $scope.schoollink = response.schoolinfo.website;
+			   $scope.groups = response.deptGList;
+			   if (response.layoutList != undefined){
+					$scope.Stalls = response.layoutList;
+					$scope.stalltitle = "教育展相關資訊";
+			   }else{
+				   $scope.StallsError = "無教育展相關資訊";
+			   }
+		   }
+		   if(res_status == "200-3"){
+			   $scope.picture = response.picture;
+			   $scope.schoolnum = response.schoolnum;
+			   $scope.chineseName = response.chineseName;
+			   $scope.englishName = response.englishName;
+			   $scope.schoolInfo = "無學校資訊資訊";
+			   if (response.schoolinfo != undefined){
+				   if (response.schoolinfo.cList!= undefined){
+					   $scope.cList1 = response.schoolinfo.cList;
+				   }else{
+					   $scope.error = "無學校資訊資訊";
+				   }
+			   }else{
+				   $scope.error = "無學校資訊資訊";
+			   }
+			   $scope.schoollink = "";
+			   if (response.deptGList != undefined){
+				   $scope.groups = response.deptGList;
+			   }else{
+				   if (response.deptGList.deptList != undefined){
+						$scope.deptGList_error = ""; 
+				   }
+			   } 
+			   $scope.Stalls = response.layoutList;
+		   }
+		   if(res_status == "200-4"){
+			   $scope.picture = response.picture;
+			   $scope.schoolnum = response.schoolnum;
+			   $scope.chineseName = response.chineseName;
+			   $scope.englishName = response.englishName;
+			   $scope.schoolInfo = "無學校資訊資訊";
+			   if (response.schoolinfo != undefined){
+				   if (response.schoolinfo.cList!= undefined){
+					   $scope.cList1 = response.schoolinfo.cList;
+				   }else{
+					   $scope.error = "無學校資訊資訊";
+				   }
+			   }else{
+				   $scope.error = "無學校資訊資訊";
+			   }
+			   $scope.schoollink = "";
+			   if (response.deptGList != undefined){
+				   $scope.groups = response.deptGList;
+			   }else{
+				   if (response.deptGList.deptList != undefined){
+						$scope.deptGList_error = "";
+				   }
+			   } 
+			   if (response.layoutList != undefined){
+					$scope.Stalls = response.layoutList;
+					$scope.stalltitle = "教育展相關資訊";
+			   }else{
+				   $scope.StallsError = "無教育展相關資訊";
+			   }
+		   } 
+		})
+		.error(function (response) {
+
+		});
+    
+    $scope.setFavoriteList = function() {
+        FavoriteList_Func.updateFavoriteList('test0001',schoolNum,schName)
+            .success(function(res) {
+                var alertPopup = $ionicPopup.alert({
+                    title: '',
+                    template: res.message
+                });
+            })
+            .error(function(res){
+
+            });
+    }
+    $scope.backToindex = function() {
+        if(localStorage.getObject('filterSunmary') != null) {
+            localStorage.removeItem('filterSunmary');
+        }
+        if(localStorage.get('filterType') != null) {
+            localStorage.removeItem('filterType');
+        }
+        if(localStorage.get('SchoolNum') != null) {
+            localStorage.removeItem('SchoolNum');
+        }
+        $state.go('lobby');
+    }
+})
+.controller('SchoolpresentCtrl', function($scope,$state, $stateParams,localStorage,schoolSearchRes,$ionicPopup,FavoriteList_Func) {
     var schoolNum = localStorage.get('SchoolNum');
 	var schoolInformation= {};
 	var res_status = "";
