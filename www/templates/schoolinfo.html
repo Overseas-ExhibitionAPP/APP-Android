@@ -1,7 +1,10 @@
 <ion-view view-title="學校介紹">
     <ion-nav-bar class="bar bar-header bar-balanced">
-        <ion-nav-back-button>
-        </ion-nav-back-button><!-- 這是返回鍵，直接插入即可 -->
+        <ion-nav-buttons side="left">
+        <button class="button-clear button icon ion-chevron-left" ng-click="backtoLobby()">
+        </button>
+        </ion-nav-buttons>
+        <!-- 這是返回鍵，直接插入即可 -->
         <ion-nav-buttons side=" right">
             <img style="height:30px; width: auto;" ng-src="img/btn-favorite-on.png" ng-click="setFavoriteList()"></img>&nbsp&nbsp
             <img style="height:30px; width: auto;" ng-src="img/btn-home.png" ng-click="backToindex()"></img>
@@ -29,4 +32,5 @@
             </div>
         </div>
     </ion-content>
+    
 </ion-view>
