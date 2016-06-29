@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova','ngMap'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova','ngMap','ngCordovaOauth'])
 
 .run(function($ionicPlatform, $rootScope, $location, $timeout, $ionicHistory, $cordovaToast) {
     $ionicPlatform.ready(function() {
@@ -48,32 +48,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           templateUrl: 'templates/lobby.html',
           controller: 'LobbyCtrl'
         })
+        .state('login', {
+          url: '/login',
+          templateUrl: 'templates/login.html',
+          controller: 'LoginCtrl'
+        })
         .state('Stalls', {
           url: '/Stall',
           templateUrl: 'templates/Stalls.html',
           controller: 'StallsCtrl'
         })
-		.state('school', {
-          url: '/school',
-          cache: false,
-          templateUrl: 'templates/school.html',
-          controller: 'SchoolSearchCtrl'
-        })
-        .state('schname', {
-          url: '/schname',
-          cache: false,
-          templateUrl: 'templates/schname.html',
-          controller: 'SchnameSearchCtrl'
-        })
         .state('Theme_events', {
           url: '/Theme_events',
           templateUrl: 'templates/Theme_events.html',
           controller: 'ThemeEventsCtrl'
-        })
-        .state('schoolinfo', {
-          url: '/schoolinfo',
-          templateUrl: 'templates/schoolinfo.html',
-          controller: 'SchoolinfoCtrl'
         })
         .state('searchlist', {
           url: '/searchlist',

@@ -85,10 +85,6 @@ div.lobby-row {
     font-size: 100%;
 }
 /*參展學校 CSS Setting(search_result.html)*/
-.header-favorite-icon {
-    font-size: 200%;
-    margin-right: 10px;
-}
 .school-description {
     padding-left: 0px;
 }
@@ -104,19 +100,8 @@ div.lobby-row {
     border-width:2px; 
     border-style:dashed
 }
-.accordion-header-div {
-    color: white;
-    font-weight: 50;
-}
-.panel > .panel-heading {
-    padding: 0 !important;
-    background: -webkit-linear-gradient(#0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
-    opacity:0.6;
-    border:1px solid transparent;
-}
-.panel-body{
-    padding: 0px !important;
-    font-size: 80%;
+.char-title {
+    color:red;
 }
 /*大學巡禮 CSS Setting(Theme_event.html)*/
 .theme-title {
@@ -287,17 +272,7 @@ td.lec-room{
     font-weight:100;
     font-size:15px;
 }
-/*手風琴頁*/
-.list .item.item-accordion {
-  line-height: 38px;
-  padding-top: 0;
-  padding-bottom: 0;
-  transition: 0.09s all linear;
-}
-.list .item.item-accordion.ng-hide {
-  line-height: 0px;
-}
-.list .item.item-accordion.ng-hide-add,
-.list .item.item-accordion.ng-hide-remove {
-  display: block !important;
+/*login.html*/
+.btn-login {
+    text-align: Center;
 }

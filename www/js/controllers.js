@@ -1,6 +1,9 @@
-angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.bootstrap','ngAnimate'])
-.controller('LobbyCtrl', function($scope,$state, $stateParams) {
+angular.module('starter.controllers', ['starter.services', 'ngCordova'])
+.controller('LobbyCtrl', function($scope,$state, $stateParams,localStorage,$http) {
 
+    if(localStorage.get('accessToken') == null) {
+        $state.go('login');
+    }
 })
 .controller('StallsCtrl', function($scope,$state, $stateParams,$http,STALLS) {
     var tmpList;
@@ -19,14 +22,13 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
     }
 })
 .controller('SchoolSearchCtrl', function($scope,$state, $stateParams,$window, FavoriteList_Func, schoolFilter, studyGroup,localStorage) {
-	
 	var filterSunmary = {};
 	$scope.school_fifter = schoolFilter;
 	$scope.studyGroup = studyGroup;
 	$scope.filterResultArea = [];
 	$scope.filterResultGroup = [];
-	
 	localStorage.removeItem('filterSunmary');
+    
 	$scope.checkedOrNotAera = function (SchoolareaName, schoolArea, $index) {
 		if (schoolArea) {
 			$scope.filterResultArea.push(""+$index);
@@ -81,7 +83,15 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
     $scope.filterResultArea.length = 0;
     $scope.filterResultGroup.length = 0;
 })
-.controller('ThemeEventsCtrl', function($scope,$state, $stateParams, ThemeEvents_serve,$http,$cordovaBarcodeScanner,$ionicPopup, $timeout,$window) {
+.controller('ThemeEventsCtrl', function($scope,$state, $stateParams, ThemeEvents_serve,$http,$cordovaBarcodeScanner,$ionicPopup, $timeout,$window,localStorage) {
+    //若無accessToken則導引至登入頁
+    if(localStorage.get('accessToken') == null) {
+        $state.go('login');
+    }
+    //設定使用者id
+    var fbtmp = localStorage.getObject('fbUserinfo');
+    var UserId =fbtmp.id;
+    
     var boxS;
     var alphabet_list;
     var i;
@@ -90,7 +100,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
     var alphabet_tmp = [];
     var Block = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAYAAAA+s9J6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAKISURBVHhe7dMxAQAgDMCwgX/PwIGHPslTBV3nGSCzf4GICSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQUjMXJIEFvkOhX5EAAAAASUVORK5CYII=";
     //集章簿初始化
-    ThemeEvents_serve.getalphabet('test0001')
+    ThemeEvents_serve.getalphabet(UserId)
         .success(function(response){
             boxS = response.box_status;
             $scope.CboxStatus = "不可兌換";
@@ -125,7 +135,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
         //掃描學校QRcode，並回傳給後端資料庫
         $cordovaBarcodeScanner.scan().then(function (result) {
             var tmp = angular.fromJson(result.text);
-            ThemeEvents_serve.collectStamp('test0001',tmp.schoolnum)
+            ThemeEvents_serve.collectStamp(UserId,tmp.schoolnum)
                 .success(function(response){
                     //該頁面reload
                     var alertPopup = $ionicPopup.alert({
@@ -135,7 +145,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
                     alertPopup.then(function(res) {
                         //更新目前的集章簿
                         if(response.status == 201 || response.status ==200) {
-                            ThemeEvents_serve.getalphabet('my','test0001')
+                            ThemeEvents_serve.getalphabet('my',UserId)
                                 .success(function(response){
                                     boxS = response.box_status;
                                     alphabet_list = response.collectionbox;
@@ -169,7 +179,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
         //掃描兌換QRcode，並回傳給後端資料庫來判斷是否可兌換
         $cordovaBarcodeScanner.scan().then(function (result) {
             var tmpurl = result.text;
-            ThemeEvents_serve.exchangeCBox('test0001',tmpurl)
+            ThemeEvents_serve.exchangeCBox(UserId,tmpurl)
                 .success(function(response){
                     //該頁面reload
                     var alertPopup = $ionicPopup.alert({
@@ -238,12 +248,16 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
     }
 })
 .controller('QuestionnaireSelect', function($scope, $window, $http, Questionnaire_serve,  $state, $ionicHistory, localStorage) {
+    //若無accessToken則導引至登入頁
+    if(localStorage.get('accessToken') == null) {
+        $state.go('login');
+    }
     var qSet;
     var count = 0;
     var change = "";
     var ansSunmary={};
-    var UserId = "test0001";
-    
+    var fbtmp = localStorage.getObject('fbUserinfo');
+    var UserId =fbtmp.id;
     Questionnaire_serve.getQuestionnaire()
         .success(function (response) {      
             qSet = response.questionset; 
@@ -377,7 +391,15 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
 
 })
 .controller('LikeListCrtl', function($scope,$state, $stateParams,FavoriteList_Func,$http,localStorage,$window) {
-    FavoriteList_Func.getFavoriteList('test0001')
+    //若無accessToken則導引至登入頁
+    if(localStorage.get('accessToken') == null) {
+        $state.go('login');
+    }
+    //設定使用者id
+    var fbtmp = localStorage.getObject('fbUserinfo');
+    var UserId =fbtmp.id;
+    
+    FavoriteList_Func.getFavoriteList(UserId)
         .success(function(res) {
             $scope.fList = res.favoriteList;
         })
@@ -387,7 +409,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
     $scope.getSchoolinfo = function(schoolnum) {
         var tmp = schoolnum;
         localStorage.set('SchoolNum', tmp);
-        $state.go('schoolinfo');
+        $state.go('schoolinfoSunmary.schoolinfo');
     }
 })
 .controller('LecturetimeCrtl', function($scope,$state, $stateParams, $http, Lecture) {
@@ -434,6 +456,14 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
 	}
 })
 .controller('SchoolinfoCtrl', function($scope,$state, $stateParams,localStorage,schoolSearchRes,$ionicPopup,FavoriteList_Func) {
+    //若無accessToken則導引至登入頁
+    if(localStorage.get('accessToken') == null) {
+        $state.go('login');
+    }
+    //設定使用者id
+    var fbtmp = localStorage.getObject('fbUserinfo');
+    var UserId =fbtmp.id;
+    
     var schoolNum = localStorage.get('SchoolNum');
 	var schoolInformation= {};
 	var res_status = "";
@@ -532,7 +562,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
 		});
     
     $scope.setFavoriteList = function() {
-        FavoriteList_Func.updateFavoriteList('test0001',schoolNum,schName)
+        FavoriteList_Func.updateFavoriteList(UserId,schoolNum,schName)
             .success(function(res) {
                 var alertPopup = $ionicPopup.alert({
                     title: '',
@@ -557,6 +587,14 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
     }
 })
 .controller('SchoolunitCtrl', function($scope,$state, $stateParams,localStorage,schoolSearchRes,$ionicPopup,FavoriteList_Func) {
+    //若無accessToken則導引至登入頁
+    if(localStorage.get('accessToken') == null) {
+        $state.go('login');
+    }
+    //設定使用者id
+    var fbtmp = localStorage.getObject('fbUserinfo');
+    var UserId =fbtmp.id;
+    
     var schoolNum = localStorage.get('SchoolNum');
 	var schoolInformation= {};
 	var res_status = "";
@@ -655,7 +693,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
 		});
     
     $scope.setFavoriteList = function() {
-        FavoriteList_Func.updateFavoriteList('test0001',schoolNum,schName)
+        FavoriteList_Func.updateFavoriteList(UserId,schoolNum,schName)
             .success(function(res) {
                 var alertPopup = $ionicPopup.alert({
                     title: '',
@@ -680,6 +718,14 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
     }
 })
 .controller('SchoolpresentCtrl', function($scope,$state, $stateParams,localStorage,schoolSearchRes,$ionicPopup,FavoriteList_Func) {
+    //若無accessToken則導引至登入頁
+    if(localStorage.get('accessToken') == null) {
+        $state.go('login');
+    }
+    //設定使用者id
+    var fbtmp = localStorage.getObject('fbUserinfo');
+    var UserId =fbtmp.id;
+    
     var schoolNum = localStorage.get('SchoolNum');
 	var schoolInformation= {};
 	var res_status = "";
@@ -778,7 +824,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
 		});
     
     $scope.setFavoriteList = function() {
-        FavoriteList_Func.updateFavoriteList('test0001',schoolNum,schName)
+        FavoriteList_Func.updateFavoriteList(UserId,schoolNum,schName)
             .success(function(res) {
                 var alertPopup = $ionicPopup.alert({
                     title: '',
@@ -831,7 +877,35 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova','ui.boots
         $state.go('lobby');
     }
 })
-.controller('OtherCtrl', function($scope,$state, $stateParams) {
-    $state.go('schname');
+.controller('LoginCtrl', function($scope,$state, $stateParams,$cordovaOauth,$ionicPopup,localStorage,$http) {
+    $scope.fbLogin = function () {
+        $cordovaOauth.facebook('301006246905488',
+                ["email", "user_friends", "public_profile"])
+                .then(function (result) {
+                    localStorage.set('accessToken',result.access_token);
+                    $http.get("https://graph.facebook.com/v2.3/me", 
+                        {
+                            params: 
+                                {
+                                    access_token: localStorage.get('accessToken') , 
+                                    fields: "id,name", 
+                                    format: "json" 
+                                }
+                        }).then(function(result) {
+                            localStorage.setObject('fbUserinfo', result.data);
+                        
+                        }, function(error) {
+                            alert("Error: " + error);
+                        });
+                    $state.go('lobby');
+                }, function (error) {
+
+                })
+    }
+})
+.controller('OtherCtrl', function($scope,$state, $stateParams,localStorage) {
+    var tmp = localStorage.getObject('fbUserinfo');
+    $scope.test = "test" + tmp.id;
+    $scope.test2 = localStorage.get('accessToken');
 })
 ;

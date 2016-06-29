@@ -1,25 +1,13 @@
-<ion-modal-view>
-    <ion-header-bar>
-        <h1 class="title">Login</h1>
-        <div class="buttons">
-            <button class="button button-clear" ng-click="closeLogin()">Close</button>
+﻿<ion-view view-title="登入">
+    <ion-nav-bar class="bar bar-header bar-balanced">
+    </ion-nav-bar>
+    <ion-content class="page-back">
+        <div class="btn-login">
+            <h2>登入Facebook即可繼續使用</h2>
+            <button class="button button-positive icon-left ion-social-facebook" 
+                ng-click="fbLogin()">
+                    Facebook登入
+            </button>            
         </div>
-    </ion-header-bar>
-    <ion-content>
-        <form ng-submit="doLogin()">
-            <div class="list">
-                <label class="item item-input">
-                    <span class="input-label">Username</span>
-                    <input type="text" ng-model="loginData.username">
-                </label>
-                <label class="item item-input">
-                    <span class="input-label">Password</span>
-                    <input type="password" ng-model="loginData.password">
-                </label>
-                <label class="item">
-                    <button class="button button-block button-positive" type="submit">Log in</button>
-                </label>
-            </div>
-        </form>
     </ion-content>
-</ion-modal-view>
+</ion-view>
