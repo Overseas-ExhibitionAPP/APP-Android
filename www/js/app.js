@@ -65,6 +65,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         })
         .state('searchlist', {
           url: '/searchlist',
+          cache: false,
           templateUrl: 'templates/searchlist.html',
           controller: 'SearchListCtrl'
         })

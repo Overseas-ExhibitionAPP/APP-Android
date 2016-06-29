@@ -458,6 +458,10 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
 		localStorage.set('SchoolNum', schoolNum);
         $state.go('schoolinfoSunmary.schoolinfo');
 	}
+    $scope.backtoLobby = function() {
+
+        $state.go('schoolSunmary.school');
+    }
 })
 .controller('SchoolinfoCtrl', function($scope,$state, $stateParams,localStorage,schoolSearchRes,$ionicPopup,FavoriteList_Func) {
     //若無accessToken則導引至登入頁
@@ -593,6 +597,10 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
         }
         $state.go('lobby');
     }
+    $scope.backtoLobby = function() {
+
+        $state.go('searchlist');
+    }
 })
 .controller('SchoolunitCtrl', function($scope,$state, $stateParams,localStorage,schoolSearchRes,$ionicPopup,FavoriteList_Func) {
     //若無accessToken則導引至登入頁
@@ -724,6 +732,10 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
         }
         $state.go('lobby');
     }
+    $scope.backtoLobby = function() {
+
+        $state.go('searchlist');
+    }
 })
 .controller('SchoolpresentCtrl', function($scope,$state, $stateParams,localStorage,schoolSearchRes,$ionicPopup,FavoriteList_Func) {
     //若無accessToken則導引至登入頁
@@ -854,6 +866,10 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
             localStorage.removeItem('SchoolNum');
         }
         $state.go('lobby');
+    }
+    $scope.backtoLobby = function() {
+
+        $state.go('searchlist');
     }
 })
 .controller('SchnameSearchCtrl', function($scope,$state, $stateParams, $ionicPopup, schoolSearchRes,localStorage) {
