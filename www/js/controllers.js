@@ -145,7 +145,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
                     alertPopup.then(function(res) {
                         //更新目前的集章簿
                         if(response.status == 201 || response.status ==200) {
-                            ThemeEvents_serve.getalphabet('my',UserId)
+                            ThemeEvents_serve.getalphabet(UserId)
                                 .success(function(response){
                                     boxS = response.box_status;
                                     alphabet_list = response.collectionbox;
