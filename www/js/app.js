@@ -146,6 +146,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         })
         .state('schoolinfoSunmary.schoolinfo', {
             url: '/schoolinfo',
+            cache: false,
             views: {
               'schoolinfoSunmary-schoolinfo': {
                 templateUrl: 'templates/schoolinfo.html',
@@ -155,6 +156,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         })
         .state('schoolinfoSunmary.schoolpresent', {
             url: '/schoolpresent',
+            cache: false,
             views: {
               'schoolinfoSunmary-schoolpresent': {
                 templateUrl: 'templates/schoolpresent.html',
@@ -164,6 +166,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         })
         .state('schoolinfoSunmary.schoolunit', {
             url: '/schoolunit',
+            cache: false,
             views: {
               'schoolinfoSunmary-schoolunit': {
                 templateUrl: 'templates/schoolunit.html',
@@ -171,6 +174,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
               }
             }
         })
+        
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/lobby'); //這是頁面起始點

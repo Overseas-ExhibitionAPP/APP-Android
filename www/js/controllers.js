@@ -408,6 +408,9 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
         });
     $scope.getSchoolinfo = function(schoolnum) {
         var tmp = schoolnum;
+
+        localStorage.removeItem('SchoolNum');
+
         localStorage.set('SchoolNum', tmp);
         $state.go('schoolinfoSunmary.schoolinfo');
     }
@@ -451,6 +454,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
             });
     }
 	$scope.getSchoolNum = function(schoolNum){
+        localStorage.removeItem('SchoolNum');
 		localStorage.set('SchoolNum', schoolNum);
         $state.go('schoolinfoSunmary.schoolinfo');
 	}
@@ -475,6 +479,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
            schName = response.chineseName;
 		   $scope.res_status = res_status;
 		   if(res_status == "200-1"){
+               $scope.schoolNum = schoolNum;
 			   $scope.picture = response.picture;
 			   $scope.schoolnum = response.schoolnum;
 			   $scope.chineseName = response.chineseName;
@@ -486,6 +491,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
 			   $scope.Stalls = response.layoutList;
 		   }
 		   if(res_status == "200-2"){
+               $scope.schoolNum = schoolNum;
 			   $scope.picture = response.picture;
 			   $scope.schoolnum = response.schoolnum;
 			   $scope.chineseName = response.chineseName;
@@ -502,6 +508,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
 			   }
 		   }
 		   if(res_status == "200-3"){
+               $scope.schoolNum = schoolNum;
 			   $scope.picture = response.picture;
 			   $scope.schoolnum = response.schoolnum;
 			   $scope.chineseName = response.chineseName;
@@ -527,6 +534,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
 			   $scope.Stalls = response.layoutList;
 		   }
 		   if(res_status == "200-4"){
+               $scope.schoolNum = schoolNum;
 			   $scope.picture = response.picture;
 			   $scope.schoolnum = response.schoolnum;
 			   $scope.chineseName = response.chineseName;
@@ -908,4 +916,5 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
     $scope.test = "test" + tmp.id;
     $scope.test2 = localStorage.get('accessToken');
 })
+
 ;
