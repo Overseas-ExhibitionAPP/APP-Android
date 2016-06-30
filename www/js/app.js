@@ -78,6 +78,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         })       
         .state('Questionnaire', {
           url: '/Questionnaire',
+          cache: false,
           templateUrl: 'templates/Questionnaire.html',
           controller: 'QuestionnaireSelect'
         })       

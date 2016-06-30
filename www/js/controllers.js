@@ -249,63 +249,70 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
         });
     }
 })
-.controller('QuestionnaireSelect', function($scope, $window, $http, Questionnaire_serve,  $state, $ionicHistory, localStorage) {
+.controller('QuestionnaireSelect', function($scope, $window, $http, Questionnaire_serve,  $state, $ionicHistory, localStorage,$ionicPopup) {
+
     //若無accessToken則導引至登入頁
     if(localStorage.get('accessToken') == null) {
         $state.go('login');
     }
+    
     var qSet;
     var count = 0;
     var change = "";
     var ansSunmary={};
+    
     var fbtmp = localStorage.getObject('fbUserinfo');
     var UserId =fbtmp.id;
-    Questionnaire_serve.getQuestionnaire()
-        .success(function (response) {      
-            qSet = response.questionset; 
-            $scope.selected = [];
-            $scope.selected = [];
-            $scope.isChecked = false;    
-            $scope.q_Ans = [];
-            var user = {    
-            };
-             ansSunmary= {
-                "userid" : UserId,
-                "userAnsList" : $scope.q_Ans
-            };  
-            $scope.Questionnaire_List_question1 = qSet[0].description;
-            if (qSet[0].type == "MultiSelect"){
-                $scope.q_option_type_Test = qSet[count].type;
-                $scope.Questionnaire_List_option_M = qSet[count].options;
-                $scope.checkedOrNot = function (asset, isChecked, index) {
-                    if (isChecked) {
-                        $scope.selected.push(asset);
-                    } else {
-                        var _index = $scope.selected.indexOf(asset);
-                        $scope.selected.splice(_index, 1);
-                    }
+    Questionnaire_serve.getQuestionnaire(UserId)
+        .success(function (response) {
+            if(response.status == '403') {
+                $state.go('Q-end');
+            } else {
+                qSet = response.questionset; 
+                $scope.selected = [];
+                $scope.selected = [];
+                $scope.isChecked = false;    
+                $scope.q_Ans = [];
+                var user = {    
                 };
-            }
-            if (qSet[0].type == "SingleSelect"){
-                $scope.q_option_type_Test = qSet[count].type;
-                $scope.Questionnaire_List_option_S = qSet[count].options;
-                $scope.selectedOrNot=function(item){
-                    $scope.selected = [];
-                    $scope.selected.push(item);
+                 ansSunmary= {
+                    "userid" : UserId,
+                    "userAnsList" : $scope.q_Ans
+                };  
+                $scope.Questionnaire_List_question1 = qSet[0].description;
+                if (qSet[0].type == "MultiSelect"){
+                    $scope.q_option_type_Test = qSet[count].type;
+                    $scope.Questionnaire_List_option_M = qSet[count].options;
+                    $scope.checkedOrNot = function (asset, isChecked, index) {
+                        if (isChecked) {
+                            $scope.selected.push(asset);
+                        } else {
+                            var _index = $scope.selected.indexOf(asset);
+                            $scope.selected.splice(_index, 1);
+                        }
+                    };
                 }
-            }
-            $scope.q_option_type_Test = qSet[0].type;
-            $scope.info = response.info;
-            
-            if (count == qSet.length)
-            {
-                $scope.state = "問卷結束";
-                $scope.Questionnaire_List_question1 = "";
-                $scope.Questionnaire_List_option1 = "";
-            }
-            else
-            {
-                count = count + 1;
+                if (qSet[0].type == "SingleSelect"){
+                    $scope.q_option_type_Test = qSet[count].type;
+                    $scope.Questionnaire_List_option_S = qSet[count].options;
+                    $scope.selectedOrNot=function(item){
+                        $scope.selected = [];
+                        $scope.selected.push(item);
+                    }
+                }
+                $scope.q_option_type_Test = qSet[0].type;
+                $scope.info = response.info;
+                
+                if (count == qSet.length)
+                {
+                    $scope.state = "問卷結束";
+                    $scope.Questionnaire_List_question1 = "";
+                    $scope.Questionnaire_List_option1 = "";
+                }
+                else
+                {
+                    count = count + 1;
+                }
             }
         })
         .error(function (response) {
@@ -317,7 +324,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
 			"options" : $scope.selected
 		};
         if (count == qSet.length+1){
-            $window.location.href = '#index';
+            $window.location.href = '#lobby';
             $window.location.reload();
             count = 0;
         }
