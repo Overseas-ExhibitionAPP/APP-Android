@@ -1,28 +1,36 @@
 angular.module('starter.controllers', ['starter.services', 'ngCordova'])
 .controller('LobbyCtrl', function($scope,$state, $stateParams,localStorage,$http) {
+    
 /*
     if(localStorage.get('accessToken') == null) {
         $state.go('login');
     }*/
 })
-.controller('StallsCtrl', function($scope,$state, $stateParams,$http,STALLS) {
+.controller('StallsCtrl', function($scope,$state,$ionicLoading,$timeout, $stateParams,$http,STALLS) {
+    $ionicLoading.show({
+      noBackdrop: true,
+      template: '<p class="item-icon-left">Loading...<ion-spinner icon="lines"/></p>'
+    });
     var tmpList;
     STALLS.getStallList()
         .success(function(res) {
             $scope.Stall_Set = res.layout_list;
             tmpList = res.layout_list;
             $scope.pic_model = tmpList[0].layout;
+            $ionicLoading.hide();
         })
         .error(function(res){
             
         });
+    
     $scope.setPic = function(picName) {
         var tmp = STALLS.searchStalls(picName , tmpList);
         $scope.pic_model = tmp.layout;
     }
 })
 .controller('SchoolSearchCtrl', function($scope,$state, $stateParams,$window, FavoriteList_Func, schoolFilter, studyGroup,localStorage) {
-	var filterSunmary = {};
+
+    var filterSunmary = {};
 	$scope.school_fifter = schoolFilter;
 	$scope.studyGroup = studyGroup;
 	$scope.filterResultArea = [];
@@ -88,7 +96,10 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
     if(localStorage.get('accessToken') == null) {
         $state.go('login');
     }
-    $ionicLoading.show({template: 'Loading...</p>',delay:'5000'}); 
+    $ionicLoading.show({
+      noBackdrop: true,
+      template: '<p class="item-icon-left">Loading...<ion-spinner icon="lines"/></p>'
+    });
     //設定使用者id
     var fbtmp = localStorage.getObject('fbUserinfo');
     var UserId =fbtmp.id;
@@ -101,8 +112,10 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
     var alphabet_tmp = [];
     var Block = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAYAAAA+s9J6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAKISURBVHhe7dMxAQAgDMCwgX/PwIGHPslTBV3nGSCzf4GICSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQYiaEmAkhZkKImRBiJoSYCSFmQoiZEGImhJgJIWZCiJkQUjMXJIEFvkOhX5EAAAAASUVORK5CYII=";
     //集章簿初始化
+    
     ThemeEvents_serve.getalphabet(UserId)
         .success(function(response){
+            
             boxS = response.box_status;
             $scope.CboxStatus = "不可兌換";
             if(response.status == "403") {
@@ -129,6 +142,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
                 }
             }
             $scope.alphabet = alphabet_tmp;
+            $ionicLoading.hide();
         })
         .error(function (response) {
         });
@@ -168,7 +182,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
                                 });
                         }
                     });
-                    $ionicLoading.hide();
+                    
                 })
                 .error(function (response) {
                 
@@ -205,8 +219,12 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
         });
     };
 })
-.controller('TrafficCtrl', function($scope,$state, $stateParams, $http,MAP) {
+.controller('TrafficCtrl', function($scope,$state,$ionicLoading,$timeout, $stateParams, $http,MAP) {
     var mapList;
+    $ionicLoading.show({
+      noBackdrop: true,
+      template: '<p class="item-icon-left">Loading...<ion-spinner icon="lines"/></p>'
+    });
     MAP.getPosList()
 		.success(function(res){
 			$scope.Pos_Set = res.traffic_list;
@@ -217,6 +235,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
 			//預設地圖為參展資料之第一筆地區資料
 			var posT = MAP.searchPos(mapList[0].name, mapList);
             $scope.position = posT.position;
+            $ionicLoading.hide();
 		})
 		.error(function(res){
 			
@@ -231,12 +250,17 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
 
     };
 })
-.controller('NewsCtrl', function($scope,$state, $stateParams, $http, News, $ionicPopup, $timeout) {
+.controller('NewsCtrl', function($scope,$state,$ionicLoading,$timeout, $stateParams, $http, News, $ionicPopup, $timeout) {
     var tmpList;
+    $ionicLoading.show({
+      noBackdrop: true,
+      template: '<p class="item-icon-left">Loading...<ion-spinner icon="lines"/></p>'
+    });
     News.getNewsList()
         .success(function(res) {
             $scope.News_Set = res.news_set;
             tmpList = res.news_set;
+            $ionicLoading.hide();
         })
         .error(function(res){
         });
@@ -392,18 +416,23 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
 .controller('PhotosCtrl', function($scope,$state, $stateParams) {
 
 })
-.controller('LikeListCrtl', function($scope,$state, $stateParams,FavoriteList_Func,$http,localStorage,$window) {
+.controller('LikeListCrtl', function($scope,$state,$ionicLoading,$timeout, $stateParams,FavoriteList_Func,$http,localStorage,$window) {
     //若無accessToken則導引至登入頁
     if(localStorage.get('accessToken') == null) {
         $state.go('login');
     }
     //設定使用者id
+    $ionicLoading.show({
+      noBackdrop: true,
+      template: '<p class="item-icon-left">Loading...<ion-spinner icon="lines"/></p>'
+    });
     var fbtmp = localStorage.getObject('fbUserinfo');
     var UserId =fbtmp.id;
     
     FavoriteList_Func.getFavoriteList(UserId)
         .success(function(res) {
             $scope.fList = res.favoriteList;
+            $ionicLoading.hide();
         })
         .error(function(res){
             
@@ -416,13 +445,18 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
         $state.go('schoolinfoSunmary.schoolinfo');
     }
 })
-.controller('LecturetimeCrtl', function($scope,$state, $stateParams, $http, Lecture) {
+.controller('LecturetimeCrtl', function($scope,$state, $ionicLoading,$timeout,$stateParams, $http, Lecture) {
     var tmpList;
+    $ionicLoading.show({
+      noBackdrop: true,
+      template: '<p class="item-icon-left">Loading...<ion-spinner icon="lines"/></p>'
+    });
     Lecture.getLectureList()
         .success(function(res) {
             $scope.button_Set = res.area_set;
             $scope.Lecture_Set = res.area_set[0].lec_Set;
             tmpList = res.area_set;
+            $ionicLoading.hide();
         })
         .error(function(res){
             
@@ -432,7 +466,11 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
         $scope.Lecture_Set = tmp.lec_Set;
     }
 })
-.controller('SearchListCtrl', function($scope,$state, $stateParams,localStorage,schoolSearchRes) {
+.controller('SearchListCtrl', function($scope,$state,$ionicLoading,$timeout, $stateParams,localStorage,schoolSearchRes) {
+    $ionicLoading.show({
+      noBackdrop: true,
+      template: '<p class="item-icon-left">Loading...<ion-spinner icon="lines"/></p>'
+    });
     var filterType = localStorage.get('filterType');
     var filterSunmary = localStorage.getObject('filterSunmary');
     if(filterType == '0') {
@@ -440,6 +478,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
             .success(function (response) {      
                 $scope.searchList = response.searchList;
                 $scope.schoolNum = response.searchList.schoolNum;
+                $ionicLoading.hide();
             })
             .error(function (response) {
 
@@ -449,6 +488,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
             .success(function (response) {      
                 $scope.searchList = response.searchList;
                 $scope.schoolNum = response.searchList.schoolNum;
+                $ionicLoading.hide();
             })
             .error(function (response) {
 
@@ -464,11 +504,15 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
         $state.go('schoolSunmary.school');
     }
 })
-.controller('SchoolinfoCtrl', function($scope,$state, $stateParams,localStorage,schoolSearchRes,$ionicPopup,FavoriteList_Func) {
+.controller('SchoolinfoCtrl', function($scope,$state, $ionicLoading,$timeout,$stateParams,localStorage,schoolSearchRes,$ionicPopup,FavoriteList_Func) {
     //若無accessToken則導引至登入頁
     if(localStorage.get('accessToken') == null) {
         $state.go('login');
     }
+    $ionicLoading.show({
+      noBackdrop: true,
+      template: '<p class="item-icon-left">Loading...<ion-spinner icon="lines"/></p>'
+    });
     //設定使用者id
     var fbtmp = localStorage.getObject('fbUserinfo');
     var UserId =fbtmp.id;
@@ -568,7 +612,8 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
 			   }else{
 				   $scope.StallsError = "無教育展相關資訊";
 			   }
-		   } 
+		   }
+           $ionicLoading.hide();
 		})
 		.error(function (response) {
 
@@ -607,11 +652,15 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
         }
     }
 })
-.controller('SchoolunitCtrl', function($scope,$state, $stateParams,localStorage,schoolSearchRes,$ionicPopup,FavoriteList_Func) {
+.controller('SchoolunitCtrl', function($scope,$state,$ionicLoading,$timeout, $stateParams,localStorage,schoolSearchRes,$ionicPopup,FavoriteList_Func) {
     //若無accessToken則導引至登入頁
     if(localStorage.get('accessToken') == null) {
         $state.go('login');
     }
+    $ionicLoading.show({
+      noBackdrop: true,
+      template: '<p class="item-icon-left">Loading...<ion-spinner icon="lines"/></p>'
+    });
     //設定使用者id
     var fbtmp = localStorage.getObject('fbUserinfo');
     var UserId =fbtmp.id;
@@ -708,6 +757,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
 				   $scope.StallsError = "無教育展相關資訊";
 			   }
 		   } 
+           $ionicLoading.hide();
 		})
 		.error(function (response) {
 
@@ -742,11 +792,15 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
         $state.go('searchlist');
     }
 })
-.controller('SchoolpresentCtrl', function($scope,$state, $stateParams,localStorage,schoolSearchRes,$ionicPopup,FavoriteList_Func) {
+.controller('SchoolpresentCtrl', function($scope,$state, $ionicLoading,$timeout,$stateParams,localStorage,schoolSearchRes,$ionicPopup,FavoriteList_Func) {
     //若無accessToken則導引至登入頁
     if(localStorage.get('accessToken') == null) {
         $state.go('login');
     }
+    $ionicLoading.show({
+      noBackdrop: true,
+      template: '<p class="item-icon-left">Loading...<ion-spinner icon="lines"/></p>'
+    });
     //設定使用者id
     var fbtmp = localStorage.getObject('fbUserinfo');
     var UserId =fbtmp.id;
@@ -843,6 +897,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
 				   $scope.StallsError = "無教育展相關資訊";
 			   }
 		   } 
+           $ionicLoading.hide();
 		})
 		.error(function (response) {
 
