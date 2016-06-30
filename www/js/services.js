@@ -42,8 +42,8 @@ services.factory('STALLS',function ($filter, $http) {
 services.factory('Questionnaire_serve', function($http){
     var Questionnaire_List;
     var self = this;
-    self.getQuestionnaire = function(){
-        var link = urlBase + '/questionnaire/'+root_country;
+    self.getQuestionnaire = function(userid){
+        var link = urlBase + '/questionnaire/'+root_country+'?userid='+userid;
         Questionnaire_List = $http.get(link);
         return Questionnaire_List;
     }
