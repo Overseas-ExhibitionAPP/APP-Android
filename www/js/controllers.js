@@ -273,13 +273,16 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
         });
     }
 })
-.controller('QuestionnaireSelect', function($scope, $window, $http, Questionnaire_serve,  $state, $ionicHistory, localStorage,$ionicPopup) {
+.controller('QuestionnaireSelect', function($scope, $window,$ionicLoading,$timeout, $http, Questionnaire_serve,  $state, $ionicHistory, localStorage) {
 
     //若無accessToken則導引至登入頁
     if(localStorage.get('accessToken') == null) {
         $state.go('login');
     }
-    
+    $ionicLoading.show({
+      noBackdrop: true,
+      template: '<p class="item-icon-left">Loading...<ion-spinner icon="lines"/></p>'
+    });
     var qSet;
     var count = 0;
     var change = "";
@@ -338,6 +341,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
                     count = count + 1;
                 }
             }
+            $ionicLoading.hide();
         })
         .error(function (response) {
 
