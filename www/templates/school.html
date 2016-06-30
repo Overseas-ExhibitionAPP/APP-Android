@@ -6,15 +6,14 @@
         </ion-nav-buttons>
         <!-- 這是返回鍵，直接插入即可 -->
     </ion-nav-bar>
-<ion-content>
+    <ion-content scroll="false">
         <div>
             <h3>操作說明:</h3>
             <p>
                 請勾選想要的地區與學群的條件，再按下搜尋鍵
             </p>
         </div>
-        <div class="school-conditionSearch">
-
+        <div class="school-btn">
             <button class="button button-full button-calm" ng-click="Filtersubmit()">搜尋</button>
         </div>
         <ion-scroll zooming="true" direction="y"  style="height: 480px">
@@ -43,7 +42,6 @@
                 </div>
             </div>
         </ion-scroll>
-    
     </ion-content>
 
 </ion-view>
