@@ -18,19 +18,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
     });
     $ionicPlatform.registerBackButtonAction(function (e) {
-        if ($ionicHistory.backView()) {
-            $ionicHistory.goBack();
+        if ($rootScope.backButtonPressedOnceToExit) {
+            ionic.Platform.exitApp();
         } else {
-            if ($rootScope.backButtonPressedOnceToExit) {
-                ionic.Platform.exitApp();
-            } else {
-                $rootScope.backButtonPressedOnceToExit = true;
-                $cordovaToast.showShortTop("Press Again to Exit.");
-                setTimeout(function () {
-                  $rootScope.backButtonPressedOnceToExit = false;
-                }, 2000);
-            }
+            $rootScope.backButtonPressedOnceToExit = true;
+            $cordovaToast.showShortTop("Press Again to Exit.");
+            setTimeout(function () {
+              $rootScope.backButtonPressedOnceToExit = false;
+            }, 2000);
         }
+        
         e.preventDefault();
         return false;
     }, 101);
