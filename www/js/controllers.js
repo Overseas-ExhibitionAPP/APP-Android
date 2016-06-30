@@ -83,11 +83,12 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
     $scope.filterResultArea.length = 0;
     $scope.filterResultGroup.length = 0;
 })
-.controller('ThemeEventsCtrl', function($scope,$state, $stateParams, ThemeEvents_serve,$http,$cordovaBarcodeScanner,$ionicPopup, $timeout,$window,localStorage) {
+.controller('ThemeEventsCtrl', function($scope,$state,$ionicLoading, $stateParams, ThemeEvents_serve,$http,$cordovaBarcodeScanner,$ionicPopup, $timeout,$window,localStorage) {
     //若無accessToken則導引至登入頁
     if(localStorage.get('accessToken') == null) {
         $state.go('login');
     }
+    $ionicLoading.show({template: 'Loading...</p>',delay:'5000'}); 
     //設定使用者id
     var fbtmp = localStorage.getObject('fbUserinfo');
     var UserId =fbtmp.id;
@@ -167,6 +168,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
                                 });
                         }
                     });
+                    $ionicLoading.hide();
                 })
                 .error(function (response) {
                 
@@ -408,9 +410,8 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
         });
     $scope.getSchoolinfo = function(schoolnum) {
         var tmp = schoolnum;
-
+        localStorage.set('backFlag','Y');
         localStorage.removeItem('SchoolNum');
-
         localStorage.set('SchoolNum', tmp);
         $state.go('schoolinfoSunmary.schoolinfo');
     }
@@ -598,8 +599,12 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
         $state.go('lobby');
     }
     $scope.backtoLobby = function() {
-
-        $state.go('searchlist');
+        if(localStorage.get('backFlag') != null){
+            $state.go('like_list');
+            localStorage.removeItem('backFlag');
+        }else{
+            $state.go('searchlist');
+        }
     }
 })
 .controller('SchoolunitCtrl', function($scope,$state, $stateParams,localStorage,schoolSearchRes,$ionicPopup,FavoriteList_Func) {
