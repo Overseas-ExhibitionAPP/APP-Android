@@ -62,10 +62,15 @@
 }
 /*Lobby layout Setting(index.html)*/
 div.lobby-row {
-    margin: 0 auto !important;
+    margin-left: 0 auto !important;
+    margin-right: 0 auto !important;
+    margin-top: 0 auto !important;
+    margin-bottom: 20px  !important;
+    
 }
 .lobby-col {
     text-align: Center;
+    
 }
 .lobby-item-img  {
     margin-bottom: 0px;
@@ -75,11 +80,12 @@ div.lobby-row {
     margin-top: -5px;
 }
 .item-href {
-    color: #000050;
     text-decoration:none;
 }
-.item-icon {
-    font-size: 420%;
+.item-icon img{
+    width: auto;
+    height: 65px;
+    margin: 0 auto;
 }
 .item-description {
     font-size: 100%;
