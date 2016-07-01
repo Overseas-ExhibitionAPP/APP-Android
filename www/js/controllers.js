@@ -455,6 +455,10 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
         localStorage.set('SchoolNum', tmp);
         $state.go('schoolinfoSunmary.schoolinfo');
     }
+    $scope.backtoLobby = function() {
+        localStorage.removeItem('backFlag');
+        $state.go('lobby');
+    }
 })
 .controller('LecturetimeCrtl', function($scope,$state, $ionicLoading,$timeout,$stateParams, $http, Lecture) {
     var tmpList;
