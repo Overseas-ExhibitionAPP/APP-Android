@@ -799,8 +799,12 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
         $state.go('lobby');
     }
     $scope.backtoLobby = function() {
-
-        $state.go('searchlist');
+        if(localStorage.get('backFlag') != null){
+            $state.go('like_list');
+            localStorage.removeItem('backFlag');
+        }else{
+            $state.go('searchlist');
+        }
     }
 })
 .controller('SchoolpresentCtrl', function($scope,$state, $ionicLoading,$timeout,$stateParams,localStorage,schoolSearchRes,$ionicPopup,FavoriteList_Func) {
@@ -939,8 +943,12 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
         $state.go('lobby');
     }
     $scope.backtoLobby = function() {
-
-        $state.go('searchlist');
+        if(localStorage.get('backFlag') != null){
+            $state.go('like_list');
+            localStorage.removeItem('backFlag');
+        }else{
+            $state.go('searchlist');
+        }
     }
 })
 .controller('SchnameSearchCtrl', function($scope,$state, $stateParams, $ionicPopup, schoolSearchRes,localStorage) {
