@@ -22,9 +22,13 @@
   fill: #999;
 }
 /*攤位圖 CSS Setting (Stall.html)*/
-.layout-img {
+.layout-area {
     width: auto;
-    height:320px;
+    height: 320px;
+}
+.layout-img {
+    width: 900px;
+    height: 1000px;
 }
 /*我的最愛 CSS Setting (News.html)*/
 .favorite-item {
