@@ -371,7 +371,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
                 $scope.Questionnaire_List_count = count;
                 count = count + 1;
                 $scope.ansSunmary_test = ansSunmary;
-                Questionnaire_serve.postQuestionnaire(ansSunmary,'2016','hk')
+                Questionnaire_serve.postQuestionnaire(ansSunmary)
                     .success(function (response){
                         $scope.end_content = "感謝頗冗填寫此活動問卷";
                         console.log(response.status);
@@ -512,6 +512,9 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
 	$scope.getSchoolNum = function(schoolNum){
         localStorage.removeItem('SchoolNum');
 		localStorage.set('SchoolNum', schoolNum);
+        if(localStorage.get('backFlag') != null){
+            localStorage.removeItem('backFlag');
+        }
         $state.go('schoolinfoSunmary.schoolinfo');
 	}
     $scope.backtoLobby = function() {
@@ -660,8 +663,9 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
     }
     $scope.backtoLobby = function() {
         if(localStorage.get('backFlag') != null){
-            $state.go('like_list');
+            
             localStorage.removeItem('backFlag');
+            $state.go('like_list');
         }else{
             $state.go('searchlist');
         }
@@ -804,8 +808,8 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
     }
     $scope.backtoLobby = function() {
         if(localStorage.get('backFlag') != null){
-            $state.go('like_list');
             localStorage.removeItem('backFlag');
+            $state.go('like_list');
         }else{
             $state.go('searchlist');
         }
@@ -948,8 +952,8 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
     }
     $scope.backtoLobby = function() {
         if(localStorage.get('backFlag') != null){
-            $state.go('like_list');
             localStorage.removeItem('backFlag');
+            $state.go('like_list');
         }else{
             $state.go('searchlist');
         }

@@ -47,7 +47,7 @@ services.factory('Questionnaire_serve', function($http){
         Questionnaire_List = $http.get(link);
         return Questionnaire_List;
     }
-    self.postQuestionnaire = function(ansList,year,country){
+    self.postQuestionnaire = function(ansList){
         var link = urlBase + '/questionnaire/'+root_country;
         var data = ansList;
         return $http.post(link,data);
