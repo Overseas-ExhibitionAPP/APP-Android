@@ -990,7 +990,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
 })
 .controller('LoginCtrl', function($scope,$state, $stateParams,$cordovaOauth,$ionicPopup,localStorage,$http) {
     $scope.fbLogin = function () {
-        $cordovaOauth.facebook('301006246905488',
+        $cordovaOauth.facebook('504278906430966',
                 ["email", "user_friends", "public_profile"])
                 .then(function (result) {
                     localStorage.set('accessToken',result.access_token);
