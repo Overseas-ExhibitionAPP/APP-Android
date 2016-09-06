@@ -145,6 +145,17 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
             $ionicLoading.hide();
         })
         .error(function (response) {
+            //無法正常取得集章簿
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+               title: '',
+               template: '網路似乎出錯囉！請稍後再試'
+            });
+            alertPopup.then(function(res) {
+               //導回lobby
+               $state.go('lobby');
+            });
+
         });
     $scope.scanBarcodeStamp = function () {
         //掃描學校QRcode，並回傳給後端資料庫
@@ -185,10 +196,20 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
                     
                 })
                 .error(function (response) {
-                
+                    //無法正常送出集章記錄並更新集章簿
+                    $ionicLoading.hide();
+                    var alertPopup = $ionicPopup.alert({
+                       title: '',
+                       template: '網路似乎出錯囉！請稍後再進行集章'
+                    });
                 });
         }, function (error) {
-            console.warn("An error happened -> " + error);
+            //無法正常開啟掃瞄器
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+               title: '',
+               template: '無法正常啟動掃描器'
+            });
         });
     };
     $scope.scanBarcodeExchange = function() {
@@ -212,10 +233,21 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
                     });
                 })
                 .error(function (response) {
+                    //無法正常送出兌換的request
+                    $ionicLoading.hide();
+                    var alertPopup = $ionicPopup.alert({
+                       title: '',
+                       template: '網路似乎出錯囉！請稍後再進行兌換'
+                    });
                 
                 });
         }, function (error) {
-            console.warn("An error happened -> " + error);
+            //無法正常開啟掃瞄器
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+               title: '',
+               template: '無法正常啟動掃描器'
+            });
         });
     };
 })
