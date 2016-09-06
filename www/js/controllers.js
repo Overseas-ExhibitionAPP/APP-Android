@@ -999,7 +999,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
                             params: 
                                 {
                                     access_token: localStorage.get('accessToken') , 
-                                    fields: "id,name", 
+                                    fields: "id,name,age_range,email", 
                                     format: "json" 
                                 }
                         }).then(function(result) {
@@ -1015,9 +1015,14 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
     }
 })
 .controller('OtherCtrl', function($scope,$state, $stateParams,localStorage) {
-    var tmp = localStorage.getObject('fbUserinfo');
-    $scope.test = "test" + tmp.id;
-    $scope.test2 = localStorage.get('accessToken');
-})
 
+})
+.controller('TestCtrl', function($scope,$state, $stateParams,localStorage) {
+    var tmp = localStorage.getObject('fbUserinfo');
+    $scope.accesstoken = localStorage.get('accessToken');
+    $scope.id = tmp.id;
+    $scope.email = tmp.email;
+    $scope.name = tmp.name;
+    $scope.rank = tmp.age_range;
+})
 ;
