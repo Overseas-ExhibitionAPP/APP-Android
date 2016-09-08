@@ -1,7 +1,5 @@
 angular.module('starter.controllers', ['starter.services', 'ngCordova'])
 .controller('LobbyCtrl', function($scope,$state, $stateParams,localStorage,$http) {
-    
-
     if(localStorage.get('accessToken') == null) {
         $state.go('login');
     }
@@ -1020,7 +1018,7 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
         $state.go('lobby');
     }
 })
-.controller('LoginCtrl', function($scope,$state, $stateParams,$cordovaOauth,$ionicPopup,localStorage,$http) {
+.controller('LoginCtrl', function($scope,$state, $stateParams,$cordovaOauth,$ionicPopup,localStorage,$http,Login_Func) {
     $scope.fbLogin = function () {
         $cordovaOauth.facebook('504278906430966',
                 ["email", "user_friends", "public_profile"])
@@ -1035,14 +1033,22 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
                                     format: "json" 
                                 }
                         }).then(function(result) {
+                            //server與client端各儲存一份userinfo
                             localStorage.setObject('fbUserinfo', result.data);
+                            Login_Func.updateUserInfo(result.data.id,result.data.name,
+                                    result.data.age_range, result.data.email)
+                                .success(function(res) {
+                                    $state.go('lobby');
+                                })
+                                .error(function(res){
+                                    $state.go('login');
+                                });
                         
                         }, function(error) {
-                            alert("Error: " + error);
+                            $state.go('login');
                         });
-                    $state.go('lobby');
                 }, function (error) {
-
+                    $state.go('login');
                 })
     }
 })
@@ -1056,5 +1062,6 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
     $scope.email = tmp.email;
     $scope.name = tmp.name;
     $scope.rank = tmp.age_range;
+    $scope.time = new Date();
 })
 ;
