@@ -1055,13 +1055,4 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
 .controller('OtherCtrl', function($scope,$state, $stateParams,localStorage) {
 
 })
-.controller('TestCtrl', function($scope,$state, $stateParams,localStorage) {
-    var tmp = localStorage.getObject('fbUserinfo');
-    $scope.accesstoken = localStorage.get('accessToken');
-    $scope.id = tmp.id;
-    $scope.email = tmp.email;
-    $scope.name = tmp.name;
-    $scope.rank = tmp.age_range;
-    $scope.time = new Date();
-})
 ;
