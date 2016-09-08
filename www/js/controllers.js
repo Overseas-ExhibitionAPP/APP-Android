@@ -195,7 +195,6 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
                 })
                 .error(function (response) {
                     //無法正常送出集章記錄並更新集章簿
-                    $ionicLoading.hide();
                     var alertPopup = $ionicPopup.alert({
                        title: '',
                        template: '網路似乎出錯囉！請稍後再進行集章'
@@ -203,7 +202,6 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
                 });
         }, function (error) {
             //無法正常開啟掃瞄器
-            $ionicLoading.hide();
             var alertPopup = $ionicPopup.alert({
                title: '',
                template: '無法正常啟動掃描器'
@@ -214,31 +212,36 @@ angular.module('starter.controllers', ['starter.services', 'ngCordova'])
         //掃描兌換QRcode，並回傳給後端資料庫來判斷是否可兌換
         $cordovaBarcodeScanner.scan().then(function (result) {
             var tmpurl = result.text;
-            ThemeEvents_serve.exchangeCBox(UserId,tmpurl)
-                .success(function(response){
-                    //該頁面reload
-                    var alertPopup = $ionicPopup.alert({
-                        title: '',
-                        template: response.message
+            if(tmpurl == "/collectionbox/exchange") {
+                ThemeEvents_serve.exchangeCBox(UserId,tmpurl)
+                    .success(function(response){
+                        //該頁面reload
+                        var alertPopup = $ionicPopup.alert({
+                            title: '',
+                            template: response.message
+                        });
+                        var status = response.status;
+                        alertPopup.then(function(res) {
+                            if(status == "200") {
+                                $scope.CboxStatus = "已兌換";
+                                boxS = "Y";
+                            }
+                            
+                        });
+                    })
+                    .error(function (response) {
+                        //無法正常送出兌換的request
+                        var alertPopup = $ionicPopup.alert({
+                           title: '',
+                           template: '網路似乎出錯囉！請稍後再進行兌換'
+                        });
                     });
-                    var status = response.status;
-                    alertPopup.then(function(res) {
-                        if(status == "200") {
-                            $scope.CboxStatus = "已兌換";
-                            boxS = "Y";
-                        }
-                        
-                    });
-                })
-                .error(function (response) {
-                    //無法正常送出兌換的request
-                    $ionicLoading.hide();
-                    var alertPopup = $ionicPopup.alert({
-                       title: '',
-                       template: '網路似乎出錯囉！請稍後再進行兌換'
-                    });
-                
+            } else {
+                var alertPopup = $ionicPopup.alert({
+                   title: '',
+                   template: '請掃描兌換專用的QRcode'
                 });
+            }
         }, function (error) {
             //無法正常開啟掃瞄器
             $ionicLoading.hide();
